@@ -10,5 +10,6 @@ Description: Interface for data stream clustering algorithms implemented in the 
 Depends: stream (>= 1.1-2), rJava (>= 0.6-3)
 Imports: graphics, stats, methods
 SystemRequirements: Oracle Java (>= 5.0)
+BugReports: https://github.com/mhahsler/streamMOA/issues
 License: GPL-3
 Copyright: MOA code in inst/java/moa.jar is Copyright (C) The University of Waikato and distributed under the Apache License, version 2.0. All other code is Copyright (C) Matthew Bolanos, John Forrest and Michael Hahsler
