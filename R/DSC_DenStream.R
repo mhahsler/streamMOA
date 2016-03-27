@@ -1,6 +1,6 @@
 #######################################################################
 # stream -  Infrastructure for Data Stream Mining
-# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest 
+# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@
 DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
   initPoints=100, offline=2, processingSpeed=1, recluster=TRUE, k = NULL) {
   #, minPoints=10) {
-  
+
   ### note:DenStream does not use horizon anymore!
   horizon <- 1000
   ### Java code does parameter checking
-  
+
   paramList <- list(
     h = horizon,
     e = epsilon,
@@ -46,18 +46,18 @@ DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
     o = 2.0,
     s = processingSpeed
     )
-  
+
   # converting the param list to a cli string to use in java
   cliParams <- convert_params(paramList)
-  
+
   # initializing the clusterer
   clusterer <- .jcast(.jnew("moa/clusterers/denstream/WithDBSCAN"),
     "moa/clusterers/AbstractClusterer")
   options <- .jcall(clusterer, "Lmoa/options/Options;", "getOptions")
   .jcall(options, "V", "setViaCLIString", cliParams)
   .jcall(clusterer, "V", "prepareForUse")
-  
-  
+
+
   # initializing the R object
   clus <- structure(
     list(
@@ -68,13 +68,16 @@ DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
     ),
     class = c("DSC_DenStream","DSC_Micro","DSC_MOA","DSC")
   )
-  
+
+  # note that reachability and single-link hc are equivalent
   if(recluster) {
-    if(!is.null(k)) clus <- DSC_TwoStage(clus, 
-      DSC_Hierarchical(k=k, method="single"))
-    else clus <- DSC_TwoStage(clus, 
-      DSC_Hierarchical(h=(offline+1e-9)*epsilon, method="single"))
+    if(is.null(k))
+      clus <- DSC_TwoStage(clus,
+        DSC_Reachability(epsilon=(offline+1e-9)*epsilon))
+    else
+      clus <- DSC_TwoStage(clus,
+        DSC_Hierarchical(k=k, method="single"))
   }
-  
+
   clus
 }
