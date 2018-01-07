@@ -10,7 +10,7 @@ Interface for data stream clustering algorithms implemented in the MOA (Massive 
 ## Installation
 
 * __Stable CRAN version:__ install from within R.
-* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/streamMOA/build/artifacts) or install via `intall_git("mhahsler/streamMOA")` (needs devtools) 
+* __Current development version:__ Download package from [AppVeyor](https://ci.appveyor.com/project/mhahsler/streamMOA/build/artifacts) or install via `install_git("mhahsler/streamMOA")` (needs devtools) 
 
 ## Example
 ```R

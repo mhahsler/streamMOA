@@ -1,6 +1,7 @@
-# Changes in version 1.1-2.1 (xx/xx/15)
+# Changes in version 1.1-3 (01/07/18)
 
 *  Improved documentation for DenStream.
+*  Fixed Java SystemRequirement and added runtime version test.
 
 # Changes in version 1.1-2 (09/06/15)
 
