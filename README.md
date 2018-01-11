@@ -1,7 +1,7 @@
 # streamMOA - Interface for MOA Stream Clustering Algorithms - R package
 
-[![CRAN version](http://www.r-pkg.org/badges/version/streamMOA)](http://cran.r-project.org/web/packages/streamMOA/index.html)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/streamMOA)](http://cran.r-project.org/web/packages/streamMOA/index.html)
+[![CRAN version](http://www.r-pkg.org/badges/version/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
 [![Travis-CI Build Status](https://travis-ci.org/mhahsler/streamMOA.svg?branch=master)](https://travis-ci.org/mhahsler/streamMOA)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mhahsler/streamMOA?branch=master&svg=true)](https://ci.appveyor.com/project/mhahsler/streamMOA)
 
@@ -34,6 +34,6 @@ R> plot(clustream, stream, type = "both")
 
 ## Further Information
 
-* [streamMOA package vignette](http://cran.r-project.org/web/packages/streamMOA/vignettes/streamMOA.pdf) with complete examples.
-* [Reference manual](http://cran.r-project.org/web/packages/streamMOA/streamMOA.pdf)
+* [streamMOA package vignette](https://CRAN.R-project.org/package=streamMOA/vignettes/streamMOA.pdf) with complete examples.
+* [Reference manual](https://CRAN.R-project.org/package=streamMOA/streamMOA.pdf)
 
