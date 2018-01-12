@@ -42,32 +42,12 @@ DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
     m = mu,
     i = initPoints,
     l = lambda,
-#    o = offline,
-    o = 2.0,
+    o = offline,
     s = processingSpeed
     )
 
-  # converting the param list to a cli string to use in java
-  cliParams <- convert_params(paramList)
-
-  # initializing the clusterer
-  clusterer <- .jcast(.jnew("moa/clusterers/denstream/WithDBSCAN"),
-    "moa/clusterers/AbstractClusterer")
-  options <- .jcall(clusterer, "Lmoa/options/Options;", "getOptions")
-  .jcall(options, "V", "setViaCLIString", cliParams)
-  .jcall(clusterer, "V", "prepareForUse")
-
-
-  # initializing the R object
-  clus <- structure(
-    list(
-      description = "DenStream",
-      options = cliParams,
-      javaObj = clusterer,
-      eps = epsilon
-    ),
-    class = c("DSC_DenStream","DSC_Micro","DSC_MOA","DSC")
-  )
+  clus <- DSC_MOA_Clusterer("moa/clusterers/denstream/WithDBSCAN", "DenStream",
+    paramList)
 
   # note that reachability and single-link hc are equivalent
   if(recluster) {

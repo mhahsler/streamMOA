@@ -1,6 +1,6 @@
 #######################################################################
 # stream -  Infrastructure for Data Stream Mining
-# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest 
+# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,27 +31,12 @@ DSC_ClusTree <- function(horizon=1000, maxHeight=8, lambda=NULL) {
     H=maxHeight
   )
 
-  # converting the param list to a cli string to use in java
-  cliParams <- convert_params(paramList)
-  
-  # initializing the clusterer
-  clusterer <- .jcast(.jnew("moa/clusterers/clustree/ClusTree"),
-    "moa/clusterers/AbstractClusterer")
-  options <- .jcall(clusterer, "Lmoa/options/Options;", "getOptions")
-  .jcall(options, "V", "setViaCLIString", cliParams)
-  .jcall(clusterer, "V", "prepareForUse")
+  clus <- DSC_MOA_Clusterer("moa/clusterers/clustree/ClusTree", "ClusTree",
+    paramList)
 
   # overwrite lambda
   if(!is.null(lambda))
-  	.jfield(clusterer,"negLambda") <- -1*lambda
+  	.jfield(clus$javaObj, "negLambda") <- -1*lambda
 
-  # initializing the R object
-  structure(
-    list(
-      description = "ClusTree",
-      options = cliParams,
-      javaObj = clusterer
-    ),
-    class = c("DSC_ClusTree","DSC_Micro","DSC_MOA","DSC")
-  )
+  clus
 }

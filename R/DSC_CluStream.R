@@ -1,6 +1,6 @@
 #######################################################################
 # stream -  Infrastructure for Data Stream Mining
-# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest 
+# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,42 +18,23 @@
 
 DSC_CluStream <- function(
   m=100,
-  horizon=1000, 
+  horizon=1000,
   t=2,
   k=NULL
 ) {
-  
+
   ### Java code does parameter checking
   paramList <- list(
     h = as.integer(horizon),
     m = as.integer(m),
     t = t
     )
-  
-  # converting the param list to a cli string to use in java
-  cliParams <- convert_params(paramList)
-  
-  # initializing the clusterer
-#  clusterer <- .jnew("moa/clusterers/clustream/Clustream")
-  clusterer <- .jcast(.jnew("moa/clusterers/clustream/WithKmeans"),
-    "moa/clusterers/AbstractClusterer")
-  options <- .jcall(clusterer, "Lmoa/options/Options;", "getOptions")
-  .jcall(options, "V", "setViaCLIString", cliParams)
-  .jcall(clusterer, "V", "prepareForUse")
-  
-  
-  # initializing the R object
-  clus <- structure(
-    list(
-      description = "CluStream",
-      options = cliParams,
-      javaObj = clusterer
-    ),
-    class = c("DSC_CluStream","DSC_Micro","DSC_MOA","DSC")
-  )
 
-  if(!is.null(k)) clus <- DSC_TwoStage(clus, 
-    DSC_Kmeans(k=k, weighted=TRUE, nstart=5)) 
-  
+  clus <- DSC_MOA_Clusterer("moa/clusterers/clustream/WithKmeans", "CluStream",
+    paramList)
+
+  if(!is.null(k)) clus <- DSC_TwoStage(clus,
+    DSC_Kmeans(k=k, weighted=TRUE, nstart=5))
+
   clus
 }
