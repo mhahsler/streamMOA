@@ -9,7 +9,10 @@ export(
   DSC_DenStream,
   DSC_CluStream,
   DSC_ClusTree,
-	
+  DSC_streamkm,
+  #DSC_BICO,
+  #DSC_DStream,
+
   DSD_RandomRBFGeneratorEvents
 )
 
@@ -23,4 +26,6 @@ S3method(get_assignment, DSC_MOA)
 ### so stream dispatches correcly
 S3method(get_microclusters, DSC_MOA)
 S3method(get_microweights, DSC_MOA)
+S3method(get_macroclusters, DSC_MOA)
+S3method(get_macroweights, DSC_MOA)
 S3method(update, DSC_MOA)

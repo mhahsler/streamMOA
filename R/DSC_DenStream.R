@@ -26,8 +26,8 @@
 # -i initPoints	10000 (number of points to use for initialization)
 
 
-DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
-  initPoints=100, offline=2, processingSpeed=1, recluster=TRUE, k = NULL) {
+DSC_DenStream <- function(epsilon=0.02,  mu=1, beta=0.2, lambda=0.25,
+  initPoints=1000, offline=2, processingSpeed=100, recluster=TRUE, k = NULL) {
   #, minPoints=10) {
 
   ### note:DenStream does not use horizon anymore!
@@ -41,8 +41,8 @@ DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
     b = beta,
     m = mu,
     i = initPoints,
-    l = lambda,
     o = offline,
+    l = lambda,
     s = processingSpeed
     )
 

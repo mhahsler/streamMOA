@@ -1,6 +1,6 @@
 #######################################################################
 # stream -  Infrastructure for Data Stream Mining
-# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest 
+# Copyright (C) 2013 Michael Hahsler, Matthew Bolanos, John Forrest
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 # -P eventSplitWeight
 # -a numAtts (dimensionality)
 # because there are so many parameters, let's only use a few key ones...
-DSD_RandomRBFGeneratorEvents <- function(k=3, d=2, 
+DSD_RandomRBFGeneratorEvents <- function(k=3, d=2,
   numClusterRange=3L,
   kernelRadius=0.07,
   kernelRadiusRange=0,
@@ -45,16 +45,16 @@ DSD_RandomRBFGeneratorEvents <- function(k=3, d=2,
   eventFrequency=30000L,
   eventMergeSplitOption=FALSE,
   eventDeleteCreate=FALSE,
-  modelSeed=NULL, 
+  modelSeed=NULL,
   instanceSeed=NULL
 ) {
   #TODO: need error checking on the params
-  
+
   if(is.null(modelSeed)) modelSeed <- as.integer(
     runif(1L, 0, .Machine$integer.max))
   if(is.null(instanceSeed)) instanceSeed <- as.integer(
     runif(1L, 0, .Machine$integer.max))
-  
+
   paramList <- list(
     m=modelSeed,
     i=instanceSeed,
@@ -72,16 +72,16 @@ DSD_RandomRBFGeneratorEvents <- function(k=3, d=2,
     C=eventDeleteCreate,
     a=d
   )
-  
+
   # converting the param list to a cli string to use in java
   cliParams <- convert_params(paramList)
-  
+
   # initializing the clusterer
   strm <- .jnew("moa/streams/clustering/RandomRBFGeneratorEvents")
-  options <- .jcall(strm, "Lmoa/options/Options;", "getOptions")
+  options <- .jcall(strm, "Lcom/github/javacliparser/Options;", "getOptions")
   .jcall(options, "V", "setViaCLIString", cliParams)
   .jcall(strm, "V", "prepareForUse")
-  
+
   l <- list(
     description = "Random RBF Generator Events (MOA)",
     k = k,
@@ -89,7 +89,7 @@ DSD_RandomRBFGeneratorEvents <- function(k=3, d=2,
     cliParams = cliParams,
     javaObj = strm
     )
-  
+
   class(l) <- c("DSD_RandomRBFGeneratorEvents","DSD_MOA","DSD")
   l
 }
