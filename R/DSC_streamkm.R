@@ -7,7 +7,7 @@
 
 #' streamKM++
 #'
-#' This is an interface to the MOA implementation of streamKM++
+#' This is an interface to the MOA implementation of streamKM++.
 #'
 #' streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream called coreset.
 #' Upon reclustering, the algorithm applies the k-means++ algorithm to find a given number of centres in the coreset.
@@ -25,14 +25,14 @@
 #' stream <- DSD_Gaussians(k=3, d=2)
 #'
 #' # cluster with streamKM++
-#' streamkm <- DSC_streamkm(sizeCoreset=10000, numClusters=3, length=10000)
+#' streamkm <- DSC_StreamKM(sizeCoreset=10000, numClusters=3, length=10000)
 #' update(streamkm, stream, 10000)
 #' streamkm
 #'
-#' # plot micro-clusters
+#' # plot macro-clusters
 #' plot(streamkm, stream, type="macro")
 #'
-DSC_streamkm <- function(sizeCoreset=10000, numClusters=5, length=100000L) {
+DSC_StreamKM <- function(sizeCoreset=10000, numClusters=5, length=100000L) {
 
   ### Java code does parameter checking
   paramList <- list(
