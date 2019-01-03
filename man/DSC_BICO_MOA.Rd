@@ -4,20 +4,20 @@
 \alias{DSC_BICO_MOA}
 \title{BICO - Fast computation of k-means coresets in a data stream}
 \usage{
-DSC_BICO_MOA(Cluster = 5, Dimensions = 10, MaxClusterFeatures = 1000,
-  Projections = 10)
+DSC_BICO_MOA(Cluster = 5, Dimensions, MaxClusterFeatures = 1000,
+  Projections = 10, k = NULL, space = NULL, p = NULL)
 }
 \arguments{
-\item{Cluster}{Number of desired centers}
+\item{Cluster, k}{Number of desired centers}
 
-\item{Dimensions}{Number of the dimensions of the input points}
+\item{Dimensions}{The number of the dimensions of the input points (stream) need to be specified in advance }
 
-\item{MaxClusterFeatures}{Maximum size of the coreset}
+\item{MaxClusterFeatures, space}{Maximum size of the coreset}
 
-\item{Projections}{Number of random projections used for the nearest neighbour search}
+\item{Projections, p}{Number of random projections used for the nearest neighbour search}
 }
 \description{
-This is an interface to the MOA implementation of BICO.
+This is an interface to the MOA implementation of BICO. The original BICO implementation by Fichtenberger et al is also available as \code{\link[stream]{DSC_BICO}}.
 }
 \details{
 BICO maintains a tree which is inspired by the clustering tree of BIRCH,

@@ -23,7 +23,8 @@
 
 #Reclustering: suggests EM or k-means
 
-DSC_ClusTree <- function(horizon=1000, maxHeight=8, lambda=NULL) {
+DSC_ClusTree <- function(horizon = 1000, maxHeight = 8, lambda = NULL,
+  k = NULL) {
 
   ### Java code does parameter checking
   paramList <- list(
@@ -38,5 +39,10 @@ DSC_ClusTree <- function(horizon=1000, maxHeight=8, lambda=NULL) {
   if(!is.null(lambda))
   	.jfield(clus$javaObj, "negLambda") <- -1*lambda
 
+  # note that reachability and single-link hc are equivalent
+  if(!is.null(k)) clus <- DSC_TwoStage(clus, DSC_Kmeans(k = k, nstart = 5))
+
   clus
 }
+
+DSC_ClusTree_MOA <- DSC_ClusTree

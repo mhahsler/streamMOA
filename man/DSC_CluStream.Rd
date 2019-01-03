@@ -1,5 +1,6 @@
-\name{DSC_CluStream}
+\name{DSC_CluStream_MOA}
 \alias{DSC_CluStream}
+\alias{DSC_CluStream_MOA}
 \alias{CluStream}
 \alias{clustream}
 \title{CluStream Data Stream Clusterer}
@@ -8,7 +9,8 @@
     }
 
 \usage{
-DSC_CluStream(m = 100, horizon = 1000, t = 2, k=NULL)
+DSC_CluStream(m = 100, horizon = 1000, t = 2, k = NULL)
+DSC_CluStream_MOA(m = 100, horizon = 1000, t = 2, k = NULL)
 }
 
 \arguments{
@@ -26,8 +28,8 @@ DSC_CluStream(m = 100, horizon = 1000, t = 2, k=NULL)
 \details{
 This is an interface to the MOA implementation of CluStream.
 
-CluStream applies a weighted k-means algorithm for reclustering (see
-Examples section below).
+If \code{k} is specified, then CluStream applies a weighted k-means
+algorithm for reclustering (see Examples section below).
 }
 
 \value{

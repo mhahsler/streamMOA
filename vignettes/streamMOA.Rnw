@@ -10,52 +10,52 @@ options(width = 75, digits = 3, prompt = 'R> ')
 Please refer to the vignette in package~\pkg{stream} for an introduction
 to data stream mining in \proglang{R}. In this vignette we give two examples
 that show how to use the \pkg{stream} framework being used from start to finish.
-The examples encompasses the creation of data streams, preparation of 
+The examples encompasses the creation of data streams, preparation of
 data stream clustering algorithms, the online
 clustering of data points into micro-clusters, reclustering and finally
 evaluation.
 The first example shows how compare a set of data stream clustering
 algorithms on a static data set. The second example shows how to perform
-evaluation on a data stream with concept drift (clusters evolve over time). 
+evaluation on a data stream with concept drift (clusters evolve over time).
 
 \section{Experimental Comparison on Static Data} \label{examples:full}
 
-First, we set up a static data set. 
-We extract 1500 data points from the Bars and Gaussians data stream generator 
+First, we set up a static data set.
+We extract 1500 data points from the Bars and Gaussians data stream generator
 with 5\% noise and put them in a \code{DSD_Memory}. The wrapper is used
 to replay the same part of the data stream for each algorithm.
 We will use the first
 1000 points to learn the clustering and the remaining 500 points for
-evaluation. 
+evaluation.
 
 <<echo=FALSE>>=
-set.seed(1234) 
+set.seed(1234)
 @
 
-<<data_bng, fig=TRUE, include=FALSE>>= 
-library("stream") 
+<<data_bng, fig=TRUE, include=FALSE>>=
+library("stream")
 stream <- DSD_Memory(DSD_BarsAndGaussians(noise=0.05), n=5500)
 stream
 plot(stream)
 @
 
-\begin{figure} 
+\begin{figure}
 \centering
 \includegraphics[width=.5\linewidth]{streamMOA-data_bng}
-\caption{Bar and Gaussians data set.} 
-\label{figure:data_bng} 
+\caption{Bar and Gaussians data set.}
+\label{figure:data_bng}
 \end{figure}
 
-Figure~\ref{figure:data_bng} shows the structure of the data set. 
+Figure~\ref{figure:data_bng} shows the structure of the data set.
 It consists of four clusters,
-two Gaussians and two uniformly filled rectangular clusters. The Gaussian and the 
-bar to the right have $1/3$ the density of the other two clusters. 
+two Gaussians and two uniformly filled rectangular clusters. The Gaussian and the
+bar to the right have $1/3$ the density of the other two clusters.
 
 We initialize four algorithms from \pkg{stream}. We choose the parameters
-experimentally so that the algorithm produce each (approximately) 100 micro-clusters. 
+experimentally so that the algorithm produce each (approximately) 100 micro-clusters.
 
-<<>>= 
-sample <- DSC_TwoStage(micro=DSC_Sample(k=100), macro=DSC_Kmeans(k=4)) 
+<<>>=
+sample <- DSC_TwoStage(micro=DSC_Sample(k=100), macro=DSC_Kmeans(k=4))
 window <- DSC_TwoStage(micro=DSC_Window(horizon=100), macro=DSC_Kmeans(k=4))
 dstream <- DSC_DStream(gridsize=.7)
 dbstream <- DSC_DBSTREAM(r=.45)
@@ -65,19 +65,19 @@ We will also use two MOA-based algorithms available in package~\pkg{streamMOA}.
 
 <<>>=
 library("streamMOA")
-denstream <- DSC_DenStream(epsilon=.5, mu=1) 
-clustream <- DSC_CluStream(m=100, k=4) 
+denstream <- DSC_DenStream_MOA(epsilon=.5, mu=1)
+clustream <- DSC_CluStream_MOA(m=100, k=4)
 @
 
-We store the algorithms in a list for easier handling and then cluster the same 
+We store the algorithms in a list for easier handling and then cluster the same
 1000 data points with each algorithm. Note that we have to reset the stream
 each time before we cluster.
 
 <<>>=
-algorithms <- list(Sample=sample, Window=window, 'D-Stream'=dstream, 
-  DBSTREAM=dbstream, DenStream=denstream, CluStream=clustream)
+algorithms <- list(Sample=sample, Window=window, 'D-Stream'=dstream,
+  DBSTREAM=dbstream, DenStream_MOA=denstream, CluStream_MOA=clustream)
 for(a in algorithms) {
-  reset_stream(stream) 
+  reset_stream(stream)
   update(a, stream, 5000)
 }
 @
@@ -92,42 +92,42 @@ We were not able to adjust DenStream to produce more than around 50 micro-cluste
 for this data set.
 
 To inspect micro-cluster placement, we plot the calculated micro-clusters and the
-original data. 
+original data.
 
-<<microclusters, fig=TRUE, include=FALSE, width=8, height=12>>= 
+<<microclusters, fig=TRUE, include=FALSE, width=8, height=12>>=
 op <- par(no.readonly = TRUE)
 layout(mat=matrix(1:6, ncol=2))
 for(a in algorithms) {
-  reset_stream(stream) 
+  reset_stream(stream)
   plot(a, stream, main=description(a), type="micro")
 }
 par(op)
 @
 
-\begin{figure} 
+\begin{figure}
 \centering
 \includegraphics{streamMOA-microclusters}
-\caption{Micro-cluster placement for different data stream clustering 
-algorithms.} 
-\label{figure:microclusters} 
+\caption{Micro-cluster placement for different data stream clustering
+algorithms.}
+\label{figure:microclusters}
 \end{figure}
 
-Figure~\ref{figure:microclusters} shows the micro-cluster placement by 
+Figure~\ref{figure:microclusters} shows the micro-cluster placement by
 the different algorithms. Micro-clusters are shown as red circles and
 the size is proportional to each cluster's weight.
 Reservoir sampling and the sliding window randomly place the micro-clusters
-and also a few noise points (shown as grey dots). 
+and also a few noise points (shown as grey dots).
 Clustream also does not suppress noise and
 places even more micro-clusters on noise points since it tries to
 represent all data as faithfully as possible. D-Stream, DenStream and DBSTREAM all
 suppress noise and concentrate the micro-clusters on the real clusters. D-Stream
-is grid-based and thus the micro-clusters are regularly spaced. DBSTREAM 
+is grid-based and thus the micro-clusters are regularly spaced. DBSTREAM
 produces a similar, almost regular pattern. DenStream
 produces one heavy micro-cluster on one cluster, while using a large number of
-micro clusters for the others. It also has problems with detecting the 
+micro clusters for the others. It also has problems with detecting the
 rectangular low-density cluster.
 
-It is also interesting to compare the assignment areas for micro-clusters 
+It is also interesting to compare the assignment areas for micro-clusters
 created by different algorithms. The assignment area is the area around
 the center of a micro-cluster in which points are considered to belong to
 the micro-cluster. In case that a point is in the assignment area of several
@@ -135,30 +135,30 @@ micro-clusters, the closer center is chosen.
 To show the assignment area we add \code{assignment=TRUE} to plot.
 We also disable showing micro-cluster weights to make the plot clearer.
 
-<<microclusters_assignment, fig=TRUE, include=FALSE, width=8, height=12>>= 
+<<microclusters_assignment, fig=TRUE, include=FALSE, width=8, height=12>>=
 op <- par(no.readonly = TRUE)
 layout(mat=matrix(1:6, ncol=2))
 for(a in algorithms) {
-  reset_stream(stream) 
+  reset_stream(stream)
   plot(a, stream, main=description(a), assignment=TRUE, weight=FALSE, type="micro")
 }
 par(op)
 @
 
-\begin{figure} 
+\begin{figure}
 \centering
 \includegraphics{streamMOA-microclusters_assignment}
-\caption{Micro-cluster assignment areas for different data stream clustering 
-algorithms.} 
-\label{figure:microclusters_assignment} 
+\caption{Micro-cluster assignment areas for different data stream clustering
+algorithms.}
+\label{figure:microclusters_assignment}
 \end{figure}
 
 Figure~\ref{figure:microclusters_assignment} shows the assignment areas as dotted
 circles around micro-clusters. Reservoir sampling and sliding window does
 not provide assignment areas and data points are always assigned to
 the nearest micro-cluster. D-Stream is grid-based
-and shows the assignment area as grey boxes. DBSTREAM uses the same 
-radius for all micro-clusters, while DenStream and CluStream calculate 
+and shows the assignment area as grey boxes. DBSTREAM uses the same
+radius for all micro-clusters, while DenStream and CluStream calculate
 the assignment area for each micro-cluster.
 
 To compare the cluster quality, we can check for example the micro-cluster purity, the
@@ -168,76 +168,76 @@ we want to use data points not seen by the algorithms for evaluation.
 
 <<>>=
 sapply(algorithms, FUN=function(a) {
-  reset_stream(stream, 1001) 
-  evaluate(a, stream, 
-    measure=c("numMicroClusters", "purity", "SSQ", "silhouette"), 
-    n=500, assignmentMethod="auto", type="micro")
+  reset_stream(stream, 1001)
+  evaluate(a, stream,
+    measure=c("numMicroClusters", "purity", "SSQ", "silhouette"),
+    n=500, assignmentMethod = "auto", type = "micro")
 })
 @
 
-We need to be careful with the comparison of these numbers, since the depend 
+We need to be careful with the comparison of these numbers, since the depend
 heavily on the number of micro-clusters with more clusters leading to a
 better value. Therefore, a comparison with DenStream
-is not valid. 
-We can compare the measures, of the other algorithms since the number 
+is not valid.
+We can compare the measures, of the other algorithms since the number
 of micro-clusters is close.
-Sampling and the sliding window produce very good values 
-for purity, CluStream achieves the highest average 
+Sampling and the sliding window produce very good values
+for purity, CluStream achieves the highest average
 silhouette coefficient and DBSTREAM produces the lowest sum of squares.
-For better results more data and cross-validation could be used. 
+For better results more data and cross-validation could be used.
 
 Next, we compare macro-clusters. D-Stream, DenStream, DBSTREAM and CluStream
-have built-in reclustering strategies. 
+have built-in reclustering strategies.
 D-Stream joins adjacent dense grid cells for form macro-clusters.
 DenStream and DBSTREAM use the reachability concept (from DBSCAN).
-CluStream used weighted $k$-means clustering (note that we used 
+CluStream used weighted $k$-means clustering (note that we used
 $k=4$ when we initialized \code{DSC_DenStream} above).
 For sampling and window we apply here weighted
 $k$-means reclustering with $k=4$, the true number of clusters.
 
 
-<<macroclusters, fig=TRUE, include=FALSE, width=8, height=12>>= 
+<<macroclusters, fig=TRUE, include=FALSE, width=8, height=12>>=
 op <- par(no.readonly = TRUE)
 layout(mat=matrix(1:6, ncol=2))
 for(a in algorithms) {
-  reset_stream(stream) 
+  reset_stream(stream)
   plot(a, stream, main=description(a), type="both")
 }
 par(op)
 @
 
-\begin{figure} 
+\begin{figure}
 \centering
 \includegraphics{streamMOA-macroclusters}
-\caption{Macro-cluster placement for different data stream clustering algorithms} 
-\label{figure:macroclusters} 
+\caption{Macro-cluster placement for different data stream clustering algorithms}
+\label{figure:macroclusters}
 \end{figure}
 
 Figure~\ref{figure:macroclusters} shows the macro-cluster placement. Sample, window and
 CluStream use $k$-means reclustering and therefore produce exactly four clusters.
 However, the placement is off, splitting a true cluster and missing one of the less
-dense clusters. 
+dense clusters.
 DenStream, DBSTREAM and D-Stream identify the two denser clusters
 correctly, but split the lower density clusters into multiple pieces.
 
 <<>>=
 sapply(algorithms, FUN=function(a) {
-  reset_stream(stream, 1001) 
-  evaluate(a, stream, measure=c("numMacroClusters","purity", "SSQ", "cRand"), 
-    n=500, assign="micro", type="macro")
+  reset_stream(stream, 1001)
+  evaluate(a, stream, measure = c("numMacroClusters","purity", "SSQ", "cRand"),
+    n = 500, assign = "micro", type = "macro")
 })
 @
 
-The evaluation measures at the macro-cluster level reflect the findings from the 
+The evaluation measures at the macro-cluster level reflect the findings from the
 visual analysis of the clustering with D-Stream producing the best results.
 
 
 
-\section{Experimental Comparison using an Evolving Data Stream} 
+\section{Experimental Comparison using an Evolving Data Stream}
 \label{examples:full_evolving}
 
 In this section we compare different clustering algorithms on
-an evolving data stream. We use  
+an evolving data stream. We use
 \code{DSD_Benchmark(1)} which creates two
 clusters moving in two-dimensional space. One moves from top left to bottom right and the other one moves
 from bottom left to top right. Both clusters overlap when they meet exactly in
@@ -251,9 +251,9 @@ stream <- DSD_Memory(DSD_Benchmark(1), 5000)
 
 
 <<moa1, fig=TRUE, include=FALSE, echo=FALSE>>=
-plot(stream, 250, xlim=c(0,1), ylim=c(0,1))
-arrows(.15,.85,.85,.15, col=rgb(.8,.8,.8,.6), lwd=10)
-arrows(.15,.15,.85,.85, col=rgb(.8,.8,.8,.6), lwd=10)
+plot(stream, 250, xlim = c(0,1), ylim = c(0,1))
+arrows(.15,.85,.85,.15, col = rgb(.8,.8,.8,.6), lwd = 10)
+arrows(.15,.15,.85,.85, col = rgb(.8,.8,.8,.6), lwd = 10)
 reset_stream(stream)
 @
 
@@ -261,8 +261,8 @@ reset_stream(stream)
 \centering
 \includegraphics[width=.5\linewidth]{streamMOA-moa1}
 
-\caption{Data points from \code{DSD\_Benchmark(1)} at the beginning of the stream. 
-The two arrows are added to highlight the direction of movement.} 
+\caption{Data points from \code{DSD\_Benchmark(1)} at the beginning of the stream.
+The two arrows are added to highlight the direction of movement.}
 \label{figure:dsd_bench}
 \end{figure}
 
@@ -272,35 +272,35 @@ Next, we define the clustering algorithms.
 
 <<>>=
 algorithms <- list(
-  'Sample' = DSC_TwoStage(micro=DSC_Sample(k=100, biased=TRUE), 
-    macro=DSC_Kmeans(k=2)), 
-  'Window' = DSC_TwoStage(micro=DSC_Window(horizon=100, lambda=.01), 
+  'Sample' = DSC_TwoStage(micro=DSC_Sample(k=100, biased=TRUE),
     macro=DSC_Kmeans(k=2)),
-  
+  'Window' = DSC_TwoStage(micro=DSC_Window(horizon=100, lambda=.01),
+    macro=DSC_Kmeans(k=2)),
+
   'D-Stream' = DSC_DStream(gridsize=.1, lambda=.01),
   'DBSTREAM' = DSC_DBSTREAM(r=.05, lambda=.01),
-  'DenStream' = DSC_DenStream(epsilon=.1, lambda=.01),
-  'CluStream' = DSC_CluStream(m=100, k=2) 
+  'DenStream' = DSC_DenStream_MOA(epsilon=.1, lambda=.01),
+  'CluStream' = DSC_CluStream_MOA(m=100, k=2)
 )
 @
 
-We perform the evaluation using \code{evaluate_cluster} which 
-performs clustering and evaluates 
+We perform the evaluation using \code{evaluate_cluster} which
+performs clustering and evaluates
 clustering quality
 every \code{horizon=250} data points. For sampling and window
 we have to specify a macro-clustering algorithm. We use $k$-means
 with the true number of clusters $k=2$.
 
-<<>>=  
+<<>>=
 n <- 5000
 horizon <- 250
 reset_stream(stream)
 
 evaluation <- lapply(algorithms, FUN=function(a) {
   reset_stream(stream)
-  evaluate_cluster(a, stream, 
+  evaluate_cluster(a, stream,
     type="macro", assign="micro",
-    measure=c("numMicro","numMacro","SSQ", "cRand"),  
+    measure=c("numMicro","numMacro","SSQ", "cRand"),
     n=n, horizon=horizon)
 })
 @
@@ -314,7 +314,7 @@ Position <- evaluation[[1]][,"points"]
 cRand <- sapply(evaluation, FUN=function(x) x[,"cRand"])
 cRand
 matplot(Position, cRand, type="l", lwd=2)
-legend("bottomleft", legend=names(evaluation), 
+legend("bottomleft", legend=names(evaluation),
   col=1:6, lty=1:6, bty="n", lwd=2)
 @
 % #barplot(colMeans(cRand), las=2)
@@ -328,7 +328,7 @@ And then we compare the sum of squares.
 SSQ <- sapply(evaluation, FUN=function(x) x[,"SSQ"])
 SSQ
 matplot(Position, SSQ, type="l", lwd=2)
-legend("topright", legend=names(evaluation), 
+legend("topright", legend=names(evaluation),
   col=1:6, lty=1:6, bty="n", lwd=2)
 @
 % #barplot(colMeans(cRand), las=2)
@@ -337,7 +337,7 @@ boxplot(SSQ, las=2, cex.axis=.8)
 @
 
 
-\begin{figure} 
+\begin{figure}
 \centering
 \begin{minipage}{.7\linewidth} \centering
 \includegraphics[width=1\linewidth]{streamMOA-dynamic}
@@ -353,13 +353,13 @@ boxplot(SSQ, las=2, cex.axis=.8)
 \includegraphics[width=1\linewidth]{streamMOA-dynamic_box2}
 \end{minipage}
 
-\caption{Evaluation of data stream clustering of an evolving stream.} 
-\label{figure:data_bng} 
+\caption{Evaluation of data stream clustering of an evolving stream.}
+\label{figure:data_bng}
 \end{figure}
 
 Figure~\ref{figure:data_bng} shows how the different clustering algorithms compare
 in terms of the corrected Rand index and the sum of squares. For all
-algorithms the performance degrades around position 3000 since both clusters 
+algorithms the performance degrades around position 3000 since both clusters
 overlap completely at that point in the stream. The box-plots to the right
 indicate that D-Stream and DBSTREAM perform overall better than the other algorithms.
 

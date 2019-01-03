@@ -37,7 +37,12 @@
 #' # plot micro and macro-clusters
 #' plot(bico, stream, type="both")
 #'
-DSC_BICO_MOA <- function(Cluster=5, Dimensions=10, MaxClusterFeatures=1000, Projections=10) {
+DSC_BICO_MOA <- function(Cluster=5, Dimensions, MaxClusterFeatures=1000, Projections=10,
+  k = NULL, space = NULL, p = NULL) {
+
+  if(!is.null(k)) Cluster <- k
+  if(!is.null(space)) MaxClusterFeatures <- space
+  if(!is.null(p)) Projections <- p
 
   ### Java code does parameter checking
   paramList <- list(

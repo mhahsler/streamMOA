@@ -18,7 +18,7 @@
 #'
 #' @author Matthias Carnein
 #'
-#' @references Marcel R. Ackermann, Christiane Lammersen, Marcus Märtens, Christoph Raupach, Christian Sohler, Kamil Swierkot. "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm Engineering and Experiments (ALENEX '10), 2010
+#' @references Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach, Christian Sohler, Kamil Swierkot. "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm Engineering and Experiments (ALENEX '10), 2010
 #'
 #' @examples
 #' # data with 3 clusters
@@ -46,3 +46,5 @@ DSC_StreamKM <- function(sizeCoreset=10000, numClusters=5, length=100000L) {
 
   clus
 }
+
+DSC_StreamKM_MOA <- DSC_StreamKM

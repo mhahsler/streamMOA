@@ -7,9 +7,13 @@ importFrom(stats, runif)
 
 export(
   DSC_DenStream,
+  DSC_DenStream_MOA,
   DSC_CluStream,
+  DSC_CluStream_MOA,
   DSC_ClusTree,
+  DSC_ClusTree_MOA,
   DSC_StreamKM,
+  DSC_StreamKM_MOA,
   DSC_BICO_MOA,
   DSC_DStream_MOA,
 

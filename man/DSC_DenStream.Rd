@@ -1,13 +1,16 @@
-\name{DSC_DenStream}
+\name{DSC_DenStream_MOA}
 \alias{DSC_DenStream}
+\alias{DSC_DenStream_MOA}
 \alias{denstream}
 \alias{DenStream}
 \title{DenStream Data Stream Clusterer}
 \description{
-Class implements the DenStream cluster algorithm for data streams.
+Interface for the DenStream cluster algorithm for data streams implemented in MOA.
 }
 \usage{
 DSC_DenStream(epsilon, mu = 1, beta = 0.2, lambda = 0.001,
+    initPoints = 100, offline = 2, processingSpeed=1, recluster = TRUE, k=NULL)
+DSC_DenStream_MOA(epsilon, mu = 1, beta = 0.2, lambda = 0.001,
     initPoints = 100, offline = 2, processingSpeed=1, recluster = TRUE, k=NULL)
 }
 
@@ -32,8 +35,6 @@ DSC_DenStream(epsilon, mu = 1, beta = 0.2, lambda = 0.001,
 }
 
 \details{
-Interface to the DenStream implementation in MOA.
-
 DenStream applies reachbility (from DBSCAN) between micro-clusters for
 reclustering using \code{epsilon} x \code{offline} (defaults to 2) as the reachability threshold.
 

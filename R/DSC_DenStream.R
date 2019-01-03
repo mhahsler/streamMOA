@@ -61,3 +61,5 @@ DSC_DenStream <- function(epsilon,  mu=1, beta=0.2, lambda=0.001,
 
   clus
 }
+
+DSC_DenStream_MOA <- DSC_DenStream
