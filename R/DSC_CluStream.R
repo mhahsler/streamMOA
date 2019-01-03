@@ -38,3 +38,5 @@ DSC_CluStream <- function(
 
   clus
 }
+
+DSC_CluStream_MOA <- DSC_CluStream

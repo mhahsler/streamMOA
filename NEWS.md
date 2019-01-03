@@ -1,3 +1,8 @@
+# Changes in version 1.2-0 (01/02/19)
+
+*  Updated the package to the June 2018 release of the MOA library.
+*  Added interfaces to the streamKM, BICO_MOA and DStream_MOA implementations. 
+
 # Changes in version 1.1-4 (04/06/18)
 
 *  Fixed Java runtime version test for version 10 and beyond.

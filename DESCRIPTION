@@ -1,11 +1,12 @@
 Package: streamMOA
-Version: 1.1-4
-Date: 2018-04-06
+Version: 1.2-0
+Date: 2019-01-03
 Title: Interface for MOA Stream Clustering Algorithms
 Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
 	    email = "mhahsler@lyle.smu.edu"),
-	person("Matthew", "Bolanos", role = c("aut", "cph")),
-	person("John", "Forrest", role = c("aut", "cph")))
+	person("John", "Forrest", role = c("aut", "cph")),
+	person("Matthew", "Bolanos", role = c("ctb")),
+	person("Matthias", "Carnein", role = c("ctb")))
 Description: Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework.
 Depends: stream (>= 1.1-2), rJava (>= 0.6-3)
 Imports: graphics, stats, methods
