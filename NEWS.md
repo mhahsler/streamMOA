@@ -1,4 +1,4 @@
-# Changes in version 1.2-0 (01/02/19)
+# Changes in version 1.2-0 (03/14/19)
 
 *  Updated the package to the June 2018 release of the MOA library.
 *  Added interfaces to the streamKM, BICO_MOA and DStream_MOA implementations. 

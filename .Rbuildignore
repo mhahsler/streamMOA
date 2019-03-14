@@ -6,5 +6,6 @@ proj$
 ^revdep$
 ^.*\.o$
 ^.*\.Rproj$
+~\.git
 ^LICENSE
 Work

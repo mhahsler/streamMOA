@@ -15,10 +15,7 @@ multi-dimensional Java array into a local R data type.
 }
 
 \references{
-MOA: Massive Online Analysis, a Framework for Stream Classification and
-Clustering Albert Bifet, Geoff Holmes, Bernhard Pfahringer, Philipp Kranen,
-Hardy Kremer, Timm Jansen, Thomas Seidl.  Journal of Machine Learning Research
-(JMLR).
+Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research 11: 1601-1604
 }
 
 \seealso{
