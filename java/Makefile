@@ -9,7 +9,7 @@ LIBS = ../inst/java/moa.jar
 .SUFFIXES: .class .java
 
 .java.class:
-	$(JAVAC) -source 1.6 -target 1.6 -cp $(LIBS) $<
+	$(JAVAC) -source 1.8 -target 1.8 -cp $(LIBS) $<
 
 all: compile install clean
 
