@@ -1,3 +1,7 @@
+# Changes in version 1.2-1 (03/20/19)
+
+* Updated system requirement for new MOA version to Java 8.
+
 # Changes in version 1.2-0 (03/14/19)
 
 *  Updated the package to the June 2018 release of the MOA library.
