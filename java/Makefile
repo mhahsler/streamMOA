@@ -14,12 +14,12 @@ LIBS = ../inst/java/moa.jar
 all: compile install clean
 
 $(JARS): $(OBJECTS)
-	$(JAR) cvf $@ $(OBJECTS) 
+	$(JAR) cvf $@ $(OBJECTS)
 
 compile: $(JARS)
 
 install:
-	@cp $(JARS) ../inst/java
+	@mv $(JARS) ../inst/java
 
 clean:
 	-@rm -f $(OBJECTS) $(JARS)
