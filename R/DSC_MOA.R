@@ -92,6 +92,12 @@ update.DSC_MOA <- function(object, dsd, n, verbose=FALSE, ...) {
 #     }
 
     d <- get_points(dsd, n)
+
+    ## MOA needs a double array!
+    d <- as.matrix(d)
+    if(storage.mode(d) == "character") stop("DSC_MOA clusterers do not support characters/factors in streams.")
+    storage.mode(d) <- "double"
+
     .jcall("StreamMOA", "V", "update", object$javaObj,
       .jarray(as.matrix(d), dispatch = TRUE))
    }

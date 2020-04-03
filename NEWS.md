@@ -1,3 +1,7 @@
+#  Changes in version 1.2-2.1 (xx/xx/20)
+
+* Fixed error for integer streams (reported and fix proposed by MatthiasCarnein)
+
 # Changes in version 1.2-2 (05/15/19)
 
 *  Updated the package to the April 2019 release of the MOA library.
