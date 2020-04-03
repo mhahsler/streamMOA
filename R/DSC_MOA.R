@@ -92,8 +92,9 @@ update.DSC_MOA <- function(object, dsd, n, verbose=FALSE, ...) {
 #     }
 
     d <- get_points(dsd, n)
+    d <- apply(d, c(1,2), as.numeric)
     .jcall("StreamMOA", "V", "update", object$javaObj,
-      .jarray(as.matrix(d), dispatch = TRUE))
+      .jarray(d, dispatch = TRUE))
    }
 
 
