@@ -1,10 +1,10 @@
-SOURCES = StreamMOA.java
+SOURCES = StreamMOA.java StreamMOA_MCODResult.java StreamMOA_MCOD.java
 OBJECTS = $(SOURCES:.java=.class)
 JARS = StreamMOA.jar
 
 JAVAC = javac
 JAR = jar
-LIBS = ../inst/java/moa.jar
+LIBS = ../inst/java/moa.jar:./
 
 .SUFFIXES: .class .java
 
