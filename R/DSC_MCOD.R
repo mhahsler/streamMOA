@@ -49,20 +49,20 @@ get_outlier_positions.DSC_MCOD <- function(x, ...) {
   centers
 }
 
-recheck_outlier.DSC_MCOD <- function(x, ocid, ...) {
-  if(!is.character(ocid)) stop("outlier correlated id must be a string")
+recheck_outlier.DSC_MCOD <- function(x, outlier_correlated_id, ...) {
+  if(!is.character(outlier_correlated_id)) stop("outlier correlated id must be a string")
   is_still_there <- FALSE
-  s <- new(J("java.lang.String"), ocid)
+  s <- new(J("java.lang.String"), outlier_correlated_id)
   tryCatch(
-    is_still_there <- .jcall(x$javaObj, "Z", "recheckOutlier", ocid),
+    is_still_there <- .jcall(x$javaObj, "Z", "recheckOutlier", outlier_correlated_id),
     error=function(e) stop(paste0("Outlier rechecking error for ", x$description, " (Class:", x$class,")",e), call. = FALSE))
 
   return(is_still_there)
 }
 
-update.DSC_MCOD <- function(x, dsd, n, verbose=FALSE, ...) {
+update.DSC_MCOD <- function(object, dsd, n, verbose=FALSE, ...) {
   warning("Using update in single pass clusterers is not recommended. Use get_assignment instead.")
-  if(is.jnull(x$javaObj)) stop("Java Object is not available.", call. = FALSE)
+  if(is.jnull(object$javaObj)) stop("Java Object is not available.", call. = FALSE)
 
   if(n>=1) {
 
@@ -76,14 +76,14 @@ update.DSC_MCOD <- function(x, dsd, n, verbose=FALSE, ...) {
     if(storage.mode(d) == "character") stop("DSC_MOA clusterers do not support characters/factors in streams.")
     storage.mode(d) <- "double"
 
-    .jcall(x$javaObj, "Ljava/util/List;", "sm_update", .jarray(as.matrix(d), dispatch = TRUE))
+    .jcall(object$javaObj, "Ljava/util/List;", "sm_update", .jarray(as.matrix(d), dispatch = TRUE))
   }
 
-  invisible(x)
+  invisible(object)
 }
 
-get_assignment.DSC_MCOD <- function(x, points, type=c("auto", "micro", "macro"), method=c("auto", "nn", "model"), ...) {
-  if(is.jnull(x$javaObj)) stop("Java Object is not available.", call. = FALSE)
+get_assignment.DSC_MCOD <- function(dsc, points, type=c("auto", "micro", "macro"), method=c("auto", "nn", "model"), ...) {
+  if(is.jnull(dsc$javaObj)) stop("Java Object is not available.", call. = FALSE)
 
   type <- match.arg(type)
   if(type=="macro")
@@ -93,7 +93,7 @@ get_assignment.DSC_MCOD <- function(x, points, type=c("auto", "micro", "macro"),
   if(storage.mode(d) == "character") stop("DSC_MOA clusterers do not support characters/factors in streams.")
   storage.mode(d) <- "double"
 
-  predict_jlist <- .jcall(x$javaObj, "Ljava/util/List;", "sm_update", .jarray(as.matrix(d), dispatch = TRUE))
+  predict_jlist <- .jcall(dsc$javaObj, "Ljava/util/List;", "sm_update", .jarray(as.matrix(d), dispatch = TRUE))
   predict_len <- .jcall(predict_jlist, "I", "size")
   assignment <- rep(NA_integer_,predict_len)
   outliers <- rep(FALSE,predict_len)
