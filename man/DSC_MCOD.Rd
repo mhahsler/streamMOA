@@ -43,8 +43,10 @@ Dalibor Krleža
 
 \examples{
 # two-stage example
-stream <- DSD_Gaussians(k = 3, d = 2, o = 10, outlier_horizon = 1000,
-            separation_type = "Mahalanobis", lim = c(0, 15))
+stream <- DSD_Gaussians(k = 3, d = 2, outliers = 10,
+            separation_type = "Mahalanobis", separation = 4,
+            space_limit = c(0, 30), variance_limit = 0.8,
+            outlier_options = list(outlier_horizon = 1000))
 mic_c <- DSC_MCOD(r = 1, t = 10, w = 1000)
 mac_c <- DSC_Kmeans(3)
 c <- DSC_TwoStage(mic_c, mac_c)

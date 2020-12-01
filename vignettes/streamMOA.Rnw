@@ -373,9 +373,10 @@ First, we create a data stream by using an outlier generating data stream, such 
 <<outlier1>>=
 library(stream)
 set.seed(1000)
-stream <- DSD_Gaussians(k = 3, d = 2, o = 10, outlier_horizon = 1000,
-            separation_type = "Mahalanobis", lim = c(0, 15),
-            variance_lim = 0.8)
+stream <- DSD_Gaussians(k = 3, d = 2, outliers = 10,
+            separation_type = "Mahalanobis", separation = 4,
+            space_limit = c(0, 30), variance_limit = 0.8,
+            outlier_options = list(outlier_horizon = 1000))
 @
 <<outlier2, fig=TRUE, include=FALSE>>=
 plot(stream, n=1000)

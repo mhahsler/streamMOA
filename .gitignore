@@ -11,3 +11,5 @@ vignettes/*.pdf
 .Rproj.user
 Work
 .RData
+doc
+Meta
