@@ -20,7 +20,7 @@
 # denstream options:
 # -e epsilon 	0.01 (defines the epsilon neighborhood, range: 0 to 1)
 # -p minPoints 	10 (min. num. points a cluster must have)
-# depricated -b beta	0.001 (range: 0 to 1)
+# deprecated -b beta	0.001 (range: 0 to 1)
 # -m mu		1 (range: 0 to max(double)) -> this is actually minpoints and will get converted to int!
 # -l lambda (range: 0 to 1)
 # -i initPoints	10000 (number of points to use for initialization)

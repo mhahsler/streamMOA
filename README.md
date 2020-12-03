@@ -5,7 +5,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/mhahsler/streamMOA.svg?branch=master)](https://travis-ci.org/mhahsler/streamMOA)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mhahsler/streamMOA?branch=master&svg=true)](https://ci.appveyor.com/project/mhahsler/streamMOA)
 
-Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework. This is an extension package for [stream](http://github.com/mhahsler/stream).
+Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework. This is an extension package for [stream](https://github.com/mhahsler/stream).
 
 ## Installation
 
