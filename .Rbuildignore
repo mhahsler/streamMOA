@@ -9,3 +9,5 @@ proj$
 ~\.git
 ^LICENSE
 Work
+^doc$
+^Meta$

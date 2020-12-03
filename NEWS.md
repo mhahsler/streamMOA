@@ -1,3 +1,7 @@
+#  Changes in version 1.2-3 (10/20/20)
+
+* Added wrapper for the MCOD algorithm, to support outlier detection additions in the stream package. (Dalibor Krleža)
+
 #  Changes in version 1.2-2.1 (xx/xx/20)
 
 * Fixed error for integer streams (reported and fix proposed by MatthiasCarnein)
