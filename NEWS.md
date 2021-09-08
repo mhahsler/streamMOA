@@ -1,6 +1,6 @@
 #  Changes in version 1.2-3.1 (xx/xx/20)
 
-* TODO: Register DSC implementations
+* Register DSC implementations with stream_1.5-0
 
 #  Changes in version 1.2-3 (12/3/20)
 

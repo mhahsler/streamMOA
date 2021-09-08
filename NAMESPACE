@@ -1,6 +1,6 @@
+import(stream)
 import(methods)
 import(rJava)
-import(stream)
 
 importFrom(graphics, points, lines)
 importFrom(stats, runif)
