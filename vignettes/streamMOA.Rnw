@@ -294,7 +294,6 @@ with the true number of clusters $k=2$.
 <<>>=
 n <- 5000
 horizon <- 250
-reset_stream(stream)
 
 evaluation <- lapply(algorithms, FUN=function(a) {
   reset_stream(stream)
@@ -394,7 +393,7 @@ Then we define a \code{DSC_MCOD} clusterer. Since this is a single-pass clustere
 call evaluation.
 <<outlier3>>=
 reset_stream(stream)
-mic_c <- DSC_MCOD(r = 2.5, w = 1000)
+mic_c <- DSOutlier_MCOD(r = 2.5, w = 1000)
 evaluate(mic_c, stream, n = 1000, type = "micro",
          measure = c("crand","outlierjaccard"))
 @
@@ -426,7 +425,7 @@ number of nighbor data points, to get more micro-clusters. However, this might a
 outlier detection capability.
 <<outlier6>>=
 reset_stream(stream)
-mic_c <- DSC_MCOD(r = 1.5, w = 1000, t = 10)
+mic_c <- DSOutlier_MCOD(r = 1.5, w = 1000, t = 10)
 mac_c <- DSC_Kmeans(3)
 tp_c <- DSC_TwoStage(mic_c, mac_c)
 evaluate(tp_c, stream, n = 1000, type = "macro",

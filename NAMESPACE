@@ -7,16 +7,14 @@ importFrom(stats, runif)
 
 export(
   DSC_DenStream,
-  DSC_DenStream_MOA,
   DSC_CluStream,
-  DSC_CluStream_MOA,
   DSC_ClusTree,
-  DSC_ClusTree_MOA,
   DSC_StreamKM,
-  DSC_StreamKM_MOA,
   DSC_BICO_MOA,
   DSC_DStream_MOA,
   DSC_MCOD,
+
+  DSOutlier_MCOD,
 
   DSD_RandomRBFGeneratorEvents
 )
@@ -27,9 +25,11 @@ S3method(print, DSC_MOA)
 S3method(get_copy, DSC_MOA)
 S3method(plot, DSC_MOA)
 S3method(get_assignment, DSC_MOA)
-S3method(get_assignment, DSC_MCOD)
-S3method(get_outlier_positions, DSC_MCOD)
-S3method(recheck_outlier, DSC_MCOD)
+
+S3method(get_assignment, DSOutlier_MCOD)
+S3method(get_outlier_positions, DSOutlier_MCOD)
+S3method(recheck_outlier, DSOutlier_MCOD)
+S3method(update, DSOutlier_MCOD)
 
 ### so stream dispatches correcly
 S3method(get_microclusters, DSC_MOA)
@@ -37,4 +37,4 @@ S3method(get_microweights, DSC_MOA)
 S3method(get_macroclusters, DSC_MOA)
 S3method(get_macroweights, DSC_MOA)
 S3method(update, DSC_MOA)
-S3method(update, DSC_MCOD)
+

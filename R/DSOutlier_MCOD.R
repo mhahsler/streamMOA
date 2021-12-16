@@ -35,13 +35,15 @@ DSC_MCOD <- function(r=0.1,t=50,w=1000,recheck_outliers=TRUE) {
       cliParameters = cliParameters,
       javaObj = clusterer
     ),
-    class = c("DSC_MCOD","DSC_SinglePass","DSC_Outlier","DSC_Micro","DSC_MOA","DSC")
+    class = c("DSOutlier_MCOD", "DSOutlier","DSC_MCOD", "DSC_Micro","DSC_MOA","DSC")
   )
 }
 
 DSC_MCOD_MOA <- DSC_MCOD
+DSOutlier_MCOD <- DSC_MCOD
+DSOutlier_MCOD_MOA <- DSC_MCOD
 
-get_outlier_positions.DSC_MCOD <- function(x, ...) {
+get_outlier_positions.DSOutlier_MCOD <- function(x, ...) {
   tryCatch(
     centers <- .get_centers_MOA(.jcall(x$javaObj, "Lmoa/cluster/Clustering;", "getOutlierClusteringResult")),
     error=function(e) stop(paste0("Outliers retrieving error:", e, " (Class:", x$class,")"), call. = FALSE))
@@ -49,7 +51,7 @@ get_outlier_positions.DSC_MCOD <- function(x, ...) {
   centers
 }
 
-recheck_outlier.DSC_MCOD <- function(x, outlier_correlated_id, ...) {
+recheck_outlier.DSOutlier_MCOD <- function(x, outlier_correlated_id, ...) {
   if(!is.character(outlier_correlated_id)) stop("outlier correlated id must be a string")
   is_still_there <- FALSE
   s <- new(J("java.lang.String"), outlier_correlated_id)
@@ -60,7 +62,7 @@ recheck_outlier.DSC_MCOD <- function(x, outlier_correlated_id, ...) {
   return(is_still_there)
 }
 
-update.DSC_MCOD <- function(object, dsd, n, verbose=FALSE, ...) {
+update.DSOutlier_MCOD <- function(object, dsd, n, verbose=FALSE, ...) {
   warning("Using update in single pass clusterers is not recommended. Use get_assignment instead.")
   if(is.jnull(object$javaObj)) stop("Java Object is not available.", call. = FALSE)
 
@@ -82,7 +84,7 @@ update.DSC_MCOD <- function(object, dsd, n, verbose=FALSE, ...) {
   invisible(object)
 }
 
-get_assignment.DSC_MCOD <- function(dsc, points, type=c("auto", "micro", "macro"), method=c("auto", "nn", "model"), ...) {
+get_assignment.DSOutlier_MCOD <- function(dsc, points, type=c("auto", "micro", "macro"), method=c("auto", "nn", "model"), ...) {
   if(is.jnull(dsc$javaObj)) stop("Java Object is not available.", call. = FALSE)
 
   type <- match.arg(type)

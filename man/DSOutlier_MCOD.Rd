@@ -1,11 +1,17 @@
-\name{DSC_MCOD_MOA}
+\name{DSOutlier_MCOD}
 \alias{DSC_MCOD}
+\alias{DSC_MCOD_MOA}
+\alias{DSOutlier_MCOD}
+\alias{DSOutlier_MCOD_MOA}
+\alias{MCOD}
 \title{Micro-cluster Continuous Outlier Detector (MCOD)}
 \description{
  Class interfaces the MOA implementation of the MCOD algorithm for distance-based data stream outlier detection.
 }
 
 \usage{
+DSOutlier_MCOD(r = 0.1, t = 50, w = 1000, recheck_outliers = TRUE)
+
 DSC_MCOD(r = 0.1, t = 50, w = 1000, recheck_outliers = TRUE)
 }
 
@@ -21,8 +27,7 @@ The algorithm detects density-based outliers. An object \eqn{x} is defined to be
 }
 
 \value{
-An object of class \code{DSC_MCOD} (subclass of
-\code{DSC_SinglePass}, \code{DSC_Outlier}, \code{DSC_Micro}, \code{DSC_MOA} and \code{DSC}).
+An object of class \code{DSC_MCOD} (subclass of \code{DSOutlier}, \code{DSC_Micro}, \code{DSC_MOA} and \code{DSC}).
 }
 
 \references{
@@ -30,11 +35,10 @@ Kontaki M, Gounaris A, Papadopoulos AN, Tsichlas K, and Manolopoulos Y (2016). "
 }
 
 \seealso{
+	\code{\link{DSOutlier}},
 	\code{\link{DSC}},
 	\code{\link{DSC_Micro}},
-	\code{\link{DSC_MOA}},
-	\code{\link{DSC_SinglePass}},
-	\code{\link{DSC_Outlier}}
+	\code{\link{DSC_MOA}}
 }
 
 \author{
