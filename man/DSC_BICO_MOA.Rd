@@ -4,30 +4,42 @@
 \alias{DSC_BICO_MOA}
 \title{BICO - Fast computation of k-means coresets in a data stream}
 \usage{
-DSC_BICO_MOA(Cluster = 5, Dimensions, MaxClusterFeatures = 1000,
-  Projections = 10, k = NULL, space = NULL, p = NULL)
+DSC_BICO_MOA(
+  Cluster = 5,
+  Dimensions,
+  MaxClusterFeatures = 1000,
+  Projections = 10,
+  k = NULL,
+  space = NULL,
+  p = NULL
+)
 }
 \arguments{
 \item{Cluster, k}{Number of desired centers}
 
-\item{Dimensions}{The number of the dimensions of the input points (stream) need to be specified in advance }
+\item{Dimensions}{The number of the dimensions of the input points (stream)
+need to be specified in advance}
 
 \item{MaxClusterFeatures, space}{Maximum size of the coreset}
 
-\item{Projections, p}{Number of random projections used for the nearest neighbour search}
+\item{Projections, p}{Number of random projections used for the nearest
+neighbour search}
 }
 \description{
-This is an interface to the MOA implementation of BICO. The original BICO implementation by Fichtenberger et al is also available as \code{\link[stream]{DSC_BICO}}.
+This is an interface to the MOA implementation of BICO. The original BICO
+implementation by Fichtenberger et al is also available as
+\code{\link[stream]{DSC_BICO}}.
 }
 \details{
-BICO maintains a tree which is inspired by the clustering tree of BIRCH,
-a SIGMOD Test of Time award-winning clustering algorithm.
-Each node in the tree represents a subset of these points. Instead of
-storing all points as individual objects, only the number of points,
-the sum and the squared sum of the subset's points are stored as key features
-of each subset. Points are inserted into exactly one node.
+BICO maintains a tree which is inspired by the clustering tree of BIRCH, a
+SIGMOD Test of Time award-winning clustering algorithm. Each node in the
+tree represents a subset of these points. Instead of storing all points as
+individual objects, only the number of points, the sum and the squared sum
+of the subset's points are stored as key features of each subset. Points are
+inserted into exactly one node.
 }
 \examples{
+
 # data with 3 clusters and 2 dimensions
 stream <- DSD_Gaussians(k=3, d=2)
 
@@ -41,7 +53,9 @@ plot(bico, stream, type="both")
 
 }
 \references{
-Hendrik Fichtenberger, Marc Gille, Melanie Schmidt, Chris Schwiegelshohn, Christian Sohler: BICO: BIRCH Meets Coresets for k-Means Clustering. ESA 2013: 481-492
+Hendrik Fichtenberger, Marc Gille, Melanie Schmidt, Chris
+Schwiegelshohn, Christian Sohler: BICO: BIRCH Meets Coresets for k-Means
+Clustering. ESA 2013: 481-492
 }
 \author{
 Matthias Carnein

@@ -16,3 +16,4 @@ SystemRequirements: Java (>= 8)
 BugReports: https://github.com/mhahsler/streamMOA
 License: GPL-3
 Copyright: MOA code in inst/java/moa.jar is Copyright (C) The University of Waikato and distributed under the Apache License, version 2.0. All other code is Copyright (C) Matthew Bolanos, John Forrest and Michael Hahsler
+RoxygenNote: 7.1.2

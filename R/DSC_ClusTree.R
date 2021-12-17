@@ -17,16 +17,65 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-# ClusTree (anytime clustering) options:
-# IntOption("horizon", 'h', "Range of the window.", 1000)
-# IntOption("maxHeight", 'H', "The maximal height of the tree", 8)
 
 #Reclustering: suggests EM or k-means
 
+#' ClusTree Data Stream Clusterer
+#'
+#' Interface for the MOA implementation of the ClusTree data stream clustering
+#' algorithm (Kranen et al, 2009).
+#'
+#' ClusTree uses a compact and self-adaptive index structure for maintaining
+#' stream summaries. Kranen et al (2009) suggest EM or k-means for reclustering.
+#'
+#' @aliases DSC_ClusTree ClusTree clustree
+#' @param horizon Range of the (time) window.
+#' @param maxHeight The maximum height of the tree.
+#' @param lambda number used to override computed lambda (decay).
+#' @param k If specified, k-means with k clusters is used for reclustering.
+#' @return An object of class \code{DSC_ClusTree} (subclass of \code{DSC},
+#' \code{DSC_MOA}, \code{DSC_Micro}).
+#' @author Michael Hahsler and John Forrest
+#' @seealso \code{\link{DSC}}, \code{\link{DSC_Micro}}, \code{\link{DSC_MOA}}
+#' @references Philipp Kranen, Ira Assent, Corinna Baldauf, and Thomas Seidl.
+#' 2009. Self-Adaptive Anytime Stream Clustering. In Proceedings of the 2009
+#' Ninth IEEE International Conference on Data Mining (ICDM '09). IEEE Computer
+#' Society, Washington, DC, USA, 249-258. DOI=10.1109/ICDM.2009.47
+#' \url{http://dx.doi.org/10.1109/ICDM.2009.47}
+#'
+#' Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
+#' (2010). MOA: Massive Online Analysis, a Framework for Stream Classification
+#' and Clustering. In Journal of Machine Learning Research (JMLR).
+#' @examples
+#'
+#' # data with 3 clusters and 5% noise
+#' stream <- DSD_Gaussians(k=3, d=2, noise=0.05)
+#'
+#' # Use automatically the k-means reclusterer with k=3 to create macro clusters
+#' clustree <- DSC_ClusTree(maxHeight=3, k = 3)
+#' update(clustree, stream, 500)
+#' clustree
+#'
+#' # plot micro-clusters
+#' plot(clustree, stream, , type = "both")
+#'
+#' # create a two stage clustering using ClusTree and reachability reclustering
+#' CTxReach <- DSC_TwoStage(
+#'   micro=DSC_ClusTree(maxHeight=3),
+#'   macro=DSC_Reachability(epsilon = .15)
+#' )
+#' CTxReach
+#' update(CTxReach, stream, 1000)
+#' plot(CTxReach, stream, type = "both")
+#'
+#' @export DSC_ClusTree
 DSC_ClusTree <- function(horizon = 1000, maxHeight = 8, lambda = NULL,
   k = NULL) {
 
   ### Java code does parameter checking
+  # ClusTree (anytime clustering) options:
+  # IntOption("horizon", 'h', "Range of the window.", 1000)
+  # IntOption("maxHeight", 'H', "The maximal height of the tree", 8)
   paramList <- list(
     h=horizon,
     H=maxHeight
@@ -45,4 +94,5 @@ DSC_ClusTree <- function(horizon = 1000, maxHeight = 8, lambda = NULL,
   clus
 }
 
-DSC_ClusTree_MOA <- DSC_ClusTree
+
+

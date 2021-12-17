@@ -16,6 +16,24 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+
+
+#' DSC_MOA Class
+#'
+#' An abstract class that inherits from the base class DSC and provides the
+#' common functions needed to interface MOA clusterers.
+#'
+#' \code{DSC_MOA} classes operate in a different way in that the centers of the
+#' micro-clusters have to be extracted from the underlying Java object. This is
+#' done by using rJava to perform method calls directly in the JRI and
+#' converting the multi-dimensional Java array into a local R data type.
+#'
+#' @author Michael Hahsler and John Forrest
+#' @param ... further arguments.
+#' @seealso \code{\link{DSC}}
+#' @references Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
+#' (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research
+#' 11: 1601-1604
 DSC_MOA <- function(...) stop("DSC_MOA is an abstract class and cannot be instantiated!")
 
 ## MOA specific stuff

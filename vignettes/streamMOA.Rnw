@@ -65,8 +65,8 @@ We will also use two MOA-based algorithms available in package~\pkg{streamMOA}.
 
 <<>>=
 library("streamMOA")
-denstream <- DSC_DenStream_MOA(epsilon=.5, mu=1)
-clustream <- DSC_CluStream_MOA(m=100, k=4)
+denstream <- DSC_DenStream(epsilon=.5, mu=1)
+clustream <- DSC_CluStream(m=100, k=4)
 @
 
 We store the algorithms in a list for easier handling and then cluster the same
@@ -276,11 +276,11 @@ algorithms <- list(
     macro=DSC_Kmeans(k=2)),
   'Window' = DSC_TwoStage(micro=DSC_Window(horizon=100, lambda=.01),
     macro=DSC_Kmeans(k=2)),
-
-  'D-Stream' = DSC_DStream(gridsize=.1, lambda=.01),
   'DBSTREAM' = DSC_DBSTREAM(r=.05, lambda=.01),
-  'DenStream' = DSC_DenStream_MOA(epsilon=.1, lambda=.01),
-  'CluStream' = DSC_CluStream_MOA(m=100, k=2)
+  'D-Stream' = DSC_DStream(gridsize=.1, lambda=.01),
+
+  'DenStream' = DSC_DenStream(epsilon=.1, lambda=.01),
+  'CluStream' = DSC_CluStream(m=100, k=2)
 )
 @
 
