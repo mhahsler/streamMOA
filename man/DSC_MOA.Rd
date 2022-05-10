@@ -6,6 +6,9 @@
 \usage{
 DSC_MOA(...)
 }
+\arguments{
+\item{...}{further arguments.}
+}
 \description{
 An abstract class that inherits from the base class DSC and provides the
 common functions needed to interface MOA clusterers.

@@ -1,4 +1,4 @@
-#  Changes in version 1.2-3.1 (xx/xx/20)
+#  Changes in version 1.2-4 (05/09/22)
 
 * Removed registry
 * We use now roxygen2

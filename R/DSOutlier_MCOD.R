@@ -61,30 +61,28 @@ DSC_MCOD <- function(r=0.1,t=50,w=1000,recheck_outliers=TRUE) {
 #' @seealso \code{\link{DSOutlier}}, \code{\link{DSC}},
 #' \code{\link{DSC_Micro}}, \code{\link{DSC_MOA}}
 #' @references Kontaki M, Gounaris A, Papadopoulos AN, Tsichlas K, and
-#' Manolopoulos Y (2016). "Efficient and flexible algorithms for monitoring
-#' distance-based outliers over data streams." In "Information systems", vol.
-#' 55, pp.
-#' 37-53.c("\\Sexpr[results=rd,stage=build]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.1109/ICDE.2011.5767923")\Sexpr{tools:::Rd_expr_doi("10.1109/ICDE.2011.5767923")}
+#' Manolopoulos Y (2016). Efficient and flexible algorithms for monitoring
+#' distance-based outliers over data streams. Information systems, vol.
+#' 55, pp. 37-53. \doi{10.1109/ICDE.2011.5767923}
 #' @examples
+#' set.seed(1234)
 #'
 #' # two-stage example
 #' stream <- DSD_Gaussians(k = 3, d = 2,
-#'             separation_type = "Mahalanobis", separation = 4,
+#'             separation_type = "Mahalanobis", separation = 2,
 #'             space_limit = c(0, 30), variance_limit = 0.8,
 #'             outliers = 10,
-#'             outlier_options = list(outlier_horizon = 1000))
+#'             outlier_options = list(outlier_horizon = 200))
 #'
-#' mic_c <- DSC_MCOD(r = 1, t = 10, w = 1000)
+#' mic_c <- DSC_MCOD(r = 2, t = 10, w = 200)
 #' mac_c <- DSC_Kmeans(3)
 #' c <- DSC_TwoStage(mic_c, mac_c)
 #'
-#' evaluate(c, stream, n = 1000, type = "macro",
+#' evaluate(c, stream, n = 200, type = "macro",
 #'   measure = c("crand","outlierjaccard"))
 #'
 #' reset_stream(stream)
-#' plot(c, stream, n = 1000, type = "all")
-#'
+#' plot(c, stream, n = 200, type = "all")
 #' @export DSOutlier_MCOD
 DSOutlier_MCOD <- DSC_MCOD
 

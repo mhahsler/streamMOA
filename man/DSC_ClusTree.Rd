@@ -56,8 +56,7 @@ plot(CTxReach, stream, type = "both")
 Philipp Kranen, Ira Assent, Corinna Baldauf, and Thomas Seidl.
 2009. Self-Adaptive Anytime Stream Clustering. In Proceedings of the 2009
 Ninth IEEE International Conference on Data Mining (ICDM '09). IEEE Computer
-Society, Washington, DC, USA, 249-258. DOI=10.1109/ICDM.2009.47
-\url{http://dx.doi.org/10.1109/ICDM.2009.47}
+Society, Washington, DC, USA, 249-258. \doi{10.1109/ICDM.2009.47}
 
 Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 (2010). MOA: Massive Online Analysis, a Framework for Stream Classification
