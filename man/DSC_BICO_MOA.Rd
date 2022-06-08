@@ -23,12 +23,12 @@ need to be specified in advance}
 \item{MaxClusterFeatures, space}{Maximum size of the coreset}
 
 \item{Projections, p}{Number of random projections used for the nearest
-neighbour search}
+neighbor search}
 }
 \description{
 This is an interface to the MOA implementation of BICO. The original BICO
 implementation by Fichtenberger et al is also available as
-\code{\link[stream]{DSC_BICO}}.
+\link[stream:DSC_BICO]{stream::DSC_BICO}.
 }
 \details{
 BICO maintains a tree which is inspired by the clustering tree of BIRCH, a
@@ -39,24 +39,34 @@ of the subset's points are stored as key features of each subset. Points are
 inserted into exactly one node.
 }
 \examples{
-
 # data with 3 clusters and 2 dimensions
-stream <- DSD_Gaussians(k=3, d=2)
+set.seed(1000)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 
 # cluster with BICO
-bico <- DSC_BICO_MOA(Cluster=3, Dimensions=2)
-update(bico, stream, 10000)
+bico <- DSC_BICO_MOA(Cluster = 3, Dimensions = 2)
+update(bico, stream, 100)
 bico
 
 # plot micro and macro-clusters
-plot(bico, stream, type="both")
-
+plot(bico, stream, type = "both")
 }
 \references{
 Hendrik Fichtenberger, Marc Gille, Melanie Schmidt, Chris
 Schwiegelshohn, Christian Sohler: BICO: BIRCH Meets Coresets for k-Means
 Clustering. ESA 2013: 481-492
 }
+\seealso{
+Other DSC_MOA: 
+\code{\link{DSC_CluStream}()},
+\code{\link{DSC_ClusTree}()},
+\code{\link{DSC_DStream_MOA}()},
+\code{\link{DSC_DenStream}()},
+\code{\link{DSC_MCOD}()},
+\code{\link{DSC_MOA}()},
+\code{\link{DSC_StreamKM}()}
+}
 \author{
 Matthias Carnein
 }
+\concept{DSC_MOA}

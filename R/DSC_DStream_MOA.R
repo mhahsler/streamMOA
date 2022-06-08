@@ -21,15 +21,17 @@
 #'
 #' This is an interface to the MOA implementation of D-Stream. A C++
 #' implementation (including reclustering with attraction) is available as
-#' \code{\link[stream]{DSC_DStream}}.
+#' [stream::DSC_DStream].
 #'
 #' D-Stream creates an equally spaced grid and estimates the density in each
 #' grid cell using the count of points falling in the cells. Grid cells are
 #' classified based on density into dense, transitional and sporadic cells. The
 #' density is faded after every new point by a decay factor.
 #'
-#' \bold{Note:} The MOA implementation of D-Stream currently does not return
+#' **Note:** The MOA implementation of D-Stream currently does not return
 #' micro clusters.
+#'
+#' @family DSC_MOA
 #'
 #' @param decayFactor The decay factor
 #' @param Cm Controls the threshold for dense grids
@@ -37,7 +39,8 @@
 #' @param Beta Adjusts the window of protection for renaming previously deleted
 #' grids as sporadic
 #' @author Matthias Carnein
-#' @references Yixin Chen and Li Tu. 2007. Density-based clustering for
+#' @references
+#' Yixin Chen and Li Tu. 2007. Density-based clustering for
 #' real-time stream data. In Proceedings of the 13th ACM SIGKDD International
 #' Conference on Knowledge Discovery and Data Mining (KDD '07). ACM, New York,
 #' NY, USA, 133-142.
@@ -46,20 +49,17 @@
 #' attraction. ACM Transactions on Knowledge Discovery from Data, 3(3), Article
 #' 12 (July 2009), 27 pages.
 #' @examples
-#'
-#' # data with 2 clusters in 2 dimensions
-#' stream = DSD_Gaussians(2,2, mu = rbind(c(-10,-10), c(10,10)))
+#' set.seed(1000)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 #'
 #' # cluster with D-Stream
-#' dstream <- DSC_DStream_MOA(decayFactor=0.998)
+#' dstream <- DSC_DStream_MOA(decayFactor = 0.998)
 #' update(dstream, stream, 10000)
 #' dstream
 #'
 #' # plot macro-clusters
 #' plot(dstream, stream, type= "macro")
-#'
-#'
-#' @export DSC_DStream_MOA
+#' @export
 DSC_DStream_MOA <-
   function(decayFactor = 0.998,
     Cm = 3.0,

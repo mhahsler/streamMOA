@@ -14,7 +14,7 @@ DSC_CluStream(m = 100, horizon = 1000, t = 2, k = NULL)
 
 \item{horizon}{Defines the time window to be used in CluStream}
 
-\item{t}{Maximal boundary factor (=Kernel radius factor).  When deciding to
+\item{t}{Maximal boundary factor (i.e., the kernel radius factor).  When deciding to
 add a new data point to a micro-cluster, the maximum boundary is defined as
 a factor of \code{t} of the RMS deviation of the data points in the
 micro-cluster from the centroid.}
@@ -24,8 +24,8 @@ micro-cluster from the centroid.}
 }
 \value{
 An object of class \code{DSC_CluStream} (subclass of
-\code{DSC_Micro}, \code{DSC_MOA} and \code{DSC}), or, if \code{k} is not
-\code{NULL} then an object of \code{DSC_TwoStage}.
+\link{DSC_Micro}, \link{DSC_MOA} and \link{DSC}), or, if \code{k} is not
+\code{NULL} then an object of \link{DSC_TwoStage}.
 }
 \description{
 Class implements the CluStream cluster algorithm for data streams (Aggarwal et al, 2003).
@@ -37,12 +37,11 @@ If \code{k} is specified, then CluStream applies a weighted k-means
 algorithm for reclustering (see Examples section below).
 }
 \examples{
-
 # data with 3 clusters and 5\% noise
-stream <- DSD_Gaussians(k=3, d=2, noise=.05)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = .05)
 
 # cluster with CluStream
-clustream <- DSC_CluStream(m=50)
+clustream <- DSC_CluStream(m = 50)
 update(clustream, stream, 500)
 clustream
 
@@ -50,20 +49,19 @@ clustream
 plot(clustream, stream)
 
 # plot assignment area (micro-cluster radius)
-plot(clustream, stream, assignment=TRUE, weights=FALSE)
+plot(clustream, stream, assignment = TRUE, weights = FALSE)
 
 # reclustering. Use weighted k-means for CluStream
-kmeans <- DSC_Kmeans(k=3, weighted=TRUE)
+kmeans <- DSC_Kmeans(k = 3, weighted = TRUE)
 recluster(kmeans, clustream)
-plot(kmeans, stream, type="both")
+plot(kmeans, stream, type = "both")
 
 # use k-means reclustering automatically by specifying k
-clustream <- DSC_CluStream(m=50, k=3)
+clustream <- DSC_CluStream(m = 50, k = 3)
 update(clustream, stream, 500)
 clustream
 
-plot(clustream, stream, type="both")
-
+plot(clustream, stream, type = "both")
 }
 \references{
 Aggarwal CC, Han J, Wang J, Yu PS (2003). "A Framework for
@@ -75,8 +73,16 @@ Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 and Clustering. In Journal of Machine Learning Research (JMLR).
 }
 \seealso{
-\code{\link{DSC}}, \code{\link{DSC_Micro}}, \code{\link{DSC_MOA}}
+Other DSC_MOA: 
+\code{\link{DSC_BICO_MOA}()},
+\code{\link{DSC_ClusTree}()},
+\code{\link{DSC_DStream_MOA}()},
+\code{\link{DSC_DenStream}()},
+\code{\link{DSC_MCOD}()},
+\code{\link{DSC_MOA}()},
+\code{\link{DSC_StreamKM}()}
 }
 \author{
 Michael Hahsler and John Forrest
 }
+\concept{DSC_MOA}

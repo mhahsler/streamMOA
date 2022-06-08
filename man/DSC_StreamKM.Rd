@@ -23,21 +23,33 @@ streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample
 Upon reclustering, the algorithm applies the k-means++ algorithm to find a given number of centres in the coreset.
 }
 \examples{
-# data with 3 clusters
-stream <- DSD_Gaussians(k=3, d=2)
+set.seed(1000)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 
 # cluster with streamKM++
-streamkm <- DSC_StreamKM(sizeCoreset=10000, numClusters=3, length=10000)
-update(streamkm, stream, 10000)
+streamkm <- DSC_StreamKM(sizeCoreset = 100, numClusters = 3, length = 100)
+update(streamkm, stream, 1000)
 streamkm
 
-# plot macro-clusters
-plot(streamkm, stream, type="macro")
-
+# plot macro-clusters (no access to micro clusters)
+plot(streamkm, stream, type = "macro")
 }
 \references{
-Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach, Christian Sohler, Kamil Swierkot. "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm Engineering and Experiments (ALENEX '10), 2010
+Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach, Christian Sohler, Kamil Swierkot.
+"StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm
+Engineering and Experiments (ALENEX '10), 2010
+}
+\seealso{
+Other DSC_MOA: 
+\code{\link{DSC_BICO_MOA}()},
+\code{\link{DSC_CluStream}()},
+\code{\link{DSC_ClusTree}()},
+\code{\link{DSC_DStream_MOA}()},
+\code{\link{DSC_DenStream}()},
+\code{\link{DSC_MCOD}()},
+\code{\link{DSC_MOA}()}
 }
 \author{
 Matthias Carnein
 }
+\concept{DSC_MOA}

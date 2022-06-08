@@ -18,8 +18,8 @@ DSC_ClusTree(horizon = 1000, maxHeight = 8, lambda = NULL, k = NULL)
 \item{k}{If specified, k-means with k clusters is used for reclustering.}
 }
 \value{
-An object of class \code{DSC_ClusTree} (subclass of \code{DSC},
-\code{DSC_MOA}, \code{DSC_Micro}).
+An object of class \code{DSC_ClusTree} (subclass of \link{DSC},
+\link{DSC_MOA}, \link{DSC_Micro}).
 }
 \description{
 Interface for the MOA implementation of the ClusTree data stream clustering
@@ -30,27 +30,28 @@ ClusTree uses a compact and self-adaptive index structure for maintaining
 stream summaries. Kranen et al (2009) suggest EM or k-means for reclustering.
 }
 \examples{
-
-# data with 3 clusters and 5\% noise
-stream <- DSD_Gaussians(k=3, d=2, noise=0.05)
+# data with 3 clusters
+set.seed(1000)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 
 # Use automatically the k-means reclusterer with k=3 to create macro clusters
-clustree <- DSC_ClusTree(maxHeight=3, k = 3)
+clustree <- DSC_ClusTree(maxHeight = 3, k = 3)
 update(clustree, stream, 500)
 clustree
 
 # plot micro-clusters
-plot(clustree, stream, , type = "both")
+plot(clustree, stream, type = "both")
 
 # create a two stage clustering using ClusTree and reachability reclustering
 CTxReach <- DSC_TwoStage(
-  micro=DSC_ClusTree(maxHeight=3),
-  macro=DSC_Reachability(epsilon = .15)
+  micro = DSC_ClusTree(maxHeight = 3),
+  macro = DSC_Reachability(epsilon = .1)
 )
 CTxReach
-update(CTxReach, stream, 1000)
-plot(CTxReach, stream, type = "both")
 
+update(CTxReach, stream, 500)
+CTxReach
+plot(CTxReach, stream, type = "both")
 }
 \references{
 Philipp Kranen, Ira Assent, Corinna Baldauf, and Thomas Seidl.
@@ -63,8 +64,16 @@ Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 and Clustering. In Journal of Machine Learning Research (JMLR).
 }
 \seealso{
-\code{\link{DSC}}, \code{\link{DSC_Micro}}, \code{\link{DSC_MOA}}
+Other DSC_MOA: 
+\code{\link{DSC_BICO_MOA}()},
+\code{\link{DSC_CluStream}()},
+\code{\link{DSC_DStream_MOA}()},
+\code{\link{DSC_DenStream}()},
+\code{\link{DSC_MCOD}()},
+\code{\link{DSC_MOA}()},
+\code{\link{DSC_StreamKM}()}
 }
 \author{
 Michael Hahsler and John Forrest
 }
+\concept{DSC_MOA}

@@ -1,10 +1,11 @@
 Package: streamMOA
-Version: 1.2-4
-Date: 2022-05-09
+Version: 1.2-4-1
+Date: 2022-xx-xx
 Encoding: UTF-8
 Title: Interface for MOA Stream Clustering Algorithms
 Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
-	    email = "mhahsler@lyle.smu.edu"),
+	    email = "mhahsler@lyle.smu.edu",
+	    comment = c(ORCID = "0000-0003-2716-1405")),
 	person("John", "Forrest", role = c("aut", "cph")),
 	person("Matthew", "Bolanos", role = c("ctb")),
 	person("Matthias", "Carnein", role = c("ctb")),
@@ -16,4 +17,5 @@ SystemRequirements: Java (>= 8)
 BugReports: https://github.com/mhahsler/streamMOA
 License: GPL-3
 Copyright: MOA code in inst/java/moa.jar is Copyright (C) The University of Waikato and distributed under the Apache License, version 2.0. All other code is Copyright (C) Matthew Bolanos, John Forrest and Michael Hahsler
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
+Roxygen: list(markdown = TRUE)

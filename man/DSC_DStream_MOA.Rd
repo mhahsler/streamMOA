@@ -19,7 +19,7 @@ grids as sporadic}
 \description{
 This is an interface to the MOA implementation of D-Stream. A C++
 implementation (including reclustering with attraction) is available as
-\code{\link[stream]{DSC_DStream}}.
+\link[stream:DSC_DStream]{stream::DSC_DStream}.
 }
 \details{
 D-Stream creates an equally spaced grid and estimates the density in each
@@ -27,23 +27,20 @@ grid cell using the count of points falling in the cells. Grid cells are
 classified based on density into dense, transitional and sporadic cells. The
 density is faded after every new point by a decay factor.
 
-\bold{Note:} The MOA implementation of D-Stream currently does not return
+\strong{Note:} The MOA implementation of D-Stream currently does not return
 micro clusters.
 }
 \examples{
-
-# data with 2 clusters in 2 dimensions
-stream = DSD_Gaussians(2,2, mu = rbind(c(-10,-10), c(10,10)))
+set.seed(1000)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 
 # cluster with D-Stream
-dstream <- DSC_DStream_MOA(decayFactor=0.998)
+dstream <- DSC_DStream_MOA(decayFactor = 0.998)
 update(dstream, stream, 10000)
 dstream
 
 # plot macro-clusters
 plot(dstream, stream, type= "macro")
-
-
 }
 \references{
 Yixin Chen and Li Tu. 2007. Density-based clustering for
@@ -55,6 +52,17 @@ Li Tu and Yixin Chen. 2009. Stream data clustering based on grid density and
 attraction. ACM Transactions on Knowledge Discovery from Data, 3(3), Article
 12 (July 2009), 27 pages.
 }
+\seealso{
+Other DSC_MOA: 
+\code{\link{DSC_BICO_MOA}()},
+\code{\link{DSC_CluStream}()},
+\code{\link{DSC_ClusTree}()},
+\code{\link{DSC_DenStream}()},
+\code{\link{DSC_MCOD}()},
+\code{\link{DSC_MOA}()},
+\code{\link{DSC_StreamKM}()}
+}
 \author{
 Matthias Carnein
 }
+\concept{DSC_MOA}

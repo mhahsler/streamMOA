@@ -23,12 +23,14 @@
 #' in MOA.
 #'
 #' DenStream applies reachbility (from DBSCAN) between micro-clusters for
-#' reclustering using \code{epsilon} x \code{offline} (defaults to 2) as the
+#' reclustering using `epsilon` x `offline` (defaults to 2) as the
 #' reachability threshold.
 #'
-#' If \code{k} is specified it automatically chooses the reachability threshold
+#' If `k` is specified it automatically chooses the reachability threshold
 #' to find k clusters. This is achieved using single-link hierarchical
 #' clustering.
+#'
+#' @family DSC_MOA
 #'
 #' @aliases DSC_DenStream DSC_DenStream_MOA denstream DenStream
 #' @param epsilon defines the epsilon neighbourhood which is the maximal radius
@@ -47,12 +49,12 @@
 #' reachability at a distance of epsilon) be performed?
 #' @param k integer; tries to automatically chooses offline to find k
 #' macro-clusters.
-#' @return An object of class \code{DSC_DenStream} (subclass of \code{DSC},
-#' \code{DSC_MOA}, \code{DSC_Micro}) or, for \code{recluster=TRUE}, an object
-#' of class \code{DSC_TwoStage}.
+#' @return An object of class `DSC_DenStream` (subclass of [DSC],
+#' [DSC_MOA], [DSC_Micro]) or, for `recluster = TRUE`, an object
+#' of class [DSC_TwoStage].
 #' @author Michael Hahsler and John Forrest
-#' @seealso \code{\link{DSC}}, \code{\link{DSC_Micro}}, \code{\link{DSC_MOA}}
-#' @references Cao F, Ester M, Qian W, Zhou A (2006). Density-Based Clustering
+#' @references
+#' Cao F, Ester M, Qian W, Zhou A (2006). Density-Based Clustering
 #' over an Evolving Data Stream with Noise. In Proceedings of the 2006 SIAM
 #' International Conference on Data Mining, pp 326-337. SIAM.
 #'
@@ -60,9 +62,9 @@
 #' (2010).  MOA: Massive Online Analysis, a Framework for Stream Classification
 #' and Clustering. In Journal of Machine Learning Research (JMLR).
 #' @examples
-#'
 #' # data with 3 clusters and 5% noise
-#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
+#' set.seed(1000)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 #'
 #' # use Den-Stream with reachability reclustering
 #' denstream <- DSC_DenStream(epsilon = .05)
@@ -82,8 +84,7 @@
 #' denstream2 <- DSC_DenStream(epsilon = .05, k = 3)
 #' update(denstream2, stream, 500)
 #' plot(denstream2, stream, type = "both")
-#'
-#' @export DSC_DenStream
+#' @export
 DSC_DenStream <- function(epsilon,
   mu = 1,
   beta = 0.2,

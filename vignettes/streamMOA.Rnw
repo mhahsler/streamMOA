@@ -65,8 +65,8 @@ We will also use two MOA-based algorithms available in package~\pkg{streamMOA}.
 
 <<>>=
 library("streamMOA")
-denstream <- DSC_DenStream(epsilon=.5, mu=1)
-clustream <- DSC_CluStream(m=100, k=4)
+denstream <- DSC_DenStream(epsilon = .5, mu = 1)
+clustream <- DSC_CluStream(m = 100, k = 4)
 @
 
 We store the algorithms in a list for easier handling and then cluster the same
@@ -276,7 +276,7 @@ algorithms <- list(
     macro=DSC_Kmeans(k=2)),
   'Window' = DSC_TwoStage(micro=DSC_Window(horizon=100, lambda=.01),
     macro=DSC_Kmeans(k=2)),
-  'DBSTREAM' = DSC_DBSTREAM(r=.05, lambda=.01),
+  'DBSTREAM' = DSC_DBSTREAM(r=.5, lambda=.01),
   'D-Stream' = DSC_DStream(gridsize=.1, lambda=.01),
 
   'DenStream' = DSC_DenStream(epsilon=.1, lambda=.01),
@@ -287,9 +287,9 @@ algorithms <- list(
 We perform the evaluation using \code{evaluate_cluster} which
 performs clustering and evaluates
 clustering quality
-every \code{horizon=250} data points. For sampling and window
+every \code{horizon = 250} data points. For sampling and window
 we have to specify a macro-clustering algorithm. We use $k$-means
-with the true number of clusters $k=2$.
+with the true number of clusters $k = 2$.
 
 <<>>=
 n <- 5000
@@ -368,86 +368,54 @@ To support the outlier detection area, \pkg{streamMOA} contains a wrapper to the
 implementation of the Micro-cluster Continuous Outlier Detector (MCOD). To demonstrate
 a synergy of outlier detection capabilities between \pkg{stream} and \pkg{streamMOA}
 packages, we bring two basic examples.
-First, we create a data stream by using an outlier generating data stream, such as
+First, we create a fixed data stream with noise outliers that are well separated from the
+clusters using Mahalanobis distance.
 <<outlier1>>=
 library(stream)
 set.seed(1000)
-stream <- DSD_Gaussians(k = 3, d = 2, outliers = 10,
-            separation_type = "Mahalanobis", separation = 4,
-            space_limit = c(0, 30), variance_limit = 0.8,
-            outlier_options = list(outlier_horizon = 1000))
+stream <- DSD_Gaussians(k = 3, d = 2,
+            variance_limit = c(0.1, 1),
+            space_limit = c(0, 30),
+            noise = .01,
+            noise_limit = c(0, 30),
+            noise_separation = 6,
+            separation_type = "Mahalanobis"
+  ) %>% DSD_Memory(n = 1000)
 @
+
 <<outlier2, fig=TRUE, include=FALSE>>=
-plot(stream, n=1000)
+plot(stream, n = 1000)
 @
 The generated stream can be seen in Figure~\ref{figure:outlier_points}.
 \begin{figure}
 \centering
 \includegraphics[width=.5\linewidth]{streamMOA-outlier2}
-\caption{Data points from \code{DSD\_Gaussians} having 3 clusters and 10 outliers.}
+\caption{Data points from \code{DSD\_Gaussians} having 3 clusters and 1\% is outliers (noise).}
 \label{figure:outlier_points}
 \end{figure}
 
 Then we define a \code{DSC_MCOD} clusterer. Since this is a single-pass clusterer
-\code{DSC_SinglePass}, we do not need to update the model first, we can immediatelly
+\code{DSC_SinglePass}, we do not need to update the model first, we can immediately
 call evaluation.
 <<outlier3>>=
 reset_stream(stream)
-mic_c <- DSOutlier_MCOD(r = 2.5, w = 1000)
+mic_c <- DSOutlier_MCOD(r = 2, w = 1000)
 evaluate(mic_c, stream, n = 1000, type = "micro",
          measure = c("crand","outlierjaccard"))
 @
 <<outlier4, fig=TRUE, include=FALSE>>=
 reset_stream(stream)
-plot(mic_c, stream, n=1000, type="micro")
-@
-<<outlier5, fig=TRUE, include=FALSE>>=
-reset_stream(stream)
-plot(mic_c, stream, n=1000, type="outlier")
+plot(mic_c, stream, n = 1000)
 @
 
 \begin{figure}
 \centering
-\begin{minipage}{.45\linewidth} \centering
-\includegraphics[width=1\linewidth]{streamMOA-outlier4}
-\end{minipage}
-\begin{minipage}{.45\linewidth} \centering
-\includegraphics[width=1\linewidth]{streamMOA-outlier5}
-\end{minipage}
+\includegraphics[width=.45\linewidth]{streamMOA-outlier4}
 \caption{MCOD outlier detection.}
 \label{figure:outlier_mcod1}
 \end{figure}
 
 In Figure~\ref{figure:outlier_mcod1} we can see micro-cluster and outlier assignments
-for the generated data stream. Additionally, we can further improve the clustering result
-by adding the macro-clustering phase as the offline part. This time we will lower the
-number of nighbor data points, to get more micro-clusters. However, this might affect the
-outlier detection capability.
-<<outlier6>>=
-reset_stream(stream)
-mic_c <- DSOutlier_MCOD(r = 1.5, w = 1000, t = 10)
-mac_c <- DSC_Kmeans(3)
-tp_c <- DSC_TwoStage(mic_c, mac_c)
-evaluate(tp_c, stream, n = 1000, type = "macro",
-         measure = c("crand","outlierjaccard"))
-@
-<<outlier7, fig=TRUE, include=FALSE>>=
-reset_stream(stream)
-plot(tp_c, stream, n=1000, type="all")
-@
-In Figure~\ref{figure:outlier_twostage} we can see marked all objects detected by both
-algorithms in both stages. We can observe more micro-clusters than in Figure \ref{figure:outlier_twostage}a,
-which is due to the lower neighborhood parameter \code{t}. Macro-clusters are correctly
-identified by the k-means algorithm. We got one false positive outlier, which affected
-the \code{OutlierJaccard} index. Overall corrected rand (\code{cRand}) improved in
-comparison to using MCOD algorithm only. Such approach can be used to improve the final
-clustering results.
-
-\begin{figure}
-\centering
-\includegraphics[width=.5\linewidth]{streamMOA-outlier7}
-\caption{Two stages MCOD + k-means (weighted).}
-\label{figure:outlier_twostage}
-\end{figure}
+for the generated data stream.
 
 \input{foot.tex}

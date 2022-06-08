@@ -27,7 +27,7 @@ DSD_RandomRBFGeneratorEvents(
 
 \item{d}{The dimensionality of the data.}
 
-\item{numClusterRange}{Range for numner of clusters.}
+\item{numClusterRange}{Range for number of clusters.}
 
 \item{kernelRadius}{The average radius of the micro-clusters.}
 
@@ -55,7 +55,7 @@ DSD_RandomRBFGeneratorEvents(
 }
 \value{
 An object of class \code{DSD_RandomRBFGeneratorEvent} (subclass of
-\code{DSD_MOA}, \code{DSD}).
+\code{DSD_MOA}, \link{DSD}).
 }
 \description{
 A class that generates random data based on RandomRBFGeneratorEvents
@@ -64,7 +64,7 @@ implemented in MOA.
 \details{
 There are an assortment of parameters available for the underlying MOA data
 structure, however, we have currently limited the available parameters to
-the arguments above.  Currently the modelSeed and instanceSeed are set to
+the arguments above.  Currently the \code{modelSeed} and \code{instanceSeed} are set to
 default values every time a \code{DSD_MOA} is created, therefore the
 generated data will be the same. Because of this, it is important to set the
 seed manually when different data is needed.
@@ -74,14 +74,12 @@ drift.  The locations of the clusters will change slightly, and they will
 merge with one another as time progresses.
 }
 \examples{
-
 stream <- DSD_RandomRBFGeneratorEvents()
-get_points(stream, 10, class=TRUE)
+get_points(stream, 10)
 
-\dontrun{
-animate_data(stream, n=5000, pointInterval=100, xlim=c(0,1), ylim=c(0,1))
+if (interactive()) {
+animate_data(stream, n=5000, horizon=100, xlim=c(0,1), ylim=c(0,1))
 }
-
 }
 \references{
 MOA: Massive Online Analysis, a Framework for Stream
@@ -90,8 +88,10 @@ Pfahringer, Philipp Kranen, Hardy Kremer, Timm Jansen, Thomas Seidl.
 Journal of Machine Learning Research (JMLR).
 }
 \seealso{
-\code{\link{DSD}}
+Other DSD_MOA: 
+\code{\link{DSD_MOA}()}
 }
 \author{
 Michael Hahsler and John Forrest
 }
+\concept{DSD_MOA}

@@ -20,7 +20,7 @@
 #'
 #' This is an interface to the MOA implementation of BICO. The original BICO
 #' implementation by Fichtenberger et al is also available as
-#' \code{\link[stream]{DSC_BICO}}.
+#' [stream::DSC_BICO].
 #'
 #' BICO maintains a tree which is inspired by the clustering tree of BIRCH, a
 #' SIGMOD Test of Time award-winning clustering algorithm. Each node in the
@@ -29,30 +29,32 @@
 #' of the subset's points are stored as key features of each subset. Points are
 #' inserted into exactly one node.
 #'
+#' @family DSC_MOA
+#'
 #' @param Cluster,k Number of desired centers
 #' @param Dimensions The number of the dimensions of the input points (stream)
-#' need to be specified in advance
+#'   need to be specified in advance
 #' @param MaxClusterFeatures,space Maximum size of the coreset
 #' @param Projections,p Number of random projections used for the nearest
-#' neighbour search
+#'   neighbor search
 #' @author Matthias Carnein
-#' @references Hendrik Fichtenberger, Marc Gille, Melanie Schmidt, Chris
+#' @references
+#' Hendrik Fichtenberger, Marc Gille, Melanie Schmidt, Chris
 #' Schwiegelshohn, Christian Sohler: BICO: BIRCH Meets Coresets for k-Means
 #' Clustering. ESA 2013: 481-492
 #' @examples
-#'
 #' # data with 3 clusters and 2 dimensions
-#' stream <- DSD_Gaussians(k=3, d=2)
+#' set.seed(1000)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
 #'
 #' # cluster with BICO
-#' bico <- DSC_BICO_MOA(Cluster=3, Dimensions=2)
-#' update(bico, stream, 10000)
+#' bico <- DSC_BICO_MOA(Cluster = 3, Dimensions = 2)
+#' update(bico, stream, 100)
 #' bico
 #'
 #' # plot micro and macro-clusters
-#' plot(bico, stream, type="both")
-#'
-#' @export DSC_BICO_MOA
+#' plot(bico, stream, type = "both")
+#' @export
 DSC_BICO_MOA <-
   function(Cluster = 5,
     Dimensions,
