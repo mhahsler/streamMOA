@@ -55,10 +55,12 @@ We initialize four algorithms from \pkg{stream}. We choose the parameters
 experimentally so that the algorithm produce each (approximately) 100 micro-clusters.
 
 <<>>=
-sample <- DSC_TwoStage(micro=DSC_Sample(k=100), macro=DSC_Kmeans(k=4))
-window <- DSC_TwoStage(micro=DSC_Window(horizon=100), macro=DSC_Kmeans(k=4))
-dstream <- DSC_DStream(gridsize=.7)
-dbstream <- DSC_DBSTREAM(r=.45)
+sample <- DSC_TwoStage(micro = DSC_Sample(k = 100),
+  macro = DSC_Kmeans(k = 4))
+window <- DSC_TwoStage(micro = DSC_Window(horizon = 100),
+  macro = DSC_Kmeans(k = 4))
+dstream <- DSC_DStream(gridsize = .7)
+dbstream <- DSC_DBSTREAM(r = .45)
 @
 
 We will also use two MOA-based algorithms available in package~\pkg{streamMOA}.
@@ -74,9 +76,15 @@ We store the algorithms in a list for easier handling and then cluster the same
 each time before we cluster.
 
 <<>>=
-algorithms <- list(Sample=sample, Window=window, 'D-Stream'=dstream,
-  DBSTREAM=dbstream, DenStream_MOA=denstream, CluStream_MOA=clustream)
-for(a in algorithms) {
+algorithms <- list(
+  'Sample'        = sample,
+  'Window'        = window,
+  'D-Stream'      = dstream,
+  'DBSTREAM'      = dbstream,
+  'DenStream_MOA' = denstream
+)
+
+for (a in algorithms) {
   reset_stream(stream)
   update(a, stream, 5000)
 }
@@ -84,7 +92,7 @@ for(a in algorithms) {
 
 We use \code{nclusters()} to inspect the number of micro-clusters.
 <<>>=
-sapply(algorithms, nclusters, type="micro")
+sapply(algorithms, nclusters, type = "micro")
 @
 
 All algorithms except DenStream produce around 100 micro-clusters.
@@ -96,10 +104,10 @@ original data.
 
 <<microclusters, fig=TRUE, include=FALSE, width=8, height=12>>=
 op <- par(no.readonly = TRUE)
-layout(mat=matrix(1:6, ncol=2))
-for(a in algorithms) {
+layout(mat = matrix(1:6, ncol = 2))
+for (a in algorithms) {
   reset_stream(stream)
-  plot(a, stream, main=description(a), type="micro")
+  plot(a, stream, main = description(a), type = "micro")
 }
 par(op)
 @
@@ -137,10 +145,17 @@ We also disable showing micro-cluster weights to make the plot clearer.
 
 <<microclusters_assignment, fig=TRUE, include=FALSE, width=8, height=12>>=
 op <- par(no.readonly = TRUE)
-layout(mat=matrix(1:6, ncol=2))
-for(a in algorithms) {
+layout(mat = matrix(1:6, ncol = 2))
+for (a in algorithms) {
   reset_stream(stream)
-  plot(a, stream, main=description(a), assignment=TRUE, weight=FALSE, type="micro")
+  plot(
+    a,
+    stream,
+    main = description(a),
+    assignment = TRUE,
+    weight = FALSE,
+    type = "micro"
+  )
 }
 par(op)
 @
@@ -167,11 +182,18 @@ stream to position 1001 since we have used the first 1000 points for learning an
 we want to use data points not seen by the algorithms for evaluation.
 
 <<>>=
-sapply(algorithms, FUN=function(a) {
-  reset_stream(stream, 1001)
-  evaluate(a, stream,
-    measure=c("numMicroClusters", "purity", "SSQ", "silhouette"),
-    n=500, assignmentMethod = "auto", type = "micro")
+sapply(
+  algorithms,
+  FUN = function(a) {
+    reset_stream(stream, 1001)
+    evaluate_static(
+      a,
+      stream,
+      measure = c("numMicroClusters", "purity", "SSQ", "silhouette"),
+      n = 500,
+      assignmentMethod = "auto",
+      type = "micro"
+    )
 })
 @
 
@@ -198,10 +220,10 @@ $k$-means reclustering with $k=4$, the true number of clusters.
 
 <<macroclusters, fig=TRUE, include=FALSE, width=8, height=12>>=
 op <- par(no.readonly = TRUE)
-layout(mat=matrix(1:6, ncol=2))
-for(a in algorithms) {
+layout(mat = matrix(1:6, ncol = 2))
+for (a in algorithms) {
   reset_stream(stream)
-  plot(a, stream, main=description(a), type="both")
+  plot(a, stream, main = description(a), type = "both")
 }
 par(op)
 @
@@ -221,10 +243,18 @@ DenStream, DBSTREAM and D-Stream identify the two denser clusters
 correctly, but split the lower density clusters into multiple pieces.
 
 <<>>=
-sapply(algorithms, FUN=function(a) {
-  reset_stream(stream, 1001)
-  evaluate(a, stream, measure = c("numMacroClusters","purity", "SSQ", "cRand"),
-    n = 500, assign = "micro", type = "macro")
+sapply(
+  algorithms,
+  FUN = function(a) {
+    reset_stream(stream, 1001)
+    evaluate_static(
+      a,
+      stream,
+      measure = c("numMacroClusters", "purity", "SSQ", "cRand"),
+      n = 500,
+      assign = "micro",
+      type = "macro"
+    )
 })
 @
 
@@ -272,19 +302,21 @@ Next, we define the clustering algorithms.
 
 <<>>=
 algorithms <- list(
-  'Sample' = DSC_TwoStage(micro=DSC_Sample(k=100, biased=TRUE),
-    macro=DSC_Kmeans(k=2)),
-  'Window' = DSC_TwoStage(micro=DSC_Window(horizon=100, lambda=.01),
-    macro=DSC_Kmeans(k=2)),
-  'DBSTREAM' = DSC_DBSTREAM(r=.5, lambda=.01),
-  'D-Stream' = DSC_DStream(gridsize=.1, lambda=.01),
+  'Sample' = DSC_TwoStage(
+    micro = DSC_Sample(k = 100, biased = TRUE),
+    macro = DSC_Kmeans(k = 2)),
+  'Window' = DSC_TwoStage(
+    micro = DSC_Window(horizon = 101, lambda = .01),
+    macro = DSC_Kmeans(k = 2)
+  ),
+  'DBSTREAM' = DSC_DBSTREAM(r = .5, lambda = .01),
+  'D-Stream' = DSC_DStream(gridsize = .1, lambda = .01),
 
-  'DenStream' = DSC_DenStream(epsilon=.1, lambda=.01),
-  'CluStream' = DSC_CluStream(m=100, k=2)
+  'DenStream' = DSC_DenStream(epsilon = .1, lambda = .01)
 )
 @
 
-We perform the evaluation using \code{evaluate_cluster} which
+We perform the evaluation using \code{evaluate_stream} which
 performs clustering and evaluates
 clustering quality
 every \code{horizon = 250} data points. For sampling and window
@@ -295,13 +327,21 @@ with the true number of clusters $k = 2$.
 n <- 5000
 horizon <- 250
 
-evaluation <- lapply(algorithms, FUN=function(a) {
-  reset_stream(stream)
-  evaluate_cluster(a, stream,
-    type="macro", assign="micro",
-    measure=c("numMicro","numMacro","SSQ", "cRand"),
-    n=n, horizon=horizon)
-})
+evaluation <- lapply(
+  algorithms,
+  FUN = function(a) {
+    reset_stream(stream)
+    evaluate_stream(
+      a,
+      stream,
+      type = "macro",
+      assign = "micro",
+      measure = c("numMicro", "numMacro", "SSQ", "cRand"),
+      n = n,
+      horizon = horizon
+    )
+  }
+)
 @
 
 %#animate_cluster(sample, dsd, macro=DSC_Kmeans(k=2), n=5000, horizon=500, type="both", evaluationMeasure="crand", evaluationAssignmentMethod="model", evaluationType="macro", assign=T, ylim=c(0,1))
@@ -324,11 +364,21 @@ boxplot(cRand, las=2, cex.axis=.8)
 And then we compare the sum of squares.
 
 <<dynamic2, fig=TRUE, include=FALSE, width=10, height=4>>=
-SSQ <- sapply(evaluation, FUN=function(x) x[,"SSQ"])
+SSQ <- sapply(
+  evaluation,
+  FUN = function(x)
+    x[, "SSQ"]
+)
 SSQ
-matplot(Position, SSQ, type="l", lwd=2)
-legend("topright", legend=names(evaluation),
-  col=1:6, lty=1:6, bty="n", lwd=2)
+matplot(Position, SSQ, type = "l", lwd = 2)
+legend(
+  "topright",
+  legend = names(evaluation),
+  col = 1:6,
+  lty = 1:6,
+  bty = "n",
+  lwd = 2
+)
 @
 % #barplot(colMeans(cRand), las=2)
 <<dynamic_box2, fig=TRUE, include=FALSE, width=4, height=4.1>>=
@@ -400,8 +450,13 @@ call evaluation.
 <<outlier3>>=
 reset_stream(stream)
 mic_c <- DSOutlier_MCOD(r = 2, w = 1000)
-evaluate(mic_c, stream, n = 1000, type = "micro",
-         measure = c("crand","outlierjaccard"))
+evaluate_static(
+  mic_c,
+  stream,
+  n = 1000,
+  type = "micro",
+  measure = c("crand", "outlierjaccard")
+)
 @
 <<outlier4, fig=TRUE, include=FALSE>>=
 reset_stream(stream)

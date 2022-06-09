@@ -7,7 +7,7 @@
 \alias{clustream}
 \title{CluStream Data Stream Clusterer}
 \usage{
-DSC_CluStream(m = 100, horizon = 1000, t = 2, k = NULL)
+DSC_CluStream(m = 100, horizon = 1000, t = 2, k = 5)
 }
 \arguments{
 \item{m}{Defines the maximum number of micro-clusters used in CluStream}
@@ -19,13 +19,11 @@ add a new data point to a micro-cluster, the maximum boundary is defined as
 a factor of \code{t} of the RMS deviation of the data points in the
 micro-cluster from the centroid.}
 
-\item{k}{Number of macro-clusters to produce using weighted k-means.
-\code{NULL} disables automatic reclustering.}
+\item{k}{Number of macro-clusters to produce using weighted k-means.}
 }
 \value{
 An object of class \code{DSC_CluStream} (subclass of
-\link{DSC_Micro}, \link{DSC_MOA} and \link{DSC}), or, if \code{k} is not
-\code{NULL} then an object of \link{DSC_TwoStage}.
+\link{DSC_Micro}, \link{DSC_MOA} and \link{DSC}).
 }
 \description{
 Class implements the CluStream cluster algorithm for data streams (Aggarwal et al, 2003).
@@ -38,26 +36,11 @@ algorithm for reclustering (see Examples section below).
 }
 \examples{
 # data with 3 clusters and 5\% noise
+set.seed(1000)
 stream <- DSD_Gaussians(k = 3, d = 2, noise = .05)
 
 # cluster with CluStream
-clustream <- DSC_CluStream(m = 50)
-update(clustream, stream, 500)
-clustream
-
-# plot micro-clusters
-plot(clustream, stream)
-
-# plot assignment area (micro-cluster radius)
-plot(clustream, stream, assignment = TRUE, weights = FALSE)
-
-# reclustering. Use weighted k-means for CluStream
-kmeans <- DSC_Kmeans(k = 3, weighted = TRUE)
-recluster(kmeans, clustream)
-plot(kmeans, stream, type = "both")
-
-# use k-means reclustering automatically by specifying k
-clustream <- DSC_CluStream(m = 50, k = 3)
+clustream <- DSC_CluStream(m = 50, horizon = 100, k = 3)
 update(clustream, stream, 500)
 clustream
 

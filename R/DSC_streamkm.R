@@ -20,38 +20,44 @@
 #'
 #' This is an interface to the MOA implementation of streamKM++.
 #'
-#' streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream called coreset.
-#' Upon reclustering, the algorithm applies the k-means++ algorithm to find a given number of centres in the coreset.
+#' streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream
+#' called coreset. The MOA implementation applies the k-means++ algorithm to find a given number
+#' of centers in the coreset.
+#'
+#' **Note:** The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
 #'
 #' @family DSC_MOA
 #'
 #' @param sizeCoreset Size of the coreset
 #' @param numClusters Number of clusters to compute
 #' @param length Length of the data stream
+#' @param ... Further arguments are passed on to [DSC_Kmeans] for reclustering.
 #'
 #' @aliases DSC_StreamKM streamkm StreamKM
 #' @author Matthias Carnein
 #'
 #' @references
-#' Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach, Christian Sohler, Kamil Swierkot.
-#'  "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm
-#'  Engineering and Experiments (ALENEX '10), 2010
+#' Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach,
+#' Christian Sohler, Kamil Swierkot.
+#' "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm
+#' Engineering and Experiments (ALENEX '10), 2010
 #' @examples
 #' set.seed(1000)
-#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 #'
 #' # cluster with streamKM++
 #' streamkm <- DSC_StreamKM(sizeCoreset = 100, numClusters = 3, length = 100)
 #' update(streamkm, stream, 1000)
 #' streamkm
 #'
-#' # plot macro-clusters (no access to micro clusters)
-#' plot(streamkm, stream, type = "macro")
+#' # plot macro-clusters (no access to micro-clusters)
+#' plot(streamkm, stream)
 #' @export
 DSC_StreamKM <-
   function(sizeCoreset = 10000,
     numClusters = 5,
-    length = 100000L) {
+    length = 100000L,
+    ...) {
     ### Java code does parameter checking
     # streakm options:
     # -s sizeCoreset 	10000 (Size of the coreset (m))
@@ -64,8 +70,6 @@ DSC_StreamKM <-
     )
 
     ## MOA implementation does not return micro-clusters but only macro clusters
-    clus <-
-      DSC_MOA_Clusterer("moa/clusterers/streamkm/StreamKM", "StreamKM", paramList)
+    DSC_MOA_Clusterer("moa/clusterers/streamkm/StreamKM", "StreamKM", paramList)
 
-    clus
   }

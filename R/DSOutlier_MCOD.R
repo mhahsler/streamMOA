@@ -46,7 +46,7 @@
 #' ### Example 1: Use MCOD to cluster and then retrieve the identified outliers.
 #' ###   We use the same data to see what points are outliers.
 #' set.seed(1000)
-#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35) %>%
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05) %>%
 #'   DSD_Memory(n = 100)
 #'
 #' mcod <- DSC_MCOD(r = .1, t = 3, w = 100)
@@ -63,7 +63,7 @@
 #' plot(mcod, stream, n = 100, outliers = FALSE)
 #'
 #' reset_stream(stream)
-#'  evaluate(mcod, stream, n = 100, type = "micro",
+#' evaluate_static(mcod, stream, n = 100, type = "micro",
 #'   measure = c("crand", "noisePrecision", "outlierjaccard"))
 #'
 #' # Example 2: two-stage clustering
@@ -72,16 +72,12 @@
 #' dsc <- DSC_TwoStage(micro, macro)
 #'
 #' reset_stream(stream)
-#' evaluate(dsc, stream, n = 100, type = "macro",
+#' evaluate_static(dsc, stream, n = 100, type = "macro",
 #'   measure = c("crand", "noisePrecision", "outlierjaccard"))
 #'
 #' # plot the clustering
 #' reset_stream(stream)
 #' plot(dsc, stream, n = 100, type = "both")
-#'
-#' # plot the MCOD outliers
-#' reset_stream(stream)
-#' plot(dsc$micro, stream, n = 100, outliers = TRUE)
 #' @export
 DSC_MCOD <- function(r = 0.1,
   t = 50,

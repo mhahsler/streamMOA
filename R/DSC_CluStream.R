@@ -36,10 +36,8 @@
 #' a factor of `t` of the RMS deviation of the data points in the
 #' micro-cluster from the centroid.
 #' @param k Number of macro-clusters to produce using weighted k-means.
-#' `NULL` disables automatic reclustering.
 #' @return An object of class `DSC_CluStream` (subclass of
-#' [DSC_Micro], [DSC_MOA] and [DSC]), or, if `k` is not
-#' `NULL` then an object of [DSC_TwoStage].
+#' [DSC_Micro], [DSC_MOA] and [DSC]).
 #' @author Michael Hahsler and John Forrest
 #' @references
 #' Aggarwal CC, Han J, Wang J, Yu PS (2003). "A Framework for
@@ -51,26 +49,11 @@
 #' and Clustering. In Journal of Machine Learning Research (JMLR).
 #' @examples
 #' # data with 3 clusters and 5% noise
+#' set.seed(1000)
 #' stream <- DSD_Gaussians(k = 3, d = 2, noise = .05)
 #'
 #' # cluster with CluStream
-#' clustream <- DSC_CluStream(m = 50)
-#' update(clustream, stream, 500)
-#' clustream
-#'
-#' # plot micro-clusters
-#' plot(clustream, stream)
-#'
-#' # plot assignment area (micro-cluster radius)
-#' plot(clustream, stream, assignment = TRUE, weights = FALSE)
-#'
-#' # reclustering. Use weighted k-means for CluStream
-#' kmeans <- DSC_Kmeans(k = 3, weighted = TRUE)
-#' recluster(kmeans, clustream)
-#' plot(kmeans, stream, type = "both")
-#'
-#' # use k-means reclustering automatically by specifying k
-#' clustream <- DSC_CluStream(m = 50, k = 3)
+#' clustream <- DSC_CluStream(m = 50, horizon = 100, k = 3)
 #' update(clustream, stream, 500)
 #' clustream
 #'
@@ -79,24 +62,16 @@
 DSC_CluStream <- function(m = 100,
   horizon = 1000,
   t = 2,
-  k = NULL) {
-  ### Java code does parameter checking
-  paramList <- list(h = as.integer(horizon),
+  k = 5) {
+
+  paramList <- list(
+    h = as.integer(horizon),
     m = as.integer(m),
-    t = t)
+    t = t,
+    k = as.integer(k)
+  )
 
-  clus <-
-    DSC_MOA_Clusterer("moa/clusterers/clustream/WithKmeans",
-      "CluStream",
-      paramList)
-
-  if (!is.null(k))
-    clus <- DSC_TwoStage(clus,
-      DSC_Kmeans(
-        k = k,
-        weighted = TRUE,
-        nstart = 5
-      ))
-
-  clus
+  DSC_MOA_Clusterer("moa/clusterers/clustream/WithKmeans",
+    "CluStream",
+    paramList)
 }

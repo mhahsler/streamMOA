@@ -6,7 +6,7 @@
 \alias{StreamKM}
 \title{streamKM++}
 \usage{
-DSC_StreamKM(sizeCoreset = 10000, numClusters = 5, length = 100000L)
+DSC_StreamKM(sizeCoreset = 10000, numClusters = 5, length = 100000L, ...)
 }
 \arguments{
 \item{sizeCoreset}{Size of the coreset}
@@ -14,28 +14,34 @@ DSC_StreamKM(sizeCoreset = 10000, numClusters = 5, length = 100000L)
 \item{numClusters}{Number of clusters to compute}
 
 \item{length}{Length of the data stream}
+
+\item{...}{Further arguments are passed on to \link{DSC_Kmeans} for reclustering.}
 }
 \description{
 This is an interface to the MOA implementation of streamKM++.
 }
 \details{
-streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream called coreset.
-Upon reclustering, the algorithm applies the k-means++ algorithm to find a given number of centres in the coreset.
+streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream
+called coreset. The MOA implementation applies the k-means++ algorithm to find a given number
+of centers in the coreset.
+
+\strong{Note:} The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
 }
 \examples{
 set.seed(1000)
-stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 
 # cluster with streamKM++
 streamkm <- DSC_StreamKM(sizeCoreset = 100, numClusters = 3, length = 100)
 update(streamkm, stream, 1000)
 streamkm
 
-# plot macro-clusters (no access to micro clusters)
-plot(streamkm, stream, type = "macro")
+# plot macro-clusters (no access to micro-clusters)
+plot(streamkm, stream)
 }
 \references{
-Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach, Christian Sohler, Kamil Swierkot.
+Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach,
+Christian Sohler, Kamil Swierkot.
 "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm
 Engineering and Experiments (ALENEX '10), 2010
 }

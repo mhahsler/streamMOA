@@ -50,11 +50,11 @@
 #' 12 (July 2009), 27 pages.
 #' @examples
 #' set.seed(1000)
-#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 #'
 #' # cluster with D-Stream
-#' dstream <- DSC_DStream_MOA(decayFactor = 0.998)
-#' update(dstream, stream, 10000)
+#' dstream <- DSC_DStream_MOA(Cm = 5)
+#' update(dstream, stream, 1000)
 #' dstream
 #'
 #' # plot macro-clusters

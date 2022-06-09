@@ -45,7 +45,7 @@
 #' @examples
 #' # data with 3 clusters and 2 dimensions
 #' set.seed(1000)
-#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, separation = .35)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 #'
 #' # cluster with BICO
 #' bico <- DSC_BICO_MOA(Cluster = 3, Dimensions = 2)
@@ -84,8 +84,5 @@ DSC_BICO_MOA <-
       p = as.integer(Projections)
     )
 
-    clus <-
-      DSC_MOA_Clusterer("moa/clusterers/kmeanspm/BICO", "BICO", paramList)
-
-    clus
+    DSC_MOA_Clusterer("moa/clusterers/kmeanspm/BICO", "BICO", paramList)
   }
