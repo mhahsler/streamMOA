@@ -349,16 +349,26 @@ evaluation <- lapply(
 First, we look at the development of the corrected Rand index over time.
 
 <<dynamic, fig=TRUE, include=FALSE, width=10, height=4>>=
-Position <- evaluation[[1]][,"points"]
-cRand <- sapply(evaluation, FUN=function(x) x[,"cRand"])
+Position <- evaluation[[1]][, "points"]
+cRand <- sapply(
+  evaluation,
+  FUN = function(x)
+    x[, "cRand"]
+)
 cRand
-matplot(Position, cRand, type="l", lwd=2)
-legend("bottomleft", legend=names(evaluation),
-  col=1:6, lty=1:6, bty="n", lwd=2)
+matplot(Position, cRand, type = "l", lwd = 2)
+legend(
+  "bottomleft",
+  legend = names(evaluation),
+  col = 1:6,
+  lty = 1:6,
+  bty = "n",
+  lwd = 2
+)
 @
 % #barplot(colMeans(cRand), las=2)
 <<dynamic_box, fig=TRUE, include=FALSE, width=4, height=4.1>>=
-boxplot(cRand, las=2, cex.axis=.8)
+boxplot(cRand, las = 2, cex.axis = .8)
 @
 
 And then we compare the sum of squares.
@@ -382,7 +392,7 @@ legend(
 @
 % #barplot(colMeans(cRand), las=2)
 <<dynamic_box2, fig=TRUE, include=FALSE, width=4, height=4.1>>=
-boxplot(SSQ, las=2, cex.axis=.8)
+boxplot(SSQ, las = 2, cex.axis = .8)
 @
 
 
@@ -458,6 +468,7 @@ evaluate_static(
   measure = c("crand", "outlierjaccard")
 )
 @
+
 <<outlier4, fig=TRUE, include=FALSE>>=
 reset_stream(stream)
 plot(mic_c, stream, n = 1000)
