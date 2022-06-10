@@ -1,7 +1,8 @@
 ---
-title: "R package streamMOA - Interface for MOA Stream Clustering Algorithms"
 output: github_document
 ---
+
+# <img src='man/figures/logo.svg' align="right" height="139" /> R package streamMOA - Interface for MOA Stream Clustering Algorithms
 
 ```{r echo=FALSE}
 options(digits = 2)
@@ -46,7 +47,7 @@ clustream
 Plot micro-clusters.
 
 ```{r plot}
-plot(clustream, stream, type = "both")
+plot(clustream, stream)
 ```
 
 ## Further Information

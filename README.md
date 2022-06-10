@@ -1,5 +1,5 @@
-R package streamMOA - Interface for MOA Stream Clustering Algorithms
-================
+
+# <img src='man/figures/logo.svg' align="right" height="139" /> R package streamMOA - Interface for MOA Stream Clustering Algorithms
 
 [![CRAN
 version](http://www.r-pkg.org/badges/version/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
@@ -36,15 +36,15 @@ update(clustream, stream, 500)
 clustream
 ```
 
-    ## CluStream + k-Means (weighted)
-    ## Class: DSC_TwoStage, DSC_Macro, DSC 
+    ## CluStream
+    ## Class: moa/clusterers/clustream/WithKmeans, DSC_MOA, DSC_Micro, DSC 
     ## Number of micro-clusters: 50 
     ## Number of macro-clusters: 3
 
 Plot micro-clusters.
 
 ``` r
-plot(clustream, stream, type = "both")
+plot(clustream, stream)
 ```
 
 ![](inst/README_files/plot-1.png)<!-- -->
