@@ -27,15 +27,19 @@ grid cell using the count of points falling in the cells. Grid cells are
 classified based on density into dense, transitional and sporadic cells. The
 density is faded after every new point by a decay factor.
 
-\strong{Note:} The MOA implementation of D-Stream currently does not return
-micro clusters.
+\strong{Notes:}
+\itemize{
+\item This implementation seems to use a 1 x 1 grid and therefore the range is increased in
+the example.
+\item The MOA implementation of D-Stream currently does not return micro clusters.
+}
 }
 \examples{
 set.seed(1000)
-stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05, space_limit = c(0, 10))
 
 # cluster with D-Stream
-dstream <- DSC_DStream_MOA(Cm = 5)
+dstream <- DSC_DStream_MOA(Cm = 3)
 update(dstream, stream, 1000)
 dstream
 
