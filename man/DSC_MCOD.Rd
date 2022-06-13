@@ -61,7 +61,7 @@ evaluate_static(mcod, stream, n = 100, type = "micro",
 
 # Example 2: two-stage clustering
 micro <- DSC_MCOD(r = .1, t = 3, w = 100)
-macro <- DSC_Kmeans(3)
+macro <- DSC_Kmeans(k = 3)
 dsc <- DSC_TwoStage(micro, macro)
 
 reset_stream(stream)

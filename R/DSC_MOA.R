@@ -29,6 +29,9 @@
 #' done by using \pkg{rJava} to perform method calls directly in the JRI and
 #' converting the multi-dimensional Java array into a local R data type.
 #'
+#' **Note:** The formula interface is currently not implemented for MOA-based clusterers.
+#' Use [DSF] to select features instead.
+#'
 #' @family DSC_MOA
 #'
 #' @author Michael Hahsler and John Forrest

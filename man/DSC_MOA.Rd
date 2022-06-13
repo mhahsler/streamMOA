@@ -19,6 +19,9 @@ common functions needed to interface MOA clusterers.
 micro-clusters have to be extracted from the underlying Java object. This is
 done by using \pkg{rJava} to perform method calls directly in the JRI and
 converting the multi-dimensional Java array into a local R data type.
+
+\strong{Note:} The formula interface is currently not implemented for MOA-based clusterers.
+Use \link{DSF} to select features instead.
 }
 \references{
 Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
