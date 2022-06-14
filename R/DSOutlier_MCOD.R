@@ -26,12 +26,20 @@
 #' to be an outlier if there are less than \eqn{t} objects lying at distance at
 #' most \eqn{r} from \eqn{x}.
 #'
+#' Outliers are stored and can be retrieved using `get_outlier_position()` and
+#' `recheck_outlier()`.
+#'
+#' **Note:** The implementation updates the clustering when [predict()] is called.
+#'
 #' @family DSC_MOA
+#' @family DSOutlier_MOA
 #'
 #' @aliases DSC_MCOD DSC_MCOD_MOA DSOutlier_MCOD DSOutlier_MCOD_MOA MCOD
-#' @param r Defines the micro-cluster radius
-#' @param t Defines the number of neighbors (k in the article)
-#' @param w Defines the window width in data points
+#'
+#' @param r Defines the micro-cluster radius.
+#' @param t Defines the number of neighbors (k in the article).
+#' @param w Defines the window width in data points.
+#' @param outlier_correlated_id ids of outliers.
 #' @param recheck_outliers Defines that the MCOD algorithm allows re-checking
 #'   of detected outliers.
 #' @return An object of class `DSC_MCOD` (subclass of [DSOutlier],
@@ -43,46 +51,32 @@
 #' distance-based outliers over data streams. Information systems, vol.
 #' 55, pp. 37-53. \doi{10.1109/ICDE.2011.5767923}
 #' @examples
-#' ### Example 1: Use MCOD to cluster and then retrieve the identified outliers.
-#' ###   We use the same data to see what points are outliers.
-#' set.seed(1000)
-#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05) %>%
-#'   DSD_Memory(n = 100)
-#'
+#' # Example 1: Clustering with MCOD
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 #' mcod <- DSC_MCOD(r = .1, t = 3, w = 100)
 #' update(mcod, stream, 100)
 #' mcod
 #'
-#' # plot micro-clusters with marked outliers (red crosses)
-#' reset_stream(stream)
 #' plot(mcod, stream, n = 100)
+#'
+#' # Example 2: Predict outliers (have a class label of NA)
+#' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
+#' mcod <- DSOutlier_MCOD(r = .1, t = 3, w = 100)
+#' update(mcod, stream, 100)
+#'
+#' plot(mcod, stream, n = 100)
+#'
+#' # MCOD can retried the outliers
 #' get_outlier_positions(mcod)
 #'
-#' # plot without outliers
-#' reset_stream(stream)
-#' plot(mcod, stream, n = 100, outliers = FALSE)
-#'
-#' reset_stream(stream)
+#' # Example 3: evaluate on a stream
 #' evaluate_static(mcod, stream, n = 100, type = "micro",
 #'   measure = c("crand", "noisePrecision", "outlierjaccard"))
-#'
-#' # Example 2: two-stage clustering
-#' micro <- DSC_MCOD(r = .1, t = 3, w = 100)
-#' macro <- DSC_Kmeans(k = 3)
-#' dsc <- DSC_TwoStage(micro, macro)
-#'
-#' reset_stream(stream)
-#' evaluate_static(dsc, stream, n = 100, type = "macro",
-#'   measure = c("crand", "noisePrecision", "outlierjaccard"))
-#'
-#' # plot the clustering
-#' reset_stream(stream)
-#' plot(dsc, stream, n = 100, type = "both")
 #' @export
 DSC_MCOD <- function(r = 0.1,
   t = 50,
   w = 1000,
-  recheck_outliers = TRUE) {
+  recheck_outliers = FALSE) {
   parameters <-
     list(r = as.double(r),
       t = as.integer(t),
@@ -110,8 +104,6 @@ DSC_MCOD <- function(r = 0.1,
       javaObj = clusterer
     ),
     class = c(
-      "DSOutlier_MCOD",
-      "DSOutlier",
       "DSC_MCOD",
       "DSC_Micro",
       "DSC_MOA",
@@ -123,7 +115,97 @@ DSC_MCOD <- function(r = 0.1,
 
 #' @rdname DSC_MCOD
 #' @export
-DSOutlier_MCOD <- DSC_MCOD
+DSOutlier_MCOD <- function(r = 0.1,
+  t = 50,
+  w = 1000,
+  recheck_outliers = TRUE) {
+
+  cl <- DSC_MCOD(r, t, w, recheck_outliers)
+  class(cl) <- c("DSOutlier_MCOD", "DSOutlier", class(cl))
+  cl
+}
+
+#' @export
+update.DSC_MCOD <-
+  function(object, dsd, n, verbose = FALSE, ...) {
+    if (is.jnull(object$javaObj))
+      stop("Java Object is not available.", call. = FALSE)
+
+    if (n >= 1) {
+      d <- get_points(dsd, n, info = FALSE)
+
+      ## MOA needs a double array!
+      d <- as.matrix(d)
+      if (storage.mode(d) == "character")
+        stop("DSC_MOA clusterers do not support characters/factors in streams.")
+      storage.mode(d) <- "double"
+
+      .jcall(object$javaObj,
+        "Ljava/util/List;",
+        "sm_update",
+        .jarray(d, dispatch = TRUE))
+    }
+
+    invisible(object)
+  }
+
+#' @export
+get_assignment.DSC_MCOD <-
+  function(dsc,
+    points,
+    type = c("auto", "micro", "macro"),
+    method = c("auto", "nn", "model"),
+    ...) {
+    if (is.jnull(dsc$javaObj))
+      stop("Java Object is not available.", call. = FALSE)
+
+    type <- match.arg(type)
+    if (type == "macro")
+      stop("MCOD does not implement macro-clustering")
+
+    points <- remove_info(points)
+    d <- as.matrix(points)
+    if (storage.mode(d) == "character")
+      stop("DSC_MOA clusterers do not support characters/factors in streams.")
+    storage.mode(d) <- "double"
+
+    predict_jlist <-
+      .jcall(dsc$javaObj,
+        "Ljava/util/List;",
+        "sm_update",
+        .jarray(as.matrix(d), dispatch = TRUE))
+    predict_len <- .jcall(predict_jlist, "I", "size")
+    assignment <- rep(NA_integer_, predict_len)
+    outliers <- rep(FALSE, predict_len)
+    outliers_corrid <- rep(NA, predict_len)
+    for (i in 1:predict_len) {
+      res_jobj <-
+        .jcall(predict_jlist, "Ljava/lang/Object;", "get", i - 1L)
+      res_i <- .jcast(res_jobj, "LStreamMOA_MCODResult;")
+      assignment[i] <- .jcall(res_i, "I", "getId")
+      outliers[i] <- .jcall(res_i, "Z", "isOutlier")
+      s <- .jcall(res_i, "Ljava/lang/String;", "getOutlierId")
+      if (!is.null(s))
+        outliers_corrid[i] <- s
+    }
+
+    assignment[assignment == 0L] <- NA_integer_
+
+    attr(assignment, "outliers") <- outliers
+    attr(assignment, "outliers_corrid") <- outliers_corrid
+
+    assignment
+  }
+
+
+### Additional functions for MCOD
+
+#' @describeIn DSC_MCOD Returns spatial positions of all current outliers.
+#' @param x a `DSC_MCOD` object.
+#' @param ... further arguments are currently ignored.
+#' @export
+get_outlier_positions <- function(x, ...)
+  UseMethod("get_outlier_positions")
 
 #' @export
 get_outlier_positions.DSOutlier_MCOD <- function(x, ...) {
@@ -145,6 +227,12 @@ get_outlier_positions.DSOutlier_MCOD <- function(x, ...) {
 
   centers
 }
+
+#' @describeIn DSC_MCOD DSC_MCOD Re-checks the outlier having `outlier_correlated_id`.
+#'   If this object is still an outlier, the method returns `TRUE`.
+#' @export
+recheck_outlier <- function(x, outlier_correlated_id, ...)
+  UseMethod("recheck_outlier")
 
 #' @export
 recheck_outlier.DSOutlier_MCOD <-
@@ -173,76 +261,35 @@ recheck_outlier.DSOutlier_MCOD <-
     return(is_still_there)
   }
 
+
+#' @describeIn DSC_MCOD forget detected outliers from the outlier detector (currently not implemented).
 #' @export
-update.DSOutlier_MCOD <-
-  function(object, dsd, n, verbose = FALSE, ...) {
-    if (is.jnull(object$javaObj))
-      stop("Java Object is not available.", call. = FALSE)
+clean_outliers <- function(x, ...)
+  UseMethod("clean_outliers")
 
-    if (n >= 1) {
-      d <- get_points(dsd, n, info = FALSE)
+.outlier_pch <- 4L
+.outlier_col <- "#FF0000FF"
 
-      ## MOA needs a double array!
-      d <- as.matrix(d)
-      if (storage.mode(d) == "character")
-        stop("DSC_MOA clusterers do not support characters/factors in streams.")
-      storage.mode(d) <- "double"
-
-      .jcall(
-        object$javaObj,
-        "Ljava/util/List;",
-        "sm_update",
-        .jarray(d, dispatch = TRUE)
-      )
-    }
-
-    invisible(object)
-  }
-
-#' @export
-get_assignment.DSOutlier_MCOD <-
-  function(dsc,
-    points,
-    type = c("auto", "micro", "macro"),
-    method = c("auto", "nn", "model"),
-    ...) {
-    if (is.jnull(dsc$javaObj))
-      stop("Java Object is not available.", call. = FALSE)
-
-    type <- match.arg(type)
-    if (type == "macro")
-      stop("MCOD does not implement macro-clustering")
-
-    d <- as.matrix(points)
-    if (storage.mode(d) == "character")
-      stop("DSC_MOA clusterers do not support characters/factors in streams.")
-    storage.mode(d) <- "double"
-
-    predict_jlist <-
-      .jcall(dsc$javaObj,
-        "Ljava/util/List;",
-        "sm_update",
-        .jarray(as.matrix(d), dispatch = TRUE))
-    predict_len <- .jcall(predict_jlist, "I", "size")
-    assignment <- rep(NA_integer_, predict_len)
-    outliers <- rep(FALSE, predict_len)
-    outliers_corrid <- rep(NA, predict_len)
-    for (i in 1:predict_len) {
-      res_jobj <- .jcall(predict_jlist, "Ljava/lang/Object;", "get", i - 1L)
-      res_i <- .jcast(res_jobj, "LStreamMOA_MCODResult;")
-      assignment[i] <- .jcall(res_i, "I", "getId")
-      outliers[i] <- .jcall(res_i, "Z", "isOutlier")
-      s <- .jcall(res_i, "Ljava/lang/String;", "getOutlierId")
-      if (!is.null(s))
-        outliers_corrid[i] <- s
-    }
-
-    to_noise <- assignment == 0L
-    assignment[to_noise] <- NA_integer_
-
-    attr(assignment, "outliers") <- outliers
-    attr(assignment, "outliers_corrid") <- outliers_corrid
-
-    assignment
-  }
-
+#' #' @export
+#' plot.DSOutlier_MCOD <- function(x,
+#'   dsd = NULL,
+#'   n = 500,
+#'   col_points = NULL,
+#'   col_clusters = c("red", "blue", "green"),
+#'   weights = TRUE,
+#'   scale = c(1, 5),
+#'   cex = 1,
+#'   pch = NULL,
+#'   method = c("pairs", "scatter", "pca"),
+#'   dim = NULL,
+#'   type = c("auto", "micro", "macro", "both"),
+#'   # we keep 'both' for compatibility reasons
+#'   assignment = FALSE,
+#'   outliers = TRUE,
+#'   ...) {
+#'   NextMethod("plot", x, outliers = NULL)
+#'
+#'   if (outliers)
+#'     points(get_outlier_positions(x), pch = .outlier_pch, col = .outlier_col)
+#' }
+#'

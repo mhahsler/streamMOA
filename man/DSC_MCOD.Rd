@@ -6,21 +6,32 @@
 \alias{DSOutlier_MCOD}
 \alias{DSOutlier_MCOD_MOA}
 \alias{MCOD}
+\alias{get_outlier_positions}
+\alias{recheck_outlier}
+\alias{clean_outliers}
 \title{Micro-cluster Continuous Outlier Detector (MCOD)}
 \usage{
-DSC_MCOD(r = 0.1, t = 50, w = 1000, recheck_outliers = TRUE)
+DSC_MCOD(r = 0.1, t = 50, w = 1000, recheck_outliers = FALSE)
 
 DSOutlier_MCOD(r = 0.1, t = 50, w = 1000, recheck_outliers = TRUE)
+
+get_outlier_positions(x, ...)
+
+recheck_outlier(x, outlier_correlated_id, ...)
+
+clean_outliers(x, ...)
 }
 \arguments{
-\item{r}{Defines the micro-cluster radius}
+\item{r}{Defines the micro-cluster radius.}
 
-\item{t}{Defines the number of neighbors (k in the article)}
+\item{t}{Defines the number of neighbors (k in the article).}
 
-\item{w}{Defines the window width in data points}
+\item{w}{Defines the window width in data points.}
 
 \item{recheck_outliers}{Defines that the MCOD algorithm allows re-checking
 of detected outliers.}
+
+\item{outlier_correlated_id}{ids of outliers.}
 }
 \value{
 An object of class \code{DSC_MCOD} (subclass of \link{DSOutlier},
@@ -34,43 +45,44 @@ distance-based data stream outlier detection.
 The algorithm detects density-based outliers. An object \eqn{x} is defined
 to be an outlier if there are less than \eqn{t} objects lying at distance at
 most \eqn{r} from \eqn{x}.
-}
-\examples{
-### Example 1: Use MCOD to cluster and then retrieve the identified outliers.
-###   We use the same data to see what points are outliers.
-set.seed(1000)
-stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05) \%>\%
-  DSD_Memory(n = 100)
 
+Outliers are stored and can be retrieved using \code{get_outlier_position()} and
+\code{recheck_outlier()}.
+
+\strong{Note:} The implementation updates the clustering when \code{\link[=predict]{predict()}} is called.
+}
+\section{Functions}{
+\itemize{
+\item \code{get_outlier_positions}: Returns spatial positions of all current outliers.
+
+\item \code{recheck_outlier}: DSC_MCOD Re-checks the outlier having \code{outlier_correlated_id}.
+If this object is still an outlier, the method returns \code{TRUE}.
+
+\item \code{clean_outliers}: forget detected outliers from the outlier detector (currently not implemented).
+}}
+
+\examples{
+# Example 1: Clustering with MCOD
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 mcod <- DSC_MCOD(r = .1, t = 3, w = 100)
 update(mcod, stream, 100)
 mcod
 
-# plot micro-clusters with marked outliers (red crosses)
-reset_stream(stream)
 plot(mcod, stream, n = 100)
+
+# Example 2: Predict outliers (have a class label of NA)
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
+mcod <- DSOutlier_MCOD(r = .1, t = 3, w = 100)
+update(mcod, stream, 100)
+
+plot(mcod, stream, n = 100)
+
+# MCOD can retried the outliers
 get_outlier_positions(mcod)
 
-# plot without outliers
-reset_stream(stream)
-plot(mcod, stream, n = 100, outliers = FALSE)
-
-reset_stream(stream)
+# Example 3: evaluate on a stream
 evaluate_static(mcod, stream, n = 100, type = "micro",
   measure = c("crand", "noisePrecision", "outlierjaccard"))
-
-# Example 2: two-stage clustering
-micro <- DSC_MCOD(r = .1, t = 3, w = 100)
-macro <- DSC_Kmeans(k = 3)
-dsc <- DSC_TwoStage(micro, macro)
-
-reset_stream(stream)
-evaluate_static(dsc, stream, n = 100, type = "macro",
-  measure = c("crand", "noisePrecision", "outlierjaccard"))
-
-# plot the clustering
-reset_stream(stream)
-plot(dsc, stream, n = 100, type = "both")
 }
 \references{
 Kontaki M, Gounaris A, Papadopoulos AN, Tsichlas K, and
@@ -92,3 +104,4 @@ Other DSC_MOA:
 Dalibor Krleža
 }
 \concept{DSC_MOA}
+\concept{DSOutlier_MOA}
