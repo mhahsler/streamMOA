@@ -2,29 +2,18 @@
 output: github_document
 ---
 
-# <img src='man/figures/logo.svg' align="right" height="139" /> R package streamMOA - Interface for MOA Stream Clustering Algorithms
-
-```{r echo=FALSE}
-options(digits = 2)
-knitr::opts_chunk$set(tidy = TRUE, message = FALSE, fig.path = 'inst/README_files/')
-```
-
 ```{r echo=FALSE, results = 'asis'}
 pkg <- 'streamMOA'
 
-library(stringr)
-
-  cat(str_interp("[![CRAN version](http://www.r-pkg.org/badges/version/${pkg})](https://CRAN.R-project.org/package=${pkg})\n"))
-  cat(str_interp("[![stream r-universe status](https://mhahsler.r-universe.dev/badges/${pkg})](https://mhahsler.r-universe.dev/ui#package:${pkg})\n"))
-  cat(str_interp("[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/${pkg})](https://CRAN.R-project.org/package=${pkg})\n"))
+source("https://raw.githubusercontent.com/mhahsler/pkg_helpers/main/pkg_helpers.R")
+pkg_title(pkg)
 ```
 
 Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework. This is an extension package for [stream](https://github.com/mhahsler/stream).
 
-## Installation
-
-* __Stable CRAN version:__ Install from within R.
-* __Current development version:__ Install from [r-universe](https://mhahsler.r-universe.dev/ui#package:`r pkg`).
+```{r echo=FALSE, results = 'asis'}
+pkg_install(pkg)
+```
 
 ## Example
 
