@@ -10,5 +10,5 @@
 #' @import methods
 #' @import rJava
 #' @importFrom graphics plot lines points
-#' @importFrom stats runif
+#' @importFrom stats runif predict
 NULL

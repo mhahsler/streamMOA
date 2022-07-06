@@ -31,6 +31,10 @@ clean_outliers(x, ...)
 \item{recheck_outliers}{Defines that the MCOD algorithm allows re-checking
 of detected outliers.}
 
+\item{x}{a \code{DSC_MCOD} object.}
+
+\item{...}{further arguments are currently ignored.}
+
 \item{outlier_correlated_id}{ids of outliers.}
 }
 \value{
