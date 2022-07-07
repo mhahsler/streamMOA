@@ -80,7 +80,7 @@ DSC_MOA_Clusterer <- function(class,
   cliParameters <- convert_params(parameters)
 
   clusterer <-
-    .jcast(.jnew(class), "moa/clusterers/AbstractClusterer")
+    .jcast(.jnew(class, class.loader = .rJava.class.loader), "moa/clusterers/AbstractClusterer")
   options <-
     .jcall(clusterer,
       "Lcom/github/javacliparser/Options;",
@@ -136,11 +136,22 @@ update.DSC_MOA <- function(object, dsd, n, verbose = FALSE, ...) {
       stop("DSC_MOA clusterers do not support characters/factors in streams.")
     storage.mode(d) <- "double"
 
-    .jcall("StreamMOA",
-      "V",
-      "update",
-      object$javaObj,
-      .jarray(d, dispatch = TRUE))
+    # jcall does not support a class loader for static classes methods
+    #   so we use J which is slower
+    #.jcall("StreamMOA",
+    #  "V",
+    #  "update",
+    #  object$javaObj,
+    #  .jarray(d, dispatch = TRUE))
+
+    #.jcall(.jfindClass("StreamMOA", class.loader = .rJava.class.loader),
+    #  "V",
+    #  "update",
+    #  object$javaObj,
+    #  .jarray(d, dispatch = TRUE))
+
+    J("StreamMOA", "update", object$javaObj,
+      .jarray(d, dispatch = TRUE), class.loader = .rJava.class.loader)
   }
 
 

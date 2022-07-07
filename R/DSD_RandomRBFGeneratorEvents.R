@@ -17,7 +17,6 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-
 #' Random RBF Generator Events Data Stream Generator
 #'
 #' A class that generates random data based on RandomRBFGeneratorEvents
@@ -55,16 +54,17 @@
 #' `DSD_MOA`, [DSD]).
 #' @author Michael Hahsler and John Forrest
 #' @references
-#' MOA: Massive Online Analysis, a Framework for Stream
-#' Classification and Clustering Albert Bifet, Geoff Holmes, Bernhard
+#' Albert Bifet, Geoff Holmes, Bernhard
 #' Pfahringer, Philipp Kranen, Hardy Kremer, Timm Jansen, Thomas Seidl.
-#' Journal of Machine Learning Research (JMLR).
+#' MOA: Massive Online Analysis, a Framework for Stream
+#' Classification and Clustering
+#' _Journal of Machine Learning Research (JMLR)_, 2010.
 #' @examples
 #' stream <- DSD_RandomRBFGeneratorEvents()
 #' get_points(stream, 10)
 #'
 #' if (interactive()) {
-#' animate_data(stream, n=5000, horizon=100, xlim=c(0,1), ylim=c(0,1))
+#' animate_data(stream, n = 5000, horizon = 100, xlim = c(0, 1), ylim = c(0, 1))
 #' }
 #' @export
 DSD_RandomRBFGeneratorEvents <- function(k = 3,
@@ -128,7 +128,7 @@ DSD_RandomRBFGeneratorEvents <- function(k = 3,
   cliParams <- convert_params(paramList)
 
   # initializing the clusterer
-  strm <- .jnew("moa/streams/clustering/RandomRBFGeneratorEvents")
+  strm <- .jnew("moa/streams/clustering/RandomRBFGeneratorEvents", class.loader = .rJava.class.loader)
   options <-
     .jcall(strm, "Lcom/github/javacliparser/Options;", "getOptions")
   .jcall(options, "V", "setViaCLIString", cliParams)

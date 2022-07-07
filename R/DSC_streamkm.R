@@ -24,7 +24,11 @@
 #' called coreset. The MOA implementation applies the k-means++ algorithm to find a given number
 #' of centers in the coreset.
 #'
-#' **Note:** The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
+#' **Notes:**
+#'
+#'  * The clustere can only cluster the number of points specified in `length` ans then
+#'    produces an `ArrayIndexOutOfBoundsException` error.
+#'  * The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
 #'
 #' @family DSC_MOA
 #'
@@ -39,15 +43,15 @@
 #' @references
 #' Marcel R. Ackermann, Christiane Lammersen, Marcus Maertens, Christoph Raupach,
 #' Christian Sohler, Kamil Swierkot.
-#' "StreamKM++: A Clustering Algorithm for Data Streams." In: Proceedings of the 12th Workshop on Algorithm
-#' Engineering and Experiments (ALENEX '10), 2010
+#' StreamKM++: A Clustering Algorithm for Data Streams. In: _Proceedings of the 12th Workshop on Algorithm
+#' Engineering and Experiments (ALENEX '10)_, 2010.
 #' @examples
 #' set.seed(1000)
 #' stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
 #'
 #' # cluster with streamKM++
-#' streamkm <- DSC_StreamKM(sizeCoreset = 100, numClusters = 3, length = 100)
-#' update(streamkm, stream, 1000)
+#' streamkm <- DSC_StreamKM(sizeCoreset = 100, numClusters = 3, length = 1000)
+#' update(streamkm, stream, 100)
 #' streamkm
 #'
 #' # plot macro-clusters (no access to micro-clusters)

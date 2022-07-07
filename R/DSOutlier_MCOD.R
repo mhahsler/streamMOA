@@ -84,7 +84,7 @@ DSC_MCOD <- function(r = 0.1,
   cliParameters <- convert_params(parameters)
 
   clusterer <-
-    .jcast(.jnew("StreamMOA_MCOD"),
+    .jcast(.jnew("StreamMOA_MCOD", class.loader = .rJava.class.loader),
       "moa/clusterers/AbstractClusterer")
   options <-
     .jcall(clusterer,

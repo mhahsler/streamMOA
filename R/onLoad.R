@@ -14,6 +14,11 @@ if (substr(jv, 1L, 2L) == "1.") {
 }
 
 .onLoad <- function(libname, pkgname) {
-  options(java.parameters = "-Xrs")  ### so sun java does not kill R on CTRL-C
-  .jpackage(pkgname, lib.loc = libname)
+  # use -Xrs so sun java does not kill R on CTRL-C
+  .jpackage(
+    pkgname,
+    lib.loc = libname,
+    parameters = "-Xrs",
+    own.loader = TRUE
+  )
 }

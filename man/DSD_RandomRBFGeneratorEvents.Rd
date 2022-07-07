@@ -78,14 +78,15 @@ stream <- DSD_RandomRBFGeneratorEvents()
 get_points(stream, 10)
 
 if (interactive()) {
-animate_data(stream, n=5000, horizon=100, xlim=c(0,1), ylim=c(0,1))
+animate_data(stream, n = 5000, horizon = 100, xlim = c(0, 1), ylim = c(0, 1))
 }
 }
 \references{
-MOA: Massive Online Analysis, a Framework for Stream
-Classification and Clustering Albert Bifet, Geoff Holmes, Bernhard
+Albert Bifet, Geoff Holmes, Bernhard
 Pfahringer, Philipp Kranen, Hardy Kremer, Timm Jansen, Thomas Seidl.
-Journal of Machine Learning Research (JMLR).
+MOA: Massive Online Analysis, a Framework for Stream
+Classification and Clustering
+\emph{Journal of Machine Learning Research (JMLR)}, 2010.
 }
 \seealso{
 Other DSD_MOA: 
