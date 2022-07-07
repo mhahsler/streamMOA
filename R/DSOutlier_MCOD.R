@@ -48,7 +48,7 @@
 #' @references
 #' Kontaki M, Gounaris A, Papadopoulos AN, Tsichlas K, and
 #' Manolopoulos Y (2016). Efficient and flexible algorithms for monitoring
-#' distance-based outliers over data streams. Information systems, vol.
+#' distance-based outliers over data streams. _Information Systems,_ Vol.
 #' 55, pp. 37-53. \doi{10.1109/ICDE.2011.5767923}
 #' @examples
 #' # Example 1: Clustering with MCOD
