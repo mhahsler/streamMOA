@@ -45,11 +45,6 @@
 #' (2010).  MOA: Massive Online Analysis, a Framework for Stream Classification
 #' and Clustering. _Journal of Machine Learning Research (JMLR)_.
 #' @examples
-#' # NOTE: rJava does not fully support multiple class loaders and therefore, streamMOA and RMOA
-#' # clash. For the time being, you can use the classifiers by loading RMOA.
-#' However, this will **break** the MOA-based clusterers. This issue
-#' # will be fixed once rJava extends its support for multiple class loaders.
-#'
 #' \dontrun{
 #' library(streamMOA)
 #' library(RMOA)

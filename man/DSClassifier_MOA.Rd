@@ -51,14 +51,9 @@ Interface for MOA-based stream classification methods based on package \pkg{RMOA
 Subsequent calls to \code{update()} update the current model.
 }
 \examples{
-# NOTE: rJava does not fully support multiple class loaders and therefore, streamMOA and RMOA
-# clash. For the time being, you can use the classifiers by **first** loading RMOA and **then**
-# streamMOA. However, this will break the MOA-based clusterers. This issue
-# will be fixed once rJava extends its support for multiple class loaders.
-
 \dontrun{
-library(RMOA)
 library(streamMOA)
+library(RMOA)
 
 # create a data stream for the iris dataset
 data <- iris[sample(nrow(iris)), ]
@@ -90,7 +85,7 @@ classifications. https://github.com/jwijffels/RMOA
 
 Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 (2010).  MOA: Massive Online Analysis, a Framework for Stream Classification
-and Clustering. In Journal of Machine Learning Research (JMLR).
+and Clustering. \emph{Journal of Machine Learning Research (JMLR)}.
 }
 \author{
 Michael Hahsler

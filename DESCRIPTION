@@ -13,7 +13,7 @@ Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
 Description: Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework (Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research 11: 1601-1604).
 Depends: stream (>= 1.5-1), rJava (>= 1.0-1)
 Imports: graphics, stats, methods
-Suggests: RMOA
+Suggests: RMOA (>= 1.1.0)
 SystemRequirements: Java (>= 8)
 BugReports: https://github.com/mhahsler/streamMOA
 License: GPL-3
