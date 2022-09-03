@@ -60,7 +60,8 @@ data <- iris[sample(nrow(iris)), ]
 stream <- DSD_Memory(data)
 stream
 
-# define the stream classifier
+# define the stream classifier. MOAmodelOptions can be passed on as a control parameter
+#   to the call RMOA::HoeffdingTree(). See ? RMOA::MOAoptions
 cl <- DSClassifier_MOA(
   Species ~ Sepal.Length + Sepal.Width + Petal.Length,
   RMOA::HoeffdingTree()
@@ -70,6 +71,9 @@ cl
 
 # update the classifier with 100 points from the stream
 update(cl, stream, 100)
+
+# look at the classifier RMOA object
+cl$RMOAObj
 
 # predict the class for the next 50 points
 newdata <- get_points(stream, n = 50)

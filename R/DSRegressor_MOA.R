@@ -17,25 +17,21 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-#' DSClassifier_MOA -- MOA-based Stream Classifiers
+#' DSRegressor_MOA -- MOA-based Stream Regressors
 #'
-#' Interface for MOA-based stream classification methods based on package \pkg{RMOA}.
+#' Interface for MOA-based stream regression methods based on package \pkg{RMOA}.
 #'
-#' `DSClassifier_MOA` provides an interface to MOA-based stream classifiers using package
-#' \pkg{RMOA}. RMOA provides access to MOAs stream classifiers in the following groups:
-#'
-#' * [RMOA::MOA_classification_trees]
-#' * [RMOA::MOA_classification_bayes]
-#' * [RMOA::MOA_classification_ensemblelearning]
+#' `DSRegressor_MOA` provides an interface to MOA-based stream regressors using package
+#' \pkg{RMOA}. Available regressors can be found at [RMOA::MOA_regressors].
 #'
 #' Subsequent calls to `update()` update the current model.
 #'
-#' @family DSClassifier_MOA
+#' @family DSRegressor_MOA
 #'
-#' @param formula a formula for the classification problem.
-#' @param RMOA_classifier a `RMOA_classifier` object.
+#' @param formula a formula for the regression problem.
+#' @param RMOA_regressor a `RMOA_regressors` object.
 #'
-#' @return An object of class `DSClassifier_MOA`
+#' @return An object of class `DSRegressor_MOA`
 #' @author Michael Hahsler
 #' @references
 #' Wijffels, J. (2014) Connect R with MOA to perform streaming
@@ -54,47 +50,47 @@
 #' stream <- DSD_Memory(data)
 #' stream
 #'
-#' # define the stream classifier. MOAmodelOptions can be passed on as a control parameter
-#' #   to the call RMOA::HoeffdingTree(). See ? RMOA::MOAoptions
-#' cl <- DSClassifier_MOA(
-#'   Species ~ Sepal.Length + Sepal.Width + Petal.Length,
-#'   RMOA::HoeffdingTree()
+#' # define a stream regression model.
+#' cl <- DSRegressor_MOA(
+#'   Sepal.Length ~ Species + Sepal.Width + Petal.Length,
+#'   RMOA::Perceptron()
 #'   )
 #'
 #' cl
 #'
-#' # update the classifier with 100 points from the stream
+#' # update the model with 100 points from the stream
 #' update(cl, stream, 100)
 #'
-#' # look at the classifier RMOA object
+#' # look at the RMOA model object
 #' cl$RMOAObj
 #'
-#' # predict the class for the next 50 points
+#' # make predictions for the next 50 points
 #' newdata <- get_points(stream, n = 50)
 #' pr <- predict(cl, newdata)
 #' pr
 #'
-#' table(pr, newdata$Species)
+#' plot(pr, newdata$Sepal.Length, xlim = c(0,10), ylim = c(0,10))
+#' abline(a = 0, b = 1, col = "red")
 #' }
 #' @export
-DSClassifier_MOA <- function(formula,
-  RMOA_classifier)
+DSRegressor_MOA <- function(formula,
+  RMOA_regressor)
   structure(
     list(
       description = paste0(
-        "MOA Classifier (",
-        RMOA_classifier$type,
+        "MOA Regressor (",
+        RMOA_regressor$type,
         ")\nFormula: ",
         deparse(formula)
       ),
       formula = formula,
-      RMOAObj = RMOA_classifier,
+      RMOAObj = RMOA_regressor,
       RMOAObj_trained = list2env(list(trained = NULL))
     ),
-    class = c("DSClassifier_MOA", "DSClassifier", "DST")
+    class = c("DSRegressor_MOA", "DSRegressor", "DST")
   )
 
-#' @rdname DSClassifier_MOA
+#' @rdname DSRegressor_MOA
 #' @param object a DSC object.
 #' @param dsd a data stream object.
 #' @param n number of data points taken from the stream.
@@ -102,7 +98,7 @@ DSClassifier_MOA <- function(formula,
 #' @param block process blocks of data to improve speed.
 #' @param ... further arguments.
 #' @export
-update.DSClassifier_MOA <- function(object,
+update.DSRegressor_MOA <- function(object,
   dsd,
   n = 1,
   verbose = FALSE,
@@ -137,11 +133,11 @@ update.DSClassifier_MOA <- function(object,
   object$RMOAObj_trained$trained <- eval(parse(text = call))
 }
 
-#' @rdname DSClassifier_MOA
+#' @rdname DSRegressor_MOA
 #' @param newdata dataframe with the new data.
 #' @param type prediction type (see [RMOA::predict.MOA_trainedmodel()]).
 #' @export
-predict.DSClassifier_MOA <-
+predict.DSRegressor_MOA <-
   function(object,
     newdata, type = "response", ...) {
     if (is.null(object$RMOAObj_trained$trained))

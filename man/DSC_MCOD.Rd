@@ -57,14 +57,14 @@ Outliers are stored and can be retrieved using \code{get_outlier_position()} and
 }
 \section{Functions}{
 \itemize{
-\item \code{get_outlier_positions}: Returns spatial positions of all current outliers.
+\item \code{get_outlier_positions()}: Returns spatial positions of all current outliers.
 
-\item \code{recheck_outlier}: DSC_MCOD Re-checks the outlier having \code{outlier_correlated_id}.
+\item \code{recheck_outlier()}: DSC_MCOD Re-checks the outlier having \code{outlier_correlated_id}.
 If this object is still an outlier, the method returns \code{TRUE}.
 
-\item \code{clean_outliers}: forget detected outliers from the outlier detector (currently not implemented).
-}}
+\item \code{clean_outliers()}: forget detected outliers from the outlier detector (currently not implemented).
 
+}}
 \examples{
 # Example 1: Clustering with MCOD
 stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
