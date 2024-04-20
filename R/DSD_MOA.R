@@ -19,7 +19,7 @@
 #' Base class for MOA-based Data Stream Generators
 #'
 #' Abstract base class for MOA-based data stream generators
-#' directly inherits from [DSD].
+#' directly inherits from [stream::DSD].
 #'
 #' @family DSD_MOA
 #'

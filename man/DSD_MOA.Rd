@@ -14,7 +14,7 @@ The abstract class cannot be instantiated and produces an error.
 }
 \description{
 Abstract base class for MOA-based data stream generators
-directly inherits from \link{DSD}.
+directly inherits from \link[stream:DSD]{stream::DSD}.
 }
 \examples{
 DSD()

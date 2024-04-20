@@ -10,18 +10,18 @@ DSC_MOA(...)
 \item{...}{further arguments.}
 }
 \description{
-An abstract class that inherits from the base class \link{DSC} and provides the
+An abstract class that inherits from the base class \link[stream:DSC]{stream::DSC} and provides the
 common functions needed to interface MOA clusterers.
 }
 \details{
-\code{DSC_MOA} is a subclass of \link{DSC} for MOA-based clusterers.
+\code{DSC_MOA} is a subclass of \link[stream:DSC]{stream::DSC} for MOA-based clusterers.
 \code{DSC_MOA} classes operate in a different way in that the centers of the
 micro-clusters have to be extracted from the underlying Java object. This is
 done by using \pkg{rJava} to perform method calls directly in the JRI and
 converting the multi-dimensional Java array into a local R data type.
 
 \strong{Note:} The formula interface is currently not implemented for MOA-based clusterers.
-Use \link{DSF} to select features instead.
+Use \link[stream:DSF]{stream::DSF} to select features instead.
 }
 \references{
 Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
@@ -29,8 +29,6 @@ Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
 11: 1601-1604
 }
 \seealso{
-\link{DSC}
-
 Other DSC_MOA: 
 \code{\link{DSC_BICO_MOA}()},
 \code{\link{DSC_CluStream}()},

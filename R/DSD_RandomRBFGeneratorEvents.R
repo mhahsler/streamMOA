@@ -25,7 +25,7 @@
 #' There are an assortment of parameters available for the underlying MOA data
 #' structure, however, we have currently limited the available parameters to
 #' the arguments above.  Currently the `modelSeed` and `instanceSeed` are set to
-#' default values every time a `DSD_MOA` is created, therefore the
+#' default values every time a [DSD_MOA] is created, therefore the
 #' generated data will be the same. Because of this, it is important to set the
 #' seed manually when different data is needed.
 #'
@@ -51,7 +51,7 @@
 #' @param modelSeed Random seed for the model.
 #' @param instanceSeed Random seed for the instances.
 #' @return An object of class `DSD_RandomRBFGeneratorEvent` (subclass of
-#' `DSD_MOA`, [DSD]).
+#' [DSD_MOA], [stream::DSD]).
 #' @author Michael Hahsler and John Forrest
 #' @references
 #' Albert Bifet, Geoff Holmes, Bernhard

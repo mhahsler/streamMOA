@@ -42,8 +42,8 @@
 #' @param outlier_correlated_id ids of outliers.
 #' @param recheck_outliers Defines that the MCOD algorithm allows re-checking
 #'   of detected outliers.
-#' @return An object of class `DSC_MCOD` (subclass of [DSOutlier],
-#'   [DSC_Micro], [DSC_MOA] and [DSC]).
+#' @return An object of class `DSC_MCOD` (subclass of
+#'   [stream::DSC_Micro], [DSC_MOA] and [stream::DSC]).
 #' @author Dalibor Krleža
 #' @references
 #' Kontaki M, Gounaris A, Papadopoulos AN, Tsichlas K, and

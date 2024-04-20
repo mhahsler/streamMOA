@@ -26,7 +26,7 @@
 #'
 #' **Notes:**
 #'
-#'  * The clustere can only cluster the number of points specified in `length` ans then
+#'  * The cluster can only cluster the number of points specified in `length` ans then
 #'    produces an `ArrayIndexOutOfBoundsException` error.
 #'  * The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
 #'
@@ -35,7 +35,7 @@
 #' @param sizeCoreset Size of the coreset
 #' @param numClusters Number of clusters to compute
 #' @param length Length of the data stream
-#' @param ... Further arguments are passed on to [DSC_Kmeans] for reclustering.
+#' @param ... Further arguments ignored.
 #'
 #' @aliases DSC_StreamKM streamkm StreamKM
 #' @author Matthias Carnein

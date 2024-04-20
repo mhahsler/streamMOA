@@ -183,7 +183,7 @@ We can compare the measures, of the other algorithms since the number
 of micro-clusters is close.
 Sampling produces very good values
 for purity, BICO achieves the highest average
-silhouette coefficient and CluStream prodices the lowest sum of squares.
+silhouette coefficient and CluStream produces the lowest sum of squares.
 For better results more data and cross-validation could be used.
 
 \section{Outlier detection}

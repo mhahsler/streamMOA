@@ -15,7 +15,7 @@ DSC_StreamKM(sizeCoreset = 10000, numClusters = 5, length = 100000L, ...)
 
 \item{length}{Length of the data stream}
 
-\item{...}{Further arguments are passed on to \link{DSC_Kmeans} for reclustering.}
+\item{...}{Further arguments ignored.}
 }
 \description{
 This is an interface to the MOA implementation of streamKM++.
@@ -27,7 +27,7 @@ of centers in the coreset.
 
 \strong{Notes:}
 \itemize{
-\item The clustere can only cluster the number of points specified in \code{length} ans then
+\item The cluster can only cluster the number of points specified in \code{length} ans then
 produces an \code{ArrayIndexOutOfBoundsException} error.
 \item The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
 }

@@ -18,8 +18,8 @@ DSC_ClusTree(horizon = 1000, maxHeight = 8, lambda = NULL, k = NULL)
 \item{k}{If specified, k-means with k clusters is used for reclustering.}
 }
 \value{
-An object of class \code{DSC_ClusTree} (subclass of \link{DSC},
-\link{DSC_MOA}, \link{DSC_Micro}).
+An object of class \code{DSC_ClusTree} (subclass of \link[stream:DSC]{stream::DSC},
+\link{DSC_MOA}, \link[stream:DSC_Micro]{stream::DSC_Micro}).
 }
 \description{
 Interface for the MOA implementation of the ClusTree data stream clustering

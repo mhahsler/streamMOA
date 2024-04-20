@@ -18,23 +18,22 @@
 
 #' DSC_MOA Class
 #'
-#' An abstract class that inherits from the base class [DSC] and provides the
+#' An abstract class that inherits from the base class [stream::DSC] and provides the
 #' common functions needed to interface MOA clusterers.
 #'
-#' `DSC_MOA` is a subclass of [DSC] for MOA-based clusterers.
+#' `DSC_MOA` is a subclass of [stream::DSC] for MOA-based clusterers.
 #' `DSC_MOA` classes operate in a different way in that the centers of the
 #' micro-clusters have to be extracted from the underlying Java object. This is
 #' done by using \pkg{rJava} to perform method calls directly in the JRI and
 #' converting the multi-dimensional Java array into a local R data type.
 #'
 #' **Note:** The formula interface is currently not implemented for MOA-based clusterers.
-#' Use [DSF] to select features instead.
+#' Use [stream::DSF] to select features instead.
 #'
 #' @family DSC_MOA
 #'
 #' @author Michael Hahsler and John Forrest
 #' @param ... further arguments.
-#' @seealso [DSC]
 #' @references
 #' Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
 #' (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research

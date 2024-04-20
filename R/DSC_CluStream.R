@@ -37,7 +37,7 @@
 #' micro-cluster from the centroid.
 #' @param k Number of macro-clusters to produce using weighted k-means.
 #' @return An object of class `DSC_CluStream` (subclass of
-#' [DSC_Micro], [DSC_MOA] and [DSC]).
+#' [stream::DSC_Micro], [DSC_MOA] and [stream::DSC]).
 #' @author Michael Hahsler and John Forrest
 #' @references
 #' Aggarwal CC, Han J, Wang J, Yu PS (2003). "A Framework for

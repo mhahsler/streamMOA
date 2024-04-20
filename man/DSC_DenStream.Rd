@@ -20,7 +20,7 @@ DSC_DenStream(
 )
 }
 \arguments{
-\item{epsilon}{defines the epsilon neighbourhood which is the maximal radius
+\item{epsilon}{defines the epsilon neighborhood which is the maximal radius
 of micro-clusters (r<=epsilon). Range: 0 to 1.}
 
 \item{mu}{minpoints as the weight w a core-micro-clusters needs to be
@@ -46,16 +46,16 @@ reachability at a distance of epsilon) be performed?}
 macro-clusters.}
 }
 \value{
-An object of class \code{DSC_DenStream} (subclass of \link{DSC},
-\link{DSC_MOA}, \link{DSC_Micro}) or, for \code{recluster = TRUE}, an object
-of class \link{DSC_TwoStage}.
+An object of class \code{DSC_DenStream} (subclass of \link[stream:DSC]{stream::DSC},
+\link{DSC_MOA}, \link[stream:DSC_Micro]{stream::DSC_Micro}) or, for \code{recluster = TRUE}, an object
+of class \link[stream:DSC_TwoStage]{stream::DSC_TwoStage}.
 }
 \description{
 Interface for the DenStream cluster algorithm for data streams implemented
 in MOA.
 }
 \details{
-DenStream applies reachbility (from DBSCAN) between micro-clusters for
+DenStream applies reachability (from DBSCAN) between micro-clusters for
 reclustering using \code{epsilon} x \code{offline} (defaults to 2) as the
 reachability threshold.
 

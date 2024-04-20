@@ -33,8 +33,8 @@
 #' @param maxHeight The maximum height of the tree.
 #' @param lambda number used to override computed lambda (decay).
 #' @param k If specified, k-means with k clusters is used for reclustering.
-#' @return An object of class `DSC_ClusTree` (subclass of [DSC],
-#' [DSC_MOA], [DSC_Micro]).
+#' @return An object of class `DSC_ClusTree` (subclass of [stream::DSC],
+#' [DSC_MOA], [stream::DSC_Micro]).
 #' @author Michael Hahsler and John Forrest
 #' @references
 #' Philipp Kranen, Ira Assent, Corinna Baldauf, and Thomas Seidl.

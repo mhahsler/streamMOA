@@ -23,7 +23,7 @@ micro-cluster from the centroid.}
 }
 \value{
 An object of class \code{DSC_CluStream} (subclass of
-\link{DSC_Micro}, \link{DSC_MOA} and \link{DSC}).
+\link[stream:DSC_Micro]{stream::DSC_Micro}, \link{DSC_MOA} and \link[stream:DSC]{stream::DSC}).
 }
 \description{
 Class implements the CluStream cluster algorithm for data streams (Aggarwal et al, 2003).

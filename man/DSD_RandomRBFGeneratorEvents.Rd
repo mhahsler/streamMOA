@@ -55,7 +55,7 @@ DSD_RandomRBFGeneratorEvents(
 }
 \value{
 An object of class \code{DSD_RandomRBFGeneratorEvent} (subclass of
-\code{DSD_MOA}, \link{DSD}).
+\link{DSD_MOA}, \link[stream:DSD]{stream::DSD}).
 }
 \description{
 A class that generates random data based on RandomRBFGeneratorEvents
@@ -65,7 +65,7 @@ implemented in MOA.
 There are an assortment of parameters available for the underlying MOA data
 structure, however, we have currently limited the available parameters to
 the arguments above.  Currently the \code{modelSeed} and \code{instanceSeed} are set to
-default values every time a \code{DSD_MOA} is created, therefore the
+default values every time a \link{DSD_MOA} is created, therefore the
 generated data will be the same. Because of this, it is important to set the
 seed manually when different data is needed.
 

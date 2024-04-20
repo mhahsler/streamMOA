@@ -38,8 +38,8 @@ of detected outliers.}
 \item{outlier_correlated_id}{ids of outliers.}
 }
 \value{
-An object of class \code{DSC_MCOD} (subclass of \link{DSOutlier},
-\link{DSC_Micro}, \link{DSC_MOA} and \link{DSC}).
+An object of class \code{DSC_MCOD} (subclass of
+\link[stream:DSC_Micro]{stream::DSC_Micro}, \link{DSC_MOA} and \link[stream:DSC]{stream::DSC}).
 }
 \description{
 Class interfaces the MOA implementation of the MCOD algorithm for

@@ -22,7 +22,7 @@
 #' Interface for the DenStream cluster algorithm for data streams implemented
 #' in MOA.
 #'
-#' DenStream applies reachbility (from DBSCAN) between micro-clusters for
+#' DenStream applies reachability (from DBSCAN) between micro-clusters for
 #' reclustering using `epsilon` x `offline` (defaults to 2) as the
 #' reachability threshold.
 #'
@@ -33,7 +33,7 @@
 #' @family DSC_MOA
 #'
 #' @aliases DSC_DenStream DSC_DenStream_MOA denstream DenStream
-#' @param epsilon defines the epsilon neighbourhood which is the maximal radius
+#' @param epsilon defines the epsilon neighborhood which is the maximal radius
 #' of micro-clusters (r<=epsilon). Range: 0 to 1.
 #' @param mu minpoints as the weight w a core-micro-clusters needs to be
 #' created (w>=mu). Range: 0 to max(int).
@@ -49,9 +49,9 @@
 #' reachability at a distance of epsilon) be performed?
 #' @param k integer; tries to automatically chooses offline to find k
 #' macro-clusters.
-#' @return An object of class `DSC_DenStream` (subclass of [DSC],
-#' [DSC_MOA], [DSC_Micro]) or, for `recluster = TRUE`, an object
-#' of class [DSC_TwoStage].
+#' @return An object of class `DSC_DenStream` (subclass of [stream::DSC],
+#' [DSC_MOA], [stream::DSC_Micro]) or, for `recluster = TRUE`, an object
+#' of class [stream::DSC_TwoStage].
 #' @author Michael Hahsler and John Forrest
 #' @references
 #' Cao F, Ester M, Qian W, Zhou A (2006). Density-Based Clustering

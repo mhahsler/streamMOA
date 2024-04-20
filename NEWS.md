@@ -1,6 +1,8 @@
-#  Changes in version 1.3-0-1 (xx/xx/22)
+#  Changes in version 1.3-1 (04/20/24)
 
 * Added DSRegressor_MOA to interface RMOA.
+* Updated man pages.
+* proxy is now imported.
 
 
 #  Changes in version 1.3-0 (09/03/22)

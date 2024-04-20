@@ -2,11 +2,33 @@
 % Please edit documentation in R/AAA_streamMOA-package.R
 \docType{package}
 \name{streamMOA-package}
+\alias{streamMOA}
 \alias{streamMOA-package}
 \title{streamMOA: Interface for MOA Stream Clustering Algorithms}
 \description{
 Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework (Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research 11: 1601-1604).
 }
-\author{
-Michael Hahsler
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/mhahsler/streamMOA}
 }
+
+}
+\author{
+\strong{Maintainer}: Michael Hahsler \email{mhahsler@lyle.smu.edu} (\href{https://orcid.org/0000-0003-2716-1405}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item John Forrest [copyright holder]
+}
+
+Other contributors:
+\itemize{
+  \item Matthew Bolanos [contributor]
+  \item Matthias Carnein [contributor]
+  \item Dalibor Krleža [contributor]
+}
+
+}
+\keyword{internal}
