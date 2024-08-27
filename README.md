@@ -1,12 +1,12 @@
 
 # <img src="man/figures/logo.svg" align="right" height="139" /> R package streamMOA - Interface for MOA Stream Clustering Algorithms
 
-[![CRAN
-version](http://www.r-pkg.org/badges/version/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
-[![stream r-universe
+[![r-universe
 status](https://mhahsler.r-universe.dev/badges/streamMOA)](https://mhahsler.r-universe.dev/streamMOA)
+[![Package on
+CRAN](https://www.r-pkg.org/badges/version/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
+downloads](https://cranlogs.r-pkg.org/badges/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
 
 Interface for data stream clustering algorithms implemented in the MOA
 (Massive Online Analysis) framework. This is an extension package for
@@ -25,7 +25,8 @@ install.packages("streamMOA")
 
 ``` r
 install.packages("streamMOA",
-    repos = c("https://mhahsler.r-universe.dev". "https://cloud.r-project.org/"))
+    repos = c("https://mhahsler.r-universe.dev",
+              "https://cloud.r-project.org/"))
 ```
 
 ## Example
