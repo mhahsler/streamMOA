@@ -9,7 +9,7 @@ import moa.clusterers.AbstractClusterer;
 // for debugging
 //import java.io.*;
 
-class StreamMOA {
+public class StreamMOA {
     public static void update(AbstractClusterer clusterer, double[][] points) {
 	DenseInstance p = null;
 	// DenStream requires an Instance Header to be set
