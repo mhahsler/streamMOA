@@ -1,3 +1,7 @@
+#  Changes in version 1.3.1-1 (xx/xx/26)
+* Patch for private methods in Java 17+ (vpinna80)
+
+
 #  Changes in version 1.3-1 (04/20/24)
 
 * Added DSRegressor_MOA to interface RMOA.
