@@ -1,0 +1,124 @@
+# Changelog
+
+## Changes in version 1.3.2 (unpublished)
+
+- Patch for private methods in Java 17+ (vpinna80)
+- Added testthat coverage for core helpers and MOA clustering workflows.
+- Added a getting-started vignette and renamed the full package
+  vignette.
+- Improved the reference manual and organized the pkgdown reference
+  index.
+
+## Changes in version 1.3-1 (04/20/24)
+
+CRAN release: 2024-04-20
+
+- Added DSRegressor_MOA to interface RMOA.
+- Updated man pages.
+- proxy is now imported.
+
+## Changes in version 1.3-0 (09/03/22)
+
+CRAN release: 2022-09-03
+
+- changes for stream_2.0.0.
+- we use now a package class loader for rJava.
+- Added DSClassifier_MOA to interface RMOA (which now also uses the
+  class loader).
+
+## Changes in version 1.2-4 (05/09/22)
+
+CRAN release: 2022-05-10
+
+- Removed registry
+- We use now roxygen2
+
+## Changes in version 1.2-3 (12/3/20)
+
+CRAN release: 2020-12-03
+
+- Added wrapper for the MCOD algorithm, to support outlier detection
+  additions in the stream package. (Dalibor Krleža)
+
+## Changes in version 1.2-2.1 (xx/xx/20)
+
+- Fixed error for integer streams (reported and fix proposed by
+  MatthiasCarnein)
+
+## Changes in version 1.2-2 (05/15/19)
+
+CRAN release: 2019-05-15
+
+- Updated the package to the April 2019 release of the MOA library.
+
+## Changes in version 1.2-1 (03/20/19)
+
+CRAN release: 2019-03-20
+
+- Updated system requirement for new MOA version to Java 8.
+
+## Changes in version 1.2-0 (03/14/19)
+
+CRAN release: 2019-03-14
+
+- Updated the package to the June 2018 release of the MOA library.
+- Added interfaces to the streamKM, BICO_MOA and DStream_MOA
+  implementations.
+
+## Changes in version 1.1-4 (04/06/18)
+
+CRAN release: 2018-04-07
+
+- Fixed Java runtime version test for version 10 and beyond.
+
+## Changes in version 1.1-3 (01/07/18)
+
+CRAN release: 2018-01-10
+
+- Improved documentation for DenStream.
+- Fixed Java SystemRequirement and added runtime version test.
+
+## Changes in version 1.1-2 (09/06/15)
+
+CRAN release: 2015-09-07
+
+- Interface changes for stream Changes in version 1.2-0.
+
+## Changes in version 1.1-1 (07/02/15)
+
+CRAN release: 2015-07-02
+
+- Fixed NAMESPACE imports.
+- Downgraded to Java version 1.5 (from 1.7)
+- DSC_DenStream gained parameter k for reclustering.
+
+## Changes in version 1.1-0 (05/21/15)
+
+CRAN release: 2015-05-22
+
+- updated to MOA Changes in 2014.11
+- DSC_MOA objects can now be saved using the convenience function
+  saveRDS_MOA.
+- DSC_Clustream and DSC_Denstream use now DSC_TwoStage for reclustering.
+- Improved speed by looping through the data points in Java.
+
+## Changes in version 1.0-0 (12/18/14)
+
+CRAN release: 2014-12-19
+
+- interface with stream changed. We use now update.DSC_MOA, etc.
+
+## Changes in version 0.1-1 (6/17/14)
+
+CRAN release: 2014-06-17
+
+- applied changes in stream 1.0-2
+- MOA clusterers now report and plot assignment radii.
+- improved vignette
+
+## Initial version 0.1-0 (6/10/14)
+
+CRAN release: 2014-05-25
+
+- Moved MOA related code to this package
+- updated to MOA Changes in 2014.04
