@@ -9,9 +9,11 @@ Journal of Machine Learning Research 11: 1601-1604).
 
 Useful links:
 
-- <http://michael.hahsler.net/streamMOA/>
+- <https://github.com/mhahsler/streamMOA>
 
-- Report bugs at <https://github.com/mhahsler/streamMOA>
+- <https://michael.hahsler.net/streamMOA/>
+
+- Report bugs at <https://github.com/mhahsler/streamMOA/issues>
 
 ## Author
 
