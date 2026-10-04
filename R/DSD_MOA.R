@@ -16,24 +16,25 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-#' Base class for MOA-based Data Stream Generators
+#' Base class for MOA-based data stream generators
 #'
-#' Abstract base class for MOA-based data stream generators
-#' directly inherits from [stream::DSD].
+#' Abstract base class for MOA-based data stream generators. It inherits
+#' directly from [stream::DSD].
 #'
 #' @family DSD_MOA
 #'
-#' @param ... further arguments.
+#' @param ... Further arguments (currently ignored).
 #' @return The abstract class cannot be instantiated and produces an error.
 #'
 #' @author Michael Hahsler
 #' @references
-#' MOA: Massive Online Analysis, a Framework for Stream
-#' Classification and Clustering Albert Bifet, Geoff Holmes, Bernhard
-#' Pfahringer, Philipp Kranen, Hardy Kremer, Timm Jansen, Thomas Seidl.
-#' Journal of Machine Learning Research (JMLR).
+#' Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, and Seidl T
+#' (2010). MOA: Massive Online Analysis, a Framework for Stream Classification
+#' and Clustering. _Journal of Machine Learning Research_, 11, 1601--1604.
 #' @examples
-#' DSD()
+#' \dontrun{
+#' DSD_MOA()
+#' }
 #' @export
 DSD_MOA <-
   function(...)

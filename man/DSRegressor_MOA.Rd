@@ -4,7 +4,7 @@
 \alias{DSRegressor_MOA}
 \alias{update.DSRegressor_MOA}
 \alias{predict.DSRegressor_MOA}
-\title{DSRegressor_MOA -- MOA-based Stream Regressors}
+\title{MOA-based stream regressor interface}
 \usage{
 DSRegressor_MOA(formula, RMOA_regressor)
 
@@ -13,23 +13,23 @@ DSRegressor_MOA(formula, RMOA_regressor)
 \method{predict}{DSRegressor_MOA}(object, newdata, type = "response", ...)
 }
 \arguments{
-\item{formula}{a formula for the regression problem.}
+\item{formula}{Formula describing the regression problem.}
 
-\item{RMOA_regressor}{a \code{RMOA_regressors} object.}
+\item{RMOA_regressor}{A regressor object from \pkg{RMOA}.}
 
-\item{object}{a DSC object.}
+\item{object}{A \code{DSRegressor_MOA} object.}
 
-\item{dsd}{a data stream object.}
+\item{dsd}{A data stream object.}
 
-\item{n}{number of data points taken from the stream.}
+\item{n}{Number of data points to read from the stream.}
 
-\item{verbose}{logical; show progress?}
+\item{verbose}{If \code{TRUE}, report progress.}
 
-\item{block}{process blocks of data to improve speed.}
+\item{block}{Number of points processed per block.}
 
-\item{...}{further arguments.}
+\item{...}{Further arguments passed to the underlying method.}
 
-\item{newdata}{dataframe with the new data.}
+\item{newdata}{Data frame containing new observations.}
 
 \item{type}{prediction type (see \code{\link[RMOA:predict.MOA_trainedmodel]{RMOA::predict.MOA_trainedmodel()}}).}
 }
@@ -37,13 +37,14 @@ DSRegressor_MOA(formula, RMOA_regressor)
 An object of class \code{DSRegressor_MOA}
 }
 \description{
-Interface for MOA-based stream regression methods based on package \pkg{RMOA}.
+Interface to MOA-based stream regression methods provided by the
+\pkg{RMOA} package.
 }
 \details{
-\code{DSRegressor_MOA} provides an interface to MOA-based stream regressors using package
-\pkg{RMOA}. Available regressors can be found at \link[RMOA:MOA_regressors]{RMOA::MOA_regressors}.
+\code{DSRegressor_MOA} provides an interface to MOA-based stream regressors
+through \pkg{RMOA}. See \link[RMOA:MOA_regressors]{RMOA::MOA_regressors} for available regressors.
 
-Subsequent calls to \code{update()} update the current model.
+Calls to \code{update()} train the current model incrementally.
 }
 \examples{
 \dontrun{

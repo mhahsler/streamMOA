@@ -63,7 +63,7 @@ plot(clustream, stream)
 ## Further Information
 
 - [streamMOA package
-  vignette](https://CRAN.R-project.org/package=streamMOA/vignettes/streamMOA.pdf)
+  vignette](https://CRAN.R-project.org/package=streamMOA/vignettes/streamMOA_vignette.pdf)
   with complete examples.
 - [Reference
   manual](https://CRAN.R-project.org/package=streamMOA/streamMOA.pdf)

@@ -20,19 +20,19 @@
 
 #' ClusTree Data Stream Clusterer
 #'
-#' Interface for the MOA implementation of the ClusTree data stream clustering
-#' algorithm (Kranen et al, 2009).
+#' Interface to the MOA implementation of the ClusTree data stream clustering
+#' algorithm (Kranen et al., 2009).
 #'
-#' ClusTree uses a compact and self-adaptive index structure for maintaining
-#' stream summaries. Kranen et al (2009) suggest EM or k-means for reclustering.
+#' ClusTree uses a compact, self-adaptive index structure to maintain stream
+#' summaries. Kranen et al. (2009) suggest EM or k-means for reclustering.
 #'
 #' @family DSC_MOA
 #'
 #' @aliases DSC_ClusTree ClusTree clustree
-#' @param horizon Range of the (time) window.
-#' @param maxHeight The maximum height of the tree.
-#' @param lambda number used to override computed lambda (decay).
-#' @param k If specified, k-means with k clusters is used for reclustering.
+#' @param horizon Length of the time window.
+#' @param maxHeight Maximum height of the tree.
+#' @param lambda Value used to override the computed decay parameter.
+#' @param k If specified, use k-means with `k` clusters for reclustering.
 #' @return An object of class `DSC_ClusTree` (subclass of [stream::DSC],
 #' [DSC_MOA], [stream::DSC_Micro]).
 #' @author Michael Hahsler and John Forrest
@@ -56,7 +56,7 @@
 #'
 #' plot(clustree, stream)
 #'
-#' #' Use automatically the k-means reclusterer with k = 3 to create macro clusters
+#' # Use the k-means reclusterer with k = 3 to create macro-clusters
 #' clustree <- DSC_ClusTree(maxHeight = 3, k = 3)
 #' update(clustree, stream, 500)
 #' clustree

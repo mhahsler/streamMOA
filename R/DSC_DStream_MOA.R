@@ -28,19 +28,19 @@
 #' classified based on density into dense, transitional and sporadic cells. The
 #' density is faded after every new point by a decay factor.
 #'
-#' **Notes:**
+#' **Notes**
 #'
-#' - This implementation seems to use a 1 x 1 grid and therefore the range is increased in
-#'   the example.
-#' - The MOA implementation of D-Stream currently does not return micro clusters.
+#' - The implementation uses a 1-by-1 grid, so the example expands the data
+#'   range.
+#' - The MOA implementation does not currently return micro-clusters.
 #'
 #' @family DSC_MOA
 #'
-#' @param decayFactor The decay factor
-#' @param Cm Controls the threshold for dense grids
-#' @param Cl Controls the threshold for sparse grids
+#' @param decayFactor Decay factor applied to grid-cell density.
+#' @param Cm Threshold for classifying grid cells as dense.
+#' @param Cl Threshold for classifying grid cells as sparse.
 #' @param Beta Adjusts the window of protection for renaming previously deleted
-#' grids as sporadic
+#'   grids as sporadic.
 #' @author Matthias Carnein
 #' @references
 #' Yixin Chen and Li Tu. 2007. Density-based clustering for
@@ -61,7 +61,7 @@
 #' dstream
 #'
 #' # plot macro-clusters
-#' plot(dstream, stream, type= "macro")
+#' plot(dstream, stream, type = "macro")
 #' @export
 DSC_DStream_MOA <-
   function(decayFactor = 0.998,

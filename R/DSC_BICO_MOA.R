@@ -16,7 +16,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-#' BICO - Fast computation of k-means coresets in a data stream
+#' BICO: Fast computation of k-means coresets in a data stream
 #'
 #' This is an interface to the MOA implementation of BICO. The original BICO
 #' implementation by Fichtenberger et al is also available as
@@ -31,12 +31,15 @@
 #'
 #' @family DSC_MOA
 #'
-#' @param Cluster,k Number of desired centers
-#' @param Dimensions The number of the dimensions of the input points (stream)
-#'   need to be specified in advance
-#' @param MaxClusterFeatures,space Maximum size of the coreset
-#' @param Projections,p Number of random projections used for the nearest
-#'   neighbor search
+#' @param Cluster Number of desired centers.
+#' @param Dimensions Number of dimensions in the input stream; this must be
+#'   specified in advance.
+#' @param MaxClusterFeatures Maximum number of cluster features in the coreset.
+#' @param Projections Number of random projections used for the nearest
+#'   neighbor search.
+#' @param k Alias for `Cluster`.
+#' @param space Alias for `MaxClusterFeatures`.
+#' @param p Alias for `Projections`.
 #' @author Matthias Carnein
 #' @references
 #' Hendrik Fichtenberger, Marc Gille, Melanie Schmidt, Chris

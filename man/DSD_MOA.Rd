@@ -2,32 +2,33 @@
 % Please edit documentation in R/DSD_MOA.R
 \name{DSD_MOA}
 \alias{DSD_MOA}
-\title{Base class for MOA-based Data Stream Generators}
+\title{Base class for MOA-based data stream generators}
 \usage{
 DSD_MOA(...)
 }
 \arguments{
-\item{...}{further arguments.}
+\item{...}{Further arguments (currently ignored).}
 }
 \value{
 The abstract class cannot be instantiated and produces an error.
 }
 \description{
-Abstract base class for MOA-based data stream generators
-directly inherits from \link[stream:DSD]{stream::DSD}.
+Abstract base class for MOA-based data stream generators. It inherits
+directly from \link[stream:DSD]{stream::DSD}.
 }
 \examples{
-DSD()
+\dontrun{
+DSD_MOA()
+}
 }
 \references{
-MOA: Massive Online Analysis, a Framework for Stream
-Classification and Clustering Albert Bifet, Geoff Holmes, Bernhard
-Pfahringer, Philipp Kranen, Hardy Kremer, Timm Jansen, Thomas Seidl.
-Journal of Machine Learning Research (JMLR).
+Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, and Seidl T
+(2010). MOA: Massive Online Analysis, a Framework for Stream Classification
+and Clustering. \emph{Journal of Machine Learning Research}, 11, 1601--1604.
 }
 \seealso{
-Other DSD_MOA: 
-\code{\link{DSD_RandomRBFGeneratorEvents}()}
+Other DSD_MOA:
+\code{\link[=DSD_RandomRBFGeneratorEvents]{DSD_RandomRBFGeneratorEvents()}}
 }
 \author{
 Michael Hahsler

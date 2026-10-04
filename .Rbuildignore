@@ -12,3 +12,7 @@ README.Rmd
 Work
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

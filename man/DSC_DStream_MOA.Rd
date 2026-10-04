@@ -7,14 +7,14 @@
 DSC_DStream_MOA(decayFactor = 0.998, Cm = 3, Cl = 0.8, Beta = 0.3)
 }
 \arguments{
-\item{decayFactor}{The decay factor}
+\item{decayFactor}{Decay factor applied to grid-cell density.}
 
-\item{Cm}{Controls the threshold for dense grids}
+\item{Cm}{Threshold for classifying grid cells as dense.}
 
-\item{Cl}{Controls the threshold for sparse grids}
+\item{Cl}{Threshold for classifying grid cells as sparse.}
 
 \item{Beta}{Adjusts the window of protection for renaming previously deleted
-grids as sporadic}
+grids as sporadic.}
 }
 \description{
 This is an interface to the MOA implementation of D-Stream. A C++
@@ -27,11 +27,11 @@ grid cell using the count of points falling in the cells. Grid cells are
 classified based on density into dense, transitional and sporadic cells. The
 density is faded after every new point by a decay factor.
 
-\strong{Notes:}
+\strong{Notes}
 \itemize{
-\item This implementation seems to use a 1 x 1 grid and therefore the range is increased in
-the example.
-\item The MOA implementation of D-Stream currently does not return micro clusters.
+\item The implementation uses a 1-by-1 grid, so the example expands the data
+range.
+\item The MOA implementation does not currently return micro-clusters.
 }
 }
 \examples{
@@ -44,7 +44,7 @@ update(dstream, stream, 1000)
 dstream
 
 # plot macro-clusters
-plot(dstream, stream, type= "macro")
+plot(dstream, stream, type = "macro")
 }
 \references{
 Yixin Chen and Li Tu. 2007. Density-based clustering for
@@ -57,14 +57,14 @@ attraction. ACM Transactions on Knowledge Discovery from Data, 3(3), Article
 12 (July 2009), 27 pages.
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_MOA}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Matthias Carnein

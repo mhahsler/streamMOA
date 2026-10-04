@@ -19,38 +19,34 @@
 
 #' Random RBF Generator Events Data Stream Generator
 #'
-#' A class that generates random data based on RandomRBFGeneratorEvents
-#' implemented in MOA.
+#' Generates random data using MOA's `RandomRBFGeneratorEvents` stream.
 #'
-#' There are an assortment of parameters available for the underlying MOA data
-#' structure, however, we have currently limited the available parameters to
-#' the arguments above.  Currently the `modelSeed` and `instanceSeed` are set to
-#' default values every time a [DSD_MOA] is created, therefore the
-#' generated data will be the same. Because of this, it is important to set the
-#' seed manually when different data is needed.
+#' Only a subset of the parameters supported by the underlying MOA generator is
+#' exposed. If `modelSeed` or `instanceSeed` is `NULL`, a seed is sampled from
+#' R's random-number generator. Set these arguments explicitly to reproduce a
+#' stream; call `set.seed()` to make the generated default seeds reproducible.
 #'
-#' The default behavior is to create a data stream with 3 clusters and concept
-#' drift.  The locations of the clusters will change slightly, and they will
-#' merge with one another as time progresses.
+#' By default, the generator creates three clusters with concept drift. Cluster
+#' locations move over time, and clusters may merge.
 #'
 #' @family DSD_MOA
 #'
-#' @param k The average number of centroids in the model.
-#' @param d The dimensionality of the data.
-#' @param numClusterRange Range for number of clusters.
-#' @param kernelRadius The average radius of the micro-clusters.
-#' @param kernelRadiusRange Deviation of the number of centroids in the model.
-#' @param densityRange Density range.
-#' @param speed Kernels move a predefined distance of 0.01 every X points.
-#' @param speedRange Speed/Velocity point offset.
-#' @param noiseLevel Noise level.
-#' @param noiseInCluster Allow noise to be placed within a cluster.
-#' @param eventFrequency Frequency of events.
-#' @param eventMergeSplitOption Merge and split?
-#' @param eventDeleteCreate Delete and create?
-#' @param modelSeed Random seed for the model.
-#' @param instanceSeed Random seed for the instances.
-#' @return An object of class `DSD_RandomRBFGeneratorEvent` (subclass of
+#' @param k Average number of centroids in the model.
+#' @param d Number of dimensions in the generated stream.
+#' @param numClusterRange Range for the number of clusters.
+#' @param kernelRadius Average radius of the micro-clusters.
+#' @param kernelRadiusRange Range of variation in micro-cluster radii.
+#' @param densityRange Range of variation in cluster density.
+#' @param speed Number of points between kernel movements.
+#' @param speedRange Range of variation in kernel speed.
+#' @param noiseLevel Proportion of noise points.
+#' @param noiseInCluster If `TRUE`, allow noise points inside clusters.
+#' @param eventFrequency Number of points between concept-drift events.
+#' @param eventMergeSplitOption If `TRUE`, enable cluster merge and split events.
+#' @param eventDeleteCreate If `TRUE`, enable cluster deletion and creation events.
+#' @param modelSeed Random seed for the cluster model.
+#' @param instanceSeed Random seed for generated instances.
+#' @return An object of class `DSD_RandomRBFGeneratorEvents` (subclass of
 #' [DSD_MOA], [stream::DSD]).
 #' @author Michael Hahsler and John Forrest
 #' @references

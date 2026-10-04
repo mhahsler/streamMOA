@@ -19,15 +19,15 @@
 
 #' Micro-cluster Continuous Outlier Detector (MCOD)
 #'
-#' Class interfaces the MOA implementation of the MCOD algorithm for
+#' Interface to the MOA implementation of the MCOD algorithm for
 #' distance-based data stream outlier detection.
 #'
 #' The algorithm detects density-based outliers. An object \eqn{x} is defined
 #' to be an outlier if there are less than \eqn{t} objects lying at distance at
 #' most \eqn{r} from \eqn{x}.
 #'
-#' Outliers are stored and can be retrieved using `get_outlier_position()` and
-#' `recheck_outlier()`.
+#' Outliers are stored and can be retrieved with [get_outlier_positions()] and
+#' checked again with [recheck_outlier()].
 #'
 #' **Note:** The implementation updates the clustering when [predict()] is called.
 #'
@@ -36,12 +36,13 @@
 #'
 #' @aliases DSC_MCOD DSC_MCOD_MOA DSOutlier_MCOD DSOutlier_MCOD_MOA MCOD
 #'
-#' @param r Defines the micro-cluster radius.
-#' @param t Defines the number of neighbors (k in the article).
-#' @param w Defines the window width in data points.
-#' @param outlier_correlated_id ids of outliers.
-#' @param recheck_outliers Defines that the MCOD algorithm allows re-checking
-#'   of detected outliers.
+#' @param r Radius used to search for neighbors.
+#' @param t Minimum number of neighbors required for a point not to be an
+#'   outlier.
+#' @param w Sliding window width in data points.
+#' @param outlier_correlated_id Identifier of the outlier to check again.
+#' @param recheck_outliers If `TRUE`, allow detected outliers to be checked
+#'   again.
 #' @return An object of class `DSC_MCOD` (subclass of
 #'   [stream::DSC_Micro], [DSC_MOA] and [stream::DSC]).
 #' @author Dalibor Krleža
@@ -66,7 +67,7 @@
 #'
 #' plot(mcod, stream, n = 100)
 #'
-#' # MCOD can retried the outliers
+#' # Retrieve detected outlier positions.
 #' get_outlier_positions(mcod)
 #'
 #' # Example 3: evaluate on a stream
@@ -201,8 +202,8 @@ get_assignment.DSC_MCOD <-
 ### Additional functions for MCOD
 
 #' @describeIn DSC_MCOD Returns spatial positions of all current outliers.
-#' @param x a `DSC_MCOD` object.
-#' @param ... further arguments are currently ignored.
+#' @param x A `DSC_MCOD` object.
+#' @param ... Further arguments (currently ignored).
 #' @export
 get_outlier_positions <- function(x, ...)
   UseMethod("get_outlier_positions")
@@ -228,8 +229,8 @@ get_outlier_positions.DSOutlier_MCOD <- function(x, ...) {
   centers
 }
 
-#' @describeIn DSC_MCOD DSC_MCOD Re-checks the outlier having `outlier_correlated_id`.
-#'   If this object is still an outlier, the method returns `TRUE`.
+#' @describeIn DSC_MCOD Re-check whether the outlier identified by
+#'   `outlier_correlated_id` is still an outlier. Returns `TRUE` if it is.
 #' @export
 recheck_outlier <- function(x, outlier_correlated_id, ...)
   UseMethod("recheck_outlier")
@@ -262,34 +263,10 @@ recheck_outlier.DSOutlier_MCOD <-
   }
 
 
-#' @describeIn DSC_MCOD forget detected outliers from the outlier detector (currently not implemented).
+#' @describeIn DSC_MCOD Forget detected outliers (currently not implemented).
 #' @export
 clean_outliers <- function(x, ...)
   UseMethod("clean_outliers")
 
 .outlier_pch <- 4L
 .outlier_col <- "#FF0000FF"
-
-#' #' @export
-#' plot.DSOutlier_MCOD <- function(x,
-#'   dsd = NULL,
-#'   n = 500,
-#'   col_points = NULL,
-#'   col_clusters = c("red", "blue", "green"),
-#'   weights = TRUE,
-#'   scale = c(1, 5),
-#'   cex = 1,
-#'   pch = NULL,
-#'   method = c("pairs", "scatter", "pca"),
-#'   dim = NULL,
-#'   type = c("auto", "micro", "macro", "both"),
-#'   # we keep 'both' for compatibility reasons
-#'   assignment = FALSE,
-#'   outliers = TRUE,
-#'   ...) {
-#'   NextMethod("plot", x, outliers = NULL)
-#'
-#'   if (outliers)
-#'     points(get_outlier_positions(x), pch = .outlier_pch, col = .outlier_col)
-#' }
-#'

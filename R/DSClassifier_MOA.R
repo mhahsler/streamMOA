@@ -17,23 +17,24 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-#' DSClassifier_MOA -- MOA-based Stream Classifiers
+#' MOA-based stream classifier interface
 #'
-#' Interface for MOA-based stream classification methods based on package \pkg{RMOA}.
+#' Interface to MOA-based stream classification methods provided by the
+#' \pkg{RMOA} package.
 #'
-#' `DSClassifier_MOA` provides an interface to MOA-based stream classifiers using package
-#' \pkg{RMOA}. RMOA provides access to MOAs stream classifiers in the following groups:
+#' `DSClassifier_MOA` provides an interface to MOA-based stream classifiers
+#' through \pkg{RMOA}. The package provides classifiers in these groups:
 #'
 #' * [RMOA::MOA_classification_trees]
 #' * [RMOA::MOA_classification_bayes]
 #' * [RMOA::MOA_classification_ensemblelearning]
 #'
-#' Subsequent calls to `update()` update the current model.
+#' Calls to `update()` train the current model incrementally.
 #'
 #' @family DSClassifier_MOA
 #'
-#' @param formula a formula for the classification problem.
-#' @param RMOA_classifier a `RMOA_classifier` object.
+#' @param formula Formula describing the classification problem.
+#' @param RMOA_classifier A classifier object from \pkg{RMOA}.
 #'
 #' @return An object of class `DSClassifier_MOA`
 #' @author Michael Hahsler
@@ -95,12 +96,12 @@ DSClassifier_MOA <- function(formula,
   )
 
 #' @rdname DSClassifier_MOA
-#' @param object a DSC object.
-#' @param dsd a data stream object.
-#' @param n number of data points taken from the stream.
-#' @param verbose logical; show progress?
-#' @param block process blocks of data to improve speed.
-#' @param ... further arguments.
+#' @param object A `DSClassifier_MOA` object.
+#' @param dsd A data stream object.
+#' @param n Number of data points to read from the stream.
+#' @param verbose If `TRUE`, report progress.
+#' @param block Number of points processed per block.
+#' @param ... Further arguments passed to the underlying method.
 #' @export
 update.DSClassifier_MOA <- function(object,
   dsd,
@@ -138,7 +139,7 @@ update.DSClassifier_MOA <- function(object,
 }
 
 #' @rdname DSClassifier_MOA
-#' @param newdata dataframe with the new data.
+#' @param newdata Data frame containing new observations.
 #' @param type prediction type (see [RMOA::predict.MOA_trainedmodel()]).
 #' @export
 predict.DSClassifier_MOA <-

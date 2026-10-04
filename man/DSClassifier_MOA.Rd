@@ -4,7 +4,7 @@
 \alias{DSClassifier_MOA}
 \alias{update.DSClassifier_MOA}
 \alias{predict.DSClassifier_MOA}
-\title{DSClassifier_MOA -- MOA-based Stream Classifiers}
+\title{MOA-based stream classifier interface}
 \usage{
 DSClassifier_MOA(formula, RMOA_classifier)
 
@@ -13,23 +13,23 @@ DSClassifier_MOA(formula, RMOA_classifier)
 \method{predict}{DSClassifier_MOA}(object, newdata, type = "response", ...)
 }
 \arguments{
-\item{formula}{a formula for the classification problem.}
+\item{formula}{Formula describing the classification problem.}
 
-\item{RMOA_classifier}{a \code{RMOA_classifier} object.}
+\item{RMOA_classifier}{A classifier object from \pkg{RMOA}.}
 
-\item{object}{a DSC object.}
+\item{object}{A \code{DSClassifier_MOA} object.}
 
-\item{dsd}{a data stream object.}
+\item{dsd}{A data stream object.}
 
-\item{n}{number of data points taken from the stream.}
+\item{n}{Number of data points to read from the stream.}
 
-\item{verbose}{logical; show progress?}
+\item{verbose}{If \code{TRUE}, report progress.}
 
-\item{block}{process blocks of data to improve speed.}
+\item{block}{Number of points processed per block.}
 
-\item{...}{further arguments.}
+\item{...}{Further arguments passed to the underlying method.}
 
-\item{newdata}{dataframe with the new data.}
+\item{newdata}{Data frame containing new observations.}
 
 \item{type}{prediction type (see \code{\link[RMOA:predict.MOA_trainedmodel]{RMOA::predict.MOA_trainedmodel()}}).}
 }
@@ -37,18 +37,19 @@ DSClassifier_MOA(formula, RMOA_classifier)
 An object of class \code{DSClassifier_MOA}
 }
 \description{
-Interface for MOA-based stream classification methods based on package \pkg{RMOA}.
+Interface to MOA-based stream classification methods provided by the
+\pkg{RMOA} package.
 }
 \details{
-\code{DSClassifier_MOA} provides an interface to MOA-based stream classifiers using package
-\pkg{RMOA}. RMOA provides access to MOAs stream classifiers in the following groups:
+\code{DSClassifier_MOA} provides an interface to MOA-based stream classifiers
+through \pkg{RMOA}. The package provides classifiers in these groups:
 \itemize{
 \item \link[RMOA:MOA_classification_trees]{RMOA::MOA_classification_trees}
 \item \link[RMOA:MOA_classification_bayes]{RMOA::MOA_classification_bayes}
 \item \link[RMOA:MOA_classification_ensemblelearning]{RMOA::MOA_classification_ensemblelearning}
 }
 
-Subsequent calls to \code{update()} update the current model.
+Calls to \code{update()} train the current model incrementally.
 }
 \examples{
 \dontrun{

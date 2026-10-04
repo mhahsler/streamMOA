@@ -22,33 +22,29 @@
 #' Interface for the DenStream cluster algorithm for data streams implemented
 #' in MOA.
 #'
-#' DenStream applies reachability (from DBSCAN) between micro-clusters for
-#' reclustering using `epsilon` x `offline` (defaults to 2) as the
-#' reachability threshold.
+#' DenStream reclusters micro-clusters using DBSCAN-style reachability. The
+#' threshold is `epsilon * offline` (with `offline = 2` by default).
 #'
-#' If `k` is specified it automatically chooses the reachability threshold
-#' to find k clusters. This is achieved using single-link hierarchical
-#' clustering.
+#' If `k` is specified, single-link hierarchical clustering chooses a
+#' reachability threshold that produces `k` macro-clusters.
 #'
 #' @family DSC_MOA
 #'
 #' @aliases DSC_DenStream DSC_DenStream_MOA denstream DenStream
-#' @param epsilon defines the epsilon neighborhood which is the maximal radius
-#' of micro-clusters (r<=epsilon). Range: 0 to 1.
-#' @param mu minpoints as the weight w a core-micro-clusters needs to be
-#' created (w>=mu). Range: 0 to max(int).
-#' @param beta multiplier for mu to detect outlier micro-clusters given their
-#' weight w (w<beta x mu). Range: 0 to 1
-#' @param lambda decay constant.
-#' @param initPoints number of points to use for initialization via DBSCAN.
-#' @param offline offline multiplier for epsilon. Range: between 2 and 20).
-#' Used for reachability reclustering
-#' @param processingSpeed Number of incoming points per time unit (important
-#' for decay).  Range: between 1 and 1000.
-#' @param recluster logical; should the offline DBSCAN-based (i.e.,
-#' reachability at a distance of epsilon) be performed?
-#' @param k integer; tries to automatically chooses offline to find k
-#' macro-clusters.
+#' @param epsilon Maximum radius of a micro-cluster. Must be between 0 and 1.
+#' @param mu Minimum weight required for a core micro-cluster.
+#' @param beta Weight multiplier used to identify outlier micro-clusters.
+#'   Must be between 0 and 1.
+#' @param lambda Decay constant.
+#' @param initPoints Number of points used to initialize the algorithm with
+#'   DBSCAN.
+#' @param offline Multiplier applied to `epsilon` for reachability
+#'   reclustering. Must be between 2 and 20.
+#' @param processingSpeed Number of incoming points per time unit, used for
+#'   decay. Must be between 1 and 1000.
+#' @param recluster If `TRUE`, apply offline reachability reclustering.
+#' @param k If specified, choose a reachability threshold to produce this
+#'   number of macro-clusters.
 #' @return An object of class `DSC_DenStream` (subclass of [stream::DSC],
 #' [DSC_MOA], [stream::DSC_Micro]) or, for `recluster = TRUE`, an object
 #' of class [stream::DSC_TwoStage].
@@ -74,11 +70,8 @@
 #' # plot macro-clusters
 #' plot(denstream, stream, type = "both")
 #'
-#' # plot micro-cluster
+#' # plot micro-clusters
 #' plot(denstream, stream, type = "micro")
-#'
-#' # show micro and macro-clusters
-#' plot(denstream, stream, type = "both")
 #'
 #' # reclustering: Choose reclustering reachability threshold automatically to find 4 clusters
 #' denstream2 <- DSC_DenStream(epsilon = .05, k = 4)

@@ -22,27 +22,28 @@ recheck_outlier(x, outlier_correlated_id, ...)
 clean_outliers(x, ...)
 }
 \arguments{
-\item{r}{Defines the micro-cluster radius.}
+\item{r}{Radius used to search for neighbors.}
 
-\item{t}{Defines the number of neighbors (k in the article).}
+\item{t}{Minimum number of neighbors required for a point not to be an
+outlier.}
 
-\item{w}{Defines the window width in data points.}
+\item{w}{Sliding window width in data points.}
 
-\item{recheck_outliers}{Defines that the MCOD algorithm allows re-checking
-of detected outliers.}
+\item{recheck_outliers}{If \code{TRUE}, allow detected outliers to be checked
+again.}
 
-\item{x}{a \code{DSC_MCOD} object.}
+\item{x}{A \code{DSC_MCOD} object.}
 
-\item{...}{further arguments are currently ignored.}
+\item{...}{Further arguments (currently ignored).}
 
-\item{outlier_correlated_id}{ids of outliers.}
+\item{outlier_correlated_id}{Identifier of the outlier to check again.}
 }
 \value{
 An object of class \code{DSC_MCOD} (subclass of
 \link[stream:DSC_Micro]{stream::DSC_Micro}, \link{DSC_MOA} and \link[stream:DSC]{stream::DSC}).
 }
 \description{
-Class interfaces the MOA implementation of the MCOD algorithm for
+Interface to the MOA implementation of the MCOD algorithm for
 distance-based data stream outlier detection.
 }
 \details{
@@ -50,8 +51,8 @@ The algorithm detects density-based outliers. An object \eqn{x} is defined
 to be an outlier if there are less than \eqn{t} objects lying at distance at
 most \eqn{r} from \eqn{x}.
 
-Outliers are stored and can be retrieved using \code{get_outlier_position()} and
-\code{recheck_outlier()}.
+Outliers are stored and can be retrieved with \code{\link[=get_outlier_positions]{get_outlier_positions()}} and
+checked again with \code{\link[=recheck_outlier]{recheck_outlier()}}.
 
 \strong{Note:} The implementation updates the clustering when \code{\link[=predict]{predict()}} is called.
 }
@@ -59,10 +60,10 @@ Outliers are stored and can be retrieved using \code{get_outlier_position()} and
 \itemize{
 \item \code{get_outlier_positions()}: Returns spatial positions of all current outliers.
 
-\item \code{recheck_outlier()}: DSC_MCOD Re-checks the outlier having \code{outlier_correlated_id}.
-If this object is still an outlier, the method returns \code{TRUE}.
+\item \code{recheck_outlier()}: Re-check whether the outlier identified by
+\code{outlier_correlated_id} is still an outlier. Returns \code{TRUE} if it is.
 
-\item \code{clean_outliers()}: forget detected outliers from the outlier detector (currently not implemented).
+\item \code{clean_outliers()}: Forget detected outliers (currently not implemented).
 
 }}
 \examples{
@@ -81,7 +82,7 @@ update(mcod, stream, 100)
 
 plot(mcod, stream, n = 100)
 
-# MCOD can retried the outliers
+# Retrieve detected outlier positions.
 get_outlier_positions(mcod)
 
 # Example 3: evaluate on a stream
@@ -95,14 +96,14 @@ distance-based outliers over data streams. \emph{Information Systems,} Vol.
 55, pp. 37-53. \doi{10.1109/ICDE.2011.5767923}
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MOA}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Dalibor Krleža

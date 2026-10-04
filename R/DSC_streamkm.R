@@ -20,22 +20,23 @@
 #'
 #' This is an interface to the MOA implementation of streamKM++.
 #'
-#' streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream
-#' called coreset. The MOA implementation applies the k-means++ algorithm to find a given number
-#' of centers in the coreset.
+#' streamKM++ uses a tree-based sampling strategy to build a small weighted
+#' sample of the stream (a coreset). The MOA implementation applies k-means++
+#' to find the requested number of centers in the coreset.
 #'
-#' **Notes:**
+#' **Notes**
 #'
-#'  * The cluster can only cluster the number of points specified in `length` ans then
-#'    produces an `ArrayIndexOutOfBoundsException` error.
-#'  * The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
+#' - The clusterer can process at most `length` points. Processing more points
+#'   causes an `ArrayIndexOutOfBoundsException`.
+#' - The coreset is not exposed as micro-clusters; only macro-clusters can be
+#'   requested.
 #'
 #' @family DSC_MOA
 #'
-#' @param sizeCoreset Size of the coreset
-#' @param numClusters Number of clusters to compute
-#' @param length Length of the data stream
-#' @param ... Further arguments ignored.
+#' @param sizeCoreset Size of the coreset.
+#' @param numClusters Number of clusters to compute.
+#' @param length Maximum number of points in the data stream.
+#' @param ... Further arguments (currently ignored).
 #'
 #' @aliases DSC_StreamKM streamkm StreamKM
 #' @author Matthias Carnein

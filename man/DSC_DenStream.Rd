@@ -20,30 +20,28 @@ DSC_DenStream(
 )
 }
 \arguments{
-\item{epsilon}{defines the epsilon neighborhood which is the maximal radius
-of micro-clusters (r<=epsilon). Range: 0 to 1.}
+\item{epsilon}{Maximum radius of a micro-cluster. Must be between 0 and 1.}
 
-\item{mu}{minpoints as the weight w a core-micro-clusters needs to be
-created (w>=mu). Range: 0 to max(int).}
+\item{mu}{Minimum weight required for a core micro-cluster.}
 
-\item{beta}{multiplier for mu to detect outlier micro-clusters given their
-weight w (w<beta x mu). Range: 0 to 1}
+\item{beta}{Weight multiplier used to identify outlier micro-clusters.
+Must be between 0 and 1.}
 
-\item{lambda}{decay constant.}
+\item{lambda}{Decay constant.}
 
-\item{initPoints}{number of points to use for initialization via DBSCAN.}
+\item{initPoints}{Number of points used to initialize the algorithm with
+DBSCAN.}
 
-\item{offline}{offline multiplier for epsilon. Range: between 2 and 20).
-Used for reachability reclustering}
+\item{offline}{Multiplier applied to \code{epsilon} for reachability
+reclustering. Must be between 2 and 20.}
 
-\item{processingSpeed}{Number of incoming points per time unit (important
-for decay).  Range: between 1 and 1000.}
+\item{processingSpeed}{Number of incoming points per time unit, used for
+decay. Must be between 1 and 1000.}
 
-\item{recluster}{logical; should the offline DBSCAN-based (i.e.,
-reachability at a distance of epsilon) be performed?}
+\item{recluster}{If \code{TRUE}, apply offline reachability reclustering.}
 
-\item{k}{integer; tries to automatically chooses offline to find k
-macro-clusters.}
+\item{k}{If specified, choose a reachability threshold to produce this
+number of macro-clusters.}
 }
 \value{
 An object of class \code{DSC_DenStream} (subclass of \link[stream:DSC]{stream::DSC},
@@ -55,13 +53,11 @@ Interface for the DenStream cluster algorithm for data streams implemented
 in MOA.
 }
 \details{
-DenStream applies reachability (from DBSCAN) between micro-clusters for
-reclustering using \code{epsilon} x \code{offline} (defaults to 2) as the
-reachability threshold.
+DenStream reclusters micro-clusters using DBSCAN-style reachability. The
+threshold is \code{epsilon * offline} (with \code{offline = 2} by default).
 
-If \code{k} is specified it automatically chooses the reachability threshold
-to find k clusters. This is achieved using single-link hierarchical
-clustering.
+If \code{k} is specified, single-link hierarchical clustering chooses a
+reachability threshold that produces \code{k} macro-clusters.
 }
 \examples{
 # data with 3 clusters and 5\% noise
@@ -76,11 +72,8 @@ denstream
 # plot macro-clusters
 plot(denstream, stream, type = "both")
 
-# plot micro-cluster
+# plot micro-clusters
 plot(denstream, stream, type = "micro")
-
-# show micro and macro-clusters
-plot(denstream, stream, type = "both")
 
 # reclustering: Choose reclustering reachability threshold automatically to find 4 clusters
 denstream2 <- DSC_DenStream(epsilon = .05, k = 4)
@@ -97,14 +90,14 @@ Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 and Clustering. In Journal of Machine Learning Research (JMLR).
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_MOA}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Michael Hahsler and John Forrest

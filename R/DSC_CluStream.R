@@ -19,7 +19,7 @@
 
 #' CluStream Data Stream Clusterer
 #'
-#' Class implements the CluStream cluster algorithm for data streams (Aggarwal et al, 2003).
+#' Implements the CluStream algorithm for data streams (Aggarwal et al., 2003).
 #'
 #' This is an interface to the MOA implementation of CluStream.
 #'
@@ -29,13 +29,12 @@
 #' @family DSC_MOA
 #'
 #' @aliases DSC_CluStream DSC_CluStream_MOA CluStream clustream
-#' @param m Defines the maximum number of micro-clusters used in CluStream
-#' @param horizon Defines the time window to be used in CluStream
-#' @param t Maximal boundary factor (i.e., the kernel radius factor).  When deciding to
-#' add a new data point to a micro-cluster, the maximum boundary is defined as
-#' a factor of `t` of the RMS deviation of the data points in the
-#' micro-cluster from the centroid.
-#' @param k Number of macro-clusters to produce using weighted k-means.
+#' @param m Maximum number of micro-clusters.
+#' @param horizon Time window used by CluStream.
+#' @param t Maximum boundary factor used to decide whether a new point belongs
+#'   to a micro-cluster. The boundary is `t` times the root mean square
+#'   deviation from the micro-cluster center.
+#' @param k Number of macro-clusters produced by weighted k-means.
 #' @return An object of class `DSC_CluStream` (subclass of
 #' [stream::DSC_Micro], [DSC_MOA] and [stream::DSC]).
 #' @author Michael Hahsler and John Forrest

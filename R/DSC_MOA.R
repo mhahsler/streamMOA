@@ -33,7 +33,7 @@
 #' @family DSC_MOA
 #'
 #' @author Michael Hahsler and John Forrest
-#' @param ... further arguments.
+#' @param ... Further arguments (currently ignored).
 #' @references
 #' Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
 #' (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research

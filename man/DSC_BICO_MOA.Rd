@@ -2,7 +2,7 @@
 % Please edit documentation in R/DSC_BICO_MOA.R
 \name{DSC_BICO_MOA}
 \alias{DSC_BICO_MOA}
-\title{BICO - Fast computation of k-means coresets in a data stream}
+\title{BICO: Fast computation of k-means coresets in a data stream}
 \usage{
 DSC_BICO_MOA(
   Cluster = 5,
@@ -15,15 +15,21 @@ DSC_BICO_MOA(
 )
 }
 \arguments{
-\item{Cluster, k}{Number of desired centers}
+\item{Cluster}{Number of desired centers.}
 
-\item{Dimensions}{The number of the dimensions of the input points (stream)
-need to be specified in advance}
+\item{Dimensions}{Number of dimensions in the input stream; this must be
+specified in advance.}
 
-\item{MaxClusterFeatures, space}{Maximum size of the coreset}
+\item{MaxClusterFeatures}{Maximum number of cluster features in the coreset.}
 
-\item{Projections, p}{Number of random projections used for the nearest
-neighbor search}
+\item{Projections}{Number of random projections used for the nearest
+neighbor search.}
+
+\item{k}{Alias for \code{Cluster}.}
+
+\item{space}{Alias for \code{MaxClusterFeatures}.}
+
+\item{p}{Alias for \code{Projections}.}
 }
 \description{
 This is an interface to the MOA implementation of BICO. The original BICO
@@ -57,14 +63,14 @@ Schwiegelshohn, Christian Sohler: BICO: BIRCH Meets Coresets for k-Means
 Clustering. ESA 2013: 481-492
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_MOA}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Matthias Carnein

@@ -9,25 +9,25 @@
 DSC_ClusTree(horizon = 1000, maxHeight = 8, lambda = NULL, k = NULL)
 }
 \arguments{
-\item{horizon}{Range of the (time) window.}
+\item{horizon}{Length of the time window.}
 
-\item{maxHeight}{The maximum height of the tree.}
+\item{maxHeight}{Maximum height of the tree.}
 
-\item{lambda}{number used to override computed lambda (decay).}
+\item{lambda}{Value used to override the computed decay parameter.}
 
-\item{k}{If specified, k-means with k clusters is used for reclustering.}
+\item{k}{If specified, use k-means with \code{k} clusters for reclustering.}
 }
 \value{
 An object of class \code{DSC_ClusTree} (subclass of \link[stream:DSC]{stream::DSC},
 \link{DSC_MOA}, \link[stream:DSC_Micro]{stream::DSC_Micro}).
 }
 \description{
-Interface for the MOA implementation of the ClusTree data stream clustering
-algorithm (Kranen et al, 2009).
+Interface to the MOA implementation of the ClusTree data stream clustering
+algorithm (Kranen et al., 2009).
 }
 \details{
-ClusTree uses a compact and self-adaptive index structure for maintaining
-stream summaries. Kranen et al (2009) suggest EM or k-means for reclustering.
+ClusTree uses a compact, self-adaptive index structure to maintain stream
+summaries. Kranen et al. (2009) suggest EM or k-means for reclustering.
 }
 \examples{
 # data with 3 clusters
@@ -40,7 +40,7 @@ clustree
 
 plot(clustree, stream)
 
-#' Use automatically the k-means reclusterer with k = 3 to create macro clusters
+# Use the k-means reclusterer with k = 3 to create macro-clusters
 clustree <- DSC_ClusTree(maxHeight = 3, k = 3)
 update(clustree, stream, 500)
 clustree
@@ -58,14 +58,14 @@ Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 and Clustering. In Journal of Machine Learning Research (JMLR).
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_MOA}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Michael Hahsler and John Forrest

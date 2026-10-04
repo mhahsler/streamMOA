@@ -1,0 +1,85 @@
+---
+title: "Getting started with streamMOA"
+author: "Michael Hahsler"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Getting started with streamMOA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(streamMOA)
+library(stream)
+set.seed(1234)
+```
+
+The `streamMOA` package connects [stream](https://CRAN.R-project.org/package=stream)
+to clustering algorithms from MOA (Massive Online Analysis). This vignette
+shows how to create a data stream, process it with a MOA clusterer, and inspect
+the resulting micro- and macro-clusters. Java 8 or later is required.
+
+## Installation
+
+Install the package from CRAN and load it together with `stream`:
+
+```{r install, eval=FALSE}
+install.packages(c("stream", "streamMOA"))
+```
+
+```{r load-package}
+library(streamMOA)
+library(stream)
+```
+
+## Create a data stream
+
+`DSD_Gaussians()` from `stream` generates a stream with three clusters and a
+small amount of noise. Request a finite number of observations with
+`get_points()`:
+
+```{r create-stream}
+stream <- DSD_Gaussians(k = 3, d = 2, noise = 0.05)
+get_points(stream, n = 5)
+```
+
+Stream observations are generated as requested, so plotting or retrieving
+points advances the stream. Set `info = FALSE` when only feature values are
+needed and cluster labels are not required.
+
+```{r plot-stream, fig.width=6, fig.height=5}
+plot(stream, n = 500)
+```
+
+## Cluster the stream
+
+`DSC_CluStream()` creates a MOA-based online clusterer. The `m` parameter sets
+the maximum number of micro-clusters, while `horizon` controls the time window.
+The optional `k` argument enables weighted k-means reclustering to produce
+macro-clusters. Use `update()` to train the clusterer on incoming observations:
+
+```{r cluster-stream}
+clustering <- DSC_CluStream(m = 50, horizon = 100, k = 3)
+update(clustering, stream, n = 500)
+clustering
+```
+
+## Inspect the result
+
+The micro-clusters summarize recent observations. Macro-clusters group those
+summaries into a smaller number of clusters. Retrieve their centers or plot
+them with the stream:
+
+```{r inspect-clustering, fig.width=6, fig.height=5}
+get_microclusters(clustering)
+get_macroclusters(clustering)
+plot(clustering, stream, type = "both")
+```
+
+Other clusterers include `DSC_DenStream()`, `DSC_ClusTree()`,
+`DSC_DStream_MOA()`, `DSC_BICO_MOA()`, and `DSC_StreamKM()`. See their help
+pages and the package vignette *Introduction to streamMOA* for algorithm
+details, options, and additional examples.

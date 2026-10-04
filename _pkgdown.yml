@@ -1,0 +1,33 @@
+url: http://michael.hahsler.net/streamMOA/
+template:
+  bootstrap: 5
+  math-rendering: mathjax
+reference:
+  - title: Online clustering
+    desc: MOA-based stream clustering algorithms and their shared interface.
+    contents:
+      - DSC_MOA
+      - DSC_BICO_MOA
+      - DSC_CluStream
+      - DSC_ClusTree
+      - DSC_DStream_MOA
+      - DSC_DenStream
+      - DSC_StreamKM
+  - title: Stream generators
+    desc: Generate streams using MOA.
+    contents:
+      - DSD_MOA
+      - DSD_RandomRBFGeneratorEvents
+  - title: Outlier detection
+    desc: MCOD clustering and outlier management.
+    contents:
+      - DSC_MCOD
+      - DSOutlier_MCOD
+      - get_outlier_positions
+      - recheck_outlier
+      - clean_outliers
+  - title: Classification and regression
+    desc: Interfaces to MOA models provided by RMOA.
+    contents:
+      - DSClassifier_MOA
+      - DSRegressor_MOA

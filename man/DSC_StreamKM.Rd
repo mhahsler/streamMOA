@@ -9,27 +9,28 @@
 DSC_StreamKM(sizeCoreset = 10000, numClusters = 5, length = 100000L, ...)
 }
 \arguments{
-\item{sizeCoreset}{Size of the coreset}
+\item{sizeCoreset}{Size of the coreset.}
 
-\item{numClusters}{Number of clusters to compute}
+\item{numClusters}{Number of clusters to compute.}
 
-\item{length}{Length of the data stream}
+\item{length}{Maximum number of points in the data stream.}
 
-\item{...}{Further arguments ignored.}
+\item{...}{Further arguments (currently ignored).}
 }
 \description{
 This is an interface to the MOA implementation of streamKM++.
 }
 \details{
-streamKM++ uses a tree-based sampling strategy to obtain a small weighted sample of the stream
-called coreset. The MOA implementation applies the k-means++ algorithm to find a given number
-of centers in the coreset.
+streamKM++ uses a tree-based sampling strategy to build a small weighted
+sample of the stream (a coreset). The MOA implementation applies k-means++
+to find the requested number of centers in the coreset.
 
-\strong{Notes:}
+\strong{Notes}
 \itemize{
-\item The cluster can only cluster the number of points specified in \code{length} ans then
-produces an \code{ArrayIndexOutOfBoundsException} error.
-\item The coreset (micro-clusters are not accessible), only the macro-clusters can be requested.
+\item The clusterer can process at most \code{length} points. Processing more points
+causes an \code{ArrayIndexOutOfBoundsException}.
+\item The coreset is not exposed as micro-clusters; only macro-clusters can be
+requested.
 }
 }
 \examples{
@@ -51,14 +52,14 @@ StreamKM++: A Clustering Algorithm for Data Streams. In: \emph{Proceedings of th
 Engineering and Experiments (ALENEX '10)}, 2010.
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_MOA}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}}
 }
 \author{
 Matthias Carnein

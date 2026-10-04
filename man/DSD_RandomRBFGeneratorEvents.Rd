@@ -23,55 +23,51 @@ DSD_RandomRBFGeneratorEvents(
 )
 }
 \arguments{
-\item{k}{The average number of centroids in the model.}
+\item{k}{Average number of centroids in the model.}
 
-\item{d}{The dimensionality of the data.}
+\item{d}{Number of dimensions in the generated stream.}
 
-\item{numClusterRange}{Range for number of clusters.}
+\item{numClusterRange}{Range for the number of clusters.}
 
-\item{kernelRadius}{The average radius of the micro-clusters.}
+\item{kernelRadius}{Average radius of the micro-clusters.}
 
-\item{kernelRadiusRange}{Deviation of the number of centroids in the model.}
+\item{kernelRadiusRange}{Range of variation in micro-cluster radii.}
 
-\item{densityRange}{Density range.}
+\item{densityRange}{Range of variation in cluster density.}
 
-\item{speed}{Kernels move a predefined distance of 0.01 every X points.}
+\item{speed}{Number of points between kernel movements.}
 
-\item{speedRange}{Speed/Velocity point offset.}
+\item{speedRange}{Range of variation in kernel speed.}
 
-\item{noiseLevel}{Noise level.}
+\item{noiseLevel}{Proportion of noise points.}
 
-\item{noiseInCluster}{Allow noise to be placed within a cluster.}
+\item{noiseInCluster}{If \code{TRUE}, allow noise points inside clusters.}
 
-\item{eventFrequency}{Frequency of events.}
+\item{eventFrequency}{Number of points between concept-drift events.}
 
-\item{eventMergeSplitOption}{Merge and split?}
+\item{eventMergeSplitOption}{If \code{TRUE}, enable cluster merge and split events.}
 
-\item{eventDeleteCreate}{Delete and create?}
+\item{eventDeleteCreate}{If \code{TRUE}, enable cluster deletion and creation events.}
 
-\item{modelSeed}{Random seed for the model.}
+\item{modelSeed}{Random seed for the cluster model.}
 
-\item{instanceSeed}{Random seed for the instances.}
+\item{instanceSeed}{Random seed for generated instances.}
 }
 \value{
-An object of class \code{DSD_RandomRBFGeneratorEvent} (subclass of
+An object of class \code{DSD_RandomRBFGeneratorEvents} (subclass of
 \link{DSD_MOA}, \link[stream:DSD]{stream::DSD}).
 }
 \description{
-A class that generates random data based on RandomRBFGeneratorEvents
-implemented in MOA.
+Generates random data using MOA's \code{RandomRBFGeneratorEvents} stream.
 }
 \details{
-There are an assortment of parameters available for the underlying MOA data
-structure, however, we have currently limited the available parameters to
-the arguments above.  Currently the \code{modelSeed} and \code{instanceSeed} are set to
-default values every time a \link{DSD_MOA} is created, therefore the
-generated data will be the same. Because of this, it is important to set the
-seed manually when different data is needed.
+Only a subset of the parameters supported by the underlying MOA generator is
+exposed. If \code{modelSeed} or \code{instanceSeed} is \code{NULL}, a seed is sampled from
+R's random-number generator. Set these arguments explicitly to reproduce a
+stream; call \code{set.seed()} to make the generated default seeds reproducible.
 
-The default behavior is to create a data stream with 3 clusters and concept
-drift.  The locations of the clusters will change slightly, and they will
-merge with one another as time progresses.
+By default, the generator creates three clusters with concept drift. Cluster
+locations move over time, and clusters may merge.
 }
 \examples{
 stream <- DSD_RandomRBFGeneratorEvents()
@@ -89,8 +85,8 @@ Classification and Clustering
 \emph{Journal of Machine Learning Research (JMLR)}, 2010.
 }
 \seealso{
-Other DSD_MOA: 
-\code{\link{DSD_MOA}()}
+Other DSD_MOA:
+\code{\link[=DSD_MOA]{DSD_MOA()}}
 }
 \author{
 Michael Hahsler and John Forrest

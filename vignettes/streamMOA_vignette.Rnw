@@ -45,7 +45,7 @@ plot(stream)
 
 \begin{figure}
 \centering
-\includegraphics[width=.5\linewidth]{streamMOA-data_bng}
+\includegraphics[width=.5\linewidth]{streamMOA_vignette-data_bng}
 \caption{Bar and Gaussians data set.}
 \label{figure:data_bng}
 \end{figure}
@@ -104,7 +104,7 @@ par(op)
 
 \begin{figure}
 \centering
-\includegraphics{streamMOA-microclusters}
+\includegraphics{streamMOA_vignette-microclusters}
 \caption{Micro-cluster placement for different data stream clustering
 algorithms.}
 \label{figure:microclusters}
@@ -150,7 +150,7 @@ par(op)
 
 \begin{figure}
 \centering
-\includegraphics{streamMOA-microclusters_assignment}
+\includegraphics{streamMOA_vignette-microclusters_assignment}
 \caption{Micro-cluster assignment areas for different data stream clustering
 algorithms.}
 \label{figure:microclusters_assignment}
@@ -213,7 +213,7 @@ plot(stream, n = 1000)
 The generated stream can be seen in Figure~\ref{figure:outlier_points}.
 \begin{figure}
 \centering
-\includegraphics[width=.5\linewidth]{streamMOA-outlier2}
+\includegraphics[width=.5\linewidth]{streamMOA_vignette-outlier2}
 \caption{Data points from \code{DSD\_Gaussians} having 3 clusters and 1\% is outliers (noise).}
 \label{figure:outlier_points}
 \end{figure}
@@ -240,7 +240,7 @@ plot(mic_c, stream, n = 1000)
 
 \begin{figure}
 \centering
-\includegraphics[width=.45\linewidth]{streamMOA-outlier4}
+\includegraphics[width=.45\linewidth]{streamMOA_vignette-outlier4}
 \caption{MCOD outlier detection.}
 \label{figure:outlier_mcod1}
 \end{figure}

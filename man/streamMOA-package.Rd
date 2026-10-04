@@ -6,11 +6,14 @@
 \alias{streamMOA-package}
 \title{streamMOA: Interface for MOA Stream Clustering Algorithms}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 Interface for data stream clustering algorithms implemented in the MOA (Massive Online Analysis) framework (Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer (2010). MOA: Massive Online Analysis, Journal of Machine Learning Research 11: 1601-1604).
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{http://michael.hahsler.net/streamMOA/}
   \item Report bugs at \url{https://github.com/mhahsler/streamMOA}
 }
 
@@ -20,6 +23,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Michael Hahsler \email{mhahsler@lyle.smu.edu} (\href{https://orcid.org/0000-0003-2716-1405}{ORCID}) [copyright holder]
   \item John Forrest [copyright holder]
 }
 

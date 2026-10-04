@@ -7,7 +7,7 @@
 DSC_MOA(...)
 }
 \arguments{
-\item{...}{further arguments.}
+\item{...}{Further arguments (currently ignored).}
 }
 \description{
 An abstract class that inherits from the base class \link[stream:DSC]{stream::DSC} and provides the
@@ -29,14 +29,14 @@ Albert Bifet, Geoff Holmes, Richard Kirkby, Bernhard Pfahringer
 11: 1601-1604
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_CluStream}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_CluStream]{DSC_CluStream()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Michael Hahsler and John Forrest

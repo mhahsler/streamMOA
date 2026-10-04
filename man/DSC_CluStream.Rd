@@ -10,23 +10,22 @@
 DSC_CluStream(m = 100, horizon = 1000, t = 2, k = 5)
 }
 \arguments{
-\item{m}{Defines the maximum number of micro-clusters used in CluStream}
+\item{m}{Maximum number of micro-clusters.}
 
-\item{horizon}{Defines the time window to be used in CluStream}
+\item{horizon}{Time window used by CluStream.}
 
-\item{t}{Maximal boundary factor (i.e., the kernel radius factor).  When deciding to
-add a new data point to a micro-cluster, the maximum boundary is defined as
-a factor of \code{t} of the RMS deviation of the data points in the
-micro-cluster from the centroid.}
+\item{t}{Maximum boundary factor used to decide whether a new point belongs
+to a micro-cluster. The boundary is \code{t} times the root mean square
+deviation from the micro-cluster center.}
 
-\item{k}{Number of macro-clusters to produce using weighted k-means.}
+\item{k}{Number of macro-clusters produced by weighted k-means.}
 }
 \value{
 An object of class \code{DSC_CluStream} (subclass of
 \link[stream:DSC_Micro]{stream::DSC_Micro}, \link{DSC_MOA} and \link[stream:DSC]{stream::DSC}).
 }
 \description{
-Class implements the CluStream cluster algorithm for data streams (Aggarwal et al, 2003).
+Implements the CluStream algorithm for data streams (Aggarwal et al., 2003).
 }
 \details{
 This is an interface to the MOA implementation of CluStream.
@@ -56,14 +55,14 @@ Bifet A, Holmes G, Pfahringer B, Kranen P, Kremer H, Jansen T, Seidl T
 and Clustering. In Journal of Machine Learning Research (JMLR).
 }
 \seealso{
-Other DSC_MOA: 
-\code{\link{DSC_BICO_MOA}()},
-\code{\link{DSC_ClusTree}()},
-\code{\link{DSC_DStream_MOA}()},
-\code{\link{DSC_DenStream}()},
-\code{\link{DSC_MCOD}()},
-\code{\link{DSC_MOA}()},
-\code{\link{DSC_StreamKM}()}
+Other DSC_MOA:
+\code{\link[=DSC_BICO_MOA]{DSC_BICO_MOA()}},
+\code{\link[=DSC_ClusTree]{DSC_ClusTree()}},
+\code{\link[=DSC_DStream_MOA]{DSC_DStream_MOA()}},
+\code{\link[=DSC_DenStream]{DSC_DenStream()}},
+\code{\link[=DSC_MCOD]{DSC_MCOD()}},
+\code{\link[=DSC_MOA]{DSC_MOA()}},
+\code{\link[=DSC_StreamKM]{DSC_StreamKM()}}
 }
 \author{
 Michael Hahsler and John Forrest

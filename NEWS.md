@@ -1,5 +1,8 @@
-#  Changes in version 1.3.1-1 (xx/xx/26)
+#  Changes in version 1.3.2 (unpublished)
 * Patch for private methods in Java 17+ (vpinna80)
+* Added testthat coverage for core helpers and MOA clustering workflows.
+* Added a getting-started vignette and renamed the full package vignette.
+* Improved the reference manual and organized the pkgdown reference index.
 
 
 #  Changes in version 1.3-1 (04/20/24)

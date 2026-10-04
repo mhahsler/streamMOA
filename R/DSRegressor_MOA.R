@@ -17,19 +17,20 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-#' DSRegressor_MOA -- MOA-based Stream Regressors
+#' MOA-based stream regressor interface
 #'
-#' Interface for MOA-based stream regression methods based on package \pkg{RMOA}.
+#' Interface to MOA-based stream regression methods provided by the
+#' \pkg{RMOA} package.
 #'
-#' `DSRegressor_MOA` provides an interface to MOA-based stream regressors using package
-#' \pkg{RMOA}. Available regressors can be found at [RMOA::MOA_regressors].
+#' `DSRegressor_MOA` provides an interface to MOA-based stream regressors
+#' through \pkg{RMOA}. See [RMOA::MOA_regressors] for available regressors.
 #'
-#' Subsequent calls to `update()` update the current model.
+#' Calls to `update()` train the current model incrementally.
 #'
 #' @family DSRegressor_MOA
 #'
-#' @param formula a formula for the regression problem.
-#' @param RMOA_regressor a `RMOA_regressors` object.
+#' @param formula Formula describing the regression problem.
+#' @param RMOA_regressor A regressor object from \pkg{RMOA}.
 #'
 #' @return An object of class `DSRegressor_MOA`
 #' @author Michael Hahsler
@@ -91,12 +92,12 @@ DSRegressor_MOA <- function(formula,
   )
 
 #' @rdname DSRegressor_MOA
-#' @param object a DSC object.
-#' @param dsd a data stream object.
-#' @param n number of data points taken from the stream.
-#' @param verbose logical; show progress?
-#' @param block process blocks of data to improve speed.
-#' @param ... further arguments.
+#' @param object A `DSRegressor_MOA` object.
+#' @param dsd A data stream object.
+#' @param n Number of data points to read from the stream.
+#' @param verbose If `TRUE`, report progress.
+#' @param block Number of points processed per block.
+#' @param ... Further arguments passed to the underlying method.
 #' @export
 update.DSRegressor_MOA <- function(object,
   dsd,
@@ -134,7 +135,7 @@ update.DSRegressor_MOA <- function(object,
 }
 
 #' @rdname DSRegressor_MOA
-#' @param newdata dataframe with the new data.
+#' @param newdata Data frame containing new observations.
 #' @param type prediction type (see [RMOA::predict.MOA_trainedmodel()]).
 #' @export
 predict.DSRegressor_MOA <-
