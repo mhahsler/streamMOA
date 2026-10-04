@@ -16,10 +16,10 @@ Imports: graphics, stats, methods, proxy
 Suggests: RMOA (>= 1.1.0), testthat (>= 3.0.0), knitr, rmarkdown
 VignetteBuilder: knitr
 SystemRequirements: Java (>= 8)
-BugReports: https://github.com/mhahsler/streamMOA
+BugReports: https://github.com/mhahsler/streamMOA/issues
 License: GPL-3
 Copyright: MOA code in inst/java/moa.jar is Copyright (C) The University of Waikato and distributed under the Apache License, version 2.0. All other code is Copyright (C) Matthew Bolanos, John Forrest and Michael Hahsler
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
-URL: http://michael.hahsler.net/streamMOA/
-RoxygenNote: 7.3.3
+URL:  https://github.com/mhahsler/streamMOA, https://michael.hahsler.net/streamMOA/
+Config/roxygen2/version: 8.1.0

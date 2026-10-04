@@ -38,8 +38,12 @@ import(methods)
 import(proxy)
 import(rJava)
 import(stream)
-importFrom(graphics,lines)
-importFrom(graphics,plot)
-importFrom(graphics,points)
-importFrom(stats,predict)
-importFrom(stats,runif)
+importFrom(graphics,
+  lines,
+  plot,
+  points
+)
+importFrom(stats,
+  predict,
+  runif
+)

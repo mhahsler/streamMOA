@@ -13,8 +13,9 @@ Interface for data stream clustering algorithms implemented in the MOA (Massive 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://michael.hahsler.net/streamMOA/}
-  \item Report bugs at \url{https://github.com/mhahsler/streamMOA}
+  \item \url{https://github.com/mhahsler/streamMOA}
+  \item \url{https://michael.hahsler.net/streamMOA/}
+  \item Report bugs at \url{https://github.com/mhahsler/streamMOA/issues}
 }
 
 }
