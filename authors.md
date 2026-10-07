@@ -19,13 +19,13 @@ Source:
 [`DESCRIPTION`](https://github.com/mhahsler/streamMOA/blob/master/DESCRIPTION)
 
 Hahsler M, Forrest J (2026). *streamMOA: Interface for MOA Stream
-Clustering Algorithms*. R package version 1.3.2,
+Clustering Algorithms*. R package version 1.4.0,
 <https://github.com/mhahsler/streamMOA>.
 
     @Manual{,
       title = {streamMOA: Interface for MOA Stream Clustering Algorithms},
       author = {Michael Hahsler and John Forrest},
       year = {2026},
-      note = {R package version 1.3.2},
+      note = {R package version 1.4.0},
       url = {https://github.com/mhahsler/streamMOA},
     }

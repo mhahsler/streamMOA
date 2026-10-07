@@ -1,7 +1,8 @@
 # Changelog
 
-## Changes in version 1.3.2 (unpublished)
+## Changes in version 1.4.0 (unpublished)
 
+- Dropped RMOA support because of incompatible MOA library.
 - Patch for private methods in Java 17+ (vpinna80)
 - Added testthat coverage for core helpers and MOA clustering workflows.
 - Added a getting-started vignette and renamed the full package

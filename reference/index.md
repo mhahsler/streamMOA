@@ -38,16 +38,3 @@ MCOD clustering and outlier management.
   [`recheck_outlier()`](http://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md)
   [`clean_outliers()`](http://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md)
   : Micro-cluster Continuous Outlier Detector (MCOD)
-
-## Classification and regression
-
-Interfaces to MOA models provided by RMOA.
-
-- [`DSClassifier_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSClassifier_MOA.md)
-  [`update(`*`<DSClassifier_MOA>`*`)`](http://michael.hahsler.net/streamMOA/reference/DSClassifier_MOA.md)
-  [`predict(`*`<DSClassifier_MOA>`*`)`](http://michael.hahsler.net/streamMOA/reference/DSClassifier_MOA.md)
-  : MOA-based stream classifier interface
-- [`DSRegressor_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSRegressor_MOA.md)
-  [`update(`*`<DSRegressor_MOA>`*`)`](http://michael.hahsler.net/streamMOA/reference/DSRegressor_MOA.md)
-  [`predict(`*`<DSRegressor_MOA>`*`)`](http://michael.hahsler.net/streamMOA/reference/DSRegressor_MOA.md)
-  : MOA-based stream regressor interface
