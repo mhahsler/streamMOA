@@ -75,6 +75,18 @@ DSC_StreamKM <-
     )
 
     ## MOA implementation does not return micro-clusters but only macro clusters
-    DSC_MOA_Clusterer("moa/clusterers/streamkm/StreamKM", "StreamKM", paramList)
+    clusterer <- DSC_MOA_Clusterer(
+      "moa/clusterers/streamkm/StreamKM",
+      "StreamKM",
+      paramList
+    )
+
+    # Keep the point count in an environment so it survives copies of the R
+    # object made by stream::update().
+    clusterer$streamKM_state <- new.env(parent = emptyenv())
+    clusterer$streamKM_state$processed <- 0L
+    clusterer$streamKM_state$max_points <- as.integer(length)
+
+    clusterer
 
   }

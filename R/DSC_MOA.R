@@ -108,6 +108,29 @@ update.DSC_MOA <- function(object, dsd, n, verbose = FALSE, ...) {
 
   if (n >= 1) {
 
+    if (!is.null(object$streamKM_state)) {
+      requested_total <- object$streamKM_state$processed + n
+      max_points <- object$streamKM_state$max_points
+
+      if (requested_total > max_points) {
+        stop(
+          sprintf(
+            paste0(
+              "StreamKM can process at most %d points. It has already processed ",
+              "%d points; this update requests %d more (total %d). Create a ",
+              "new StreamKM clusterer with length >= %d to process this many points."
+            ),
+            max_points,
+            object$streamKM_state$processed,
+            n,
+            requested_total,
+            requested_total
+          ),
+          call. = FALSE
+        )
+      }
+    }
+
     ## This loop is now done in Java to speed up clustering
     ## data has to be all doubles for MOA clusterers!
     #     for (i in 1:n) {
@@ -151,6 +174,9 @@ update.DSC_MOA <- function(object, dsd, n, verbose = FALSE, ...) {
 
     J("StreamMOA", "update", object$javaObj,
       .jarray(d, dispatch = TRUE), class.loader = .rJava.class.loader)
+
+    if (!is.null(object$streamKM_state))
+      object$streamKM_state$processed <- object$streamKM_state$processed + n
   }
 
 
