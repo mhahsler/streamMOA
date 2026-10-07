@@ -1,16 +1,18 @@
 
 # <img src="man/figures/logo.svg" align="right" height="139" /> R package streamMOA - Interface for MOA Stream Clustering Algorithms
 
-[![r-universe
-status](https://mhahsler.r-universe.dev/badges/streamMOA)](https://mhahsler.r-universe.dev/streamMOA)
 [![Package on
 CRAN](https://www.r-pkg.org/badges/version/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/streamMOA)](https://CRAN.R-project.org/package=streamMOA)
+![License](https://img.shields.io/cran/l/streamMOA) [![r-universe
+status](https://mhahsler.r-universe.dev/badges/streamMOA)](https://mhahsler.r-universe.dev/streamMOA)
+
+**Maintainer:** [Michael Hahsler](https://michael.hahsler.net)
 
 Interface for data stream clustering algorithms implemented in the MOA
 (Massive Online Analysis) framework. This is an extension package for
-[stream](https://github.com/mhahsler/stream).
+[stream](https://michael.hahsler.net/stream/).
 
 ## Installation
 
@@ -58,12 +60,4 @@ Plot micro-clusters.
 plot(clustream, stream)
 ```
 
-![](inst/README_files/plot-1.png)<!-- -->
-
-## Further Information
-
-- [streamMOA package
-  vignette](https://CRAN.R-project.org/package=streamMOA/vignettes/streamMOA_vignette.pdf)
-  with complete examples.
-- [Reference
-  manual](https://CRAN.R-project.org/package=streamMOA/streamMOA.pdf)
+![](man/figures/README-plot-1.png)<!-- -->
