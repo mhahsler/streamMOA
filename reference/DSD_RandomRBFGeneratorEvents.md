@@ -89,7 +89,7 @@ DSD_RandomRBFGeneratorEvents(
 ## Value
 
 An object of class `DSD_RandomRBFGeneratorEvents` (subclass of
-[DSD_MOA](http://michael.hahsler.net/streamMOA/reference/DSD_MOA.md),
+[DSD_MOA](https://michael.hahsler.net/streamMOA/reference/DSD_MOA.md),
 [stream::DSD](https://rdrr.io/pkg/stream/man/DSD.html)).
 
 ## Details
@@ -114,7 +114,7 @@ Learning Research (JMLR)*, 2010.
 ## See also
 
 Other DSD_MOA:
-[`DSD_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSD_MOA.md)
+[`DSD_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSD_MOA.md)
 
 ## Author
 

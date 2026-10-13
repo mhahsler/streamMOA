@@ -29,7 +29,7 @@ Classification and Clustering. *Journal of Machine Learning Research*,
 ## See also
 
 Other DSD_MOA:
-[`DSD_RandomRBFGeneratorEvents()`](http://michael.hahsler.net/streamMOA/reference/DSD_RandomRBFGeneratorEvents.md)
+[`DSD_RandomRBFGeneratorEvents()`](https://michael.hahsler.net/streamMOA/reference/DSD_RandomRBFGeneratorEvents.md)
 
 ## Author
 

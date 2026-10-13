@@ -67,13 +67,13 @@ Clustering. ESA 2013: 481-492
 ## See also
 
 Other DSC_MOA:
-[`DSC_CluStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md),
-[`DSC_ClusTree()`](http://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
-[`DSC_DStream_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
-[`DSC_DenStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
-[`DSC_MCOD()`](http://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md),
-[`DSC_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_MOA.md),
-[`DSC_StreamKM()`](http://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
+[`DSC_CluStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md),
+[`DSC_ClusTree()`](https://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
+[`DSC_DStream_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
+[`DSC_DenStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
+[`DSC_MCOD()`](https://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md),
+[`DSC_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_MOA.md),
+[`DSC_StreamKM()`](https://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
 
 ## Author
 

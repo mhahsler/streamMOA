@@ -51,8 +51,8 @@ clean_outliers(x, ...)
 
 An object of class `DSC_MCOD` (subclass of
 [stream::DSC_Micro](https://rdrr.io/pkg/stream/man/DSC_Micro.html),
-[DSC_MOA](http://michael.hahsler.net/streamMOA/reference/DSC_MOA.md) and
-[stream::DSC](https://rdrr.io/pkg/stream/man/DSC.html)).
+[DSC_MOA](https://michael.hahsler.net/streamMOA/reference/DSC_MOA.md)
+and [stream::DSC](https://rdrr.io/pkg/stream/man/DSC.html)).
 
 ## Details
 
@@ -87,13 +87,13 @@ outliers over data streams. *Information Systems,* Vol. 55, pp. 37-53.
 ## See also
 
 Other DSC_MOA:
-[`DSC_BICO_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
-[`DSC_CluStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md),
-[`DSC_ClusTree()`](http://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
-[`DSC_DStream_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
-[`DSC_DenStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
-[`DSC_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_MOA.md),
-[`DSC_StreamKM()`](http://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
+[`DSC_BICO_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
+[`DSC_CluStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md),
+[`DSC_ClusTree()`](https://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
+[`DSC_DStream_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
+[`DSC_DenStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
+[`DSC_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_MOA.md),
+[`DSC_StreamKM()`](https://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
 
 ## Author
 

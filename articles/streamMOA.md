@@ -53,7 +53,7 @@ plot(stream, n = 500)
 
 ## Cluster the stream
 
-[`DSC_CluStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md)
+[`DSC_CluStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md)
 creates a MOA-based online clusterer. The `m` parameter sets the maximum
 number of micro-clusters, while `horizon` controls the time window. The
 optional `k` argument enables weighted k-means reclustering to produce
@@ -142,11 +142,11 @@ plot(clustering, stream, type = "both")
 ![](streamMOA_files/figure-html/inspect-clustering-1.png)
 
 Other clusterers include
-[`DSC_DenStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
-[`DSC_ClusTree()`](http://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
-[`DSC_DStream_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
-[`DSC_BICO_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
+[`DSC_DenStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
+[`DSC_ClusTree()`](https://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
+[`DSC_DStream_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
+[`DSC_BICO_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
 and
-[`DSC_StreamKM()`](http://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md).
+[`DSC_StreamKM()`](https://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md).
 See their help pages and the package vignette *Introduction to
 streamMOA* for algorithm details, options, and additional examples.

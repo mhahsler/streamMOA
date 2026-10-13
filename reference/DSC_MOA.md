@@ -40,13 +40,13 @@ MOA: Massive Online Analysis, Journal of Machine Learning Research 11:
 ## See also
 
 Other DSC_MOA:
-[`DSC_BICO_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
-[`DSC_CluStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md),
-[`DSC_ClusTree()`](http://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
-[`DSC_DStream_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
-[`DSC_DenStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
-[`DSC_MCOD()`](http://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md),
-[`DSC_StreamKM()`](http://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
+[`DSC_BICO_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
+[`DSC_CluStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_CluStream.md),
+[`DSC_ClusTree()`](https://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
+[`DSC_DStream_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
+[`DSC_DenStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
+[`DSC_MCOD()`](https://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md),
+[`DSC_StreamKM()`](https://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
 
 ## Author
 

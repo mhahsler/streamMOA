@@ -1,14 +1,13 @@
 # Changelog
 
-## Changes in version 1.4.0 (unpublished)
+## Changes in version 1.4.0 (10/13/26)
 
 - Dropped RMOA support because of incompatible MOA library.
 - Patch for private methods in Java 17+ (vpinna80)
 - Added testthat coverage for core helpers and MOA clustering workflows.
 - Added a getting-started vignette and renamed the full package
   vignette.
-- Improved the reference manual and organized the pkgdown reference
-  index.
+- Improved the reference manual and added pkgdown.
 
 ## Changes in version 1.3-1 (04/20/24)
 

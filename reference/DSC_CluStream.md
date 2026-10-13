@@ -33,8 +33,8 @@ DSC_CluStream(m = 100, horizon = 1000, t = 2, k = 5)
 
 An object of class `DSC_CluStream` (subclass of
 [stream::DSC_Micro](https://rdrr.io/pkg/stream/man/DSC_Micro.html),
-[DSC_MOA](http://michael.hahsler.net/streamMOA/reference/DSC_MOA.md) and
-[stream::DSC](https://rdrr.io/pkg/stream/man/DSC.html)).
+[DSC_MOA](https://michael.hahsler.net/streamMOA/reference/DSC_MOA.md)
+and [stream::DSC](https://rdrr.io/pkg/stream/man/DSC.html)).
 
 ## Details
 
@@ -57,13 +57,13 @@ Classification and Clustering. In Journal of Machine Learning Research
 ## See also
 
 Other DSC_MOA:
-[`DSC_BICO_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
-[`DSC_ClusTree()`](http://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
-[`DSC_DStream_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
-[`DSC_DenStream()`](http://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
-[`DSC_MCOD()`](http://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md),
-[`DSC_MOA()`](http://michael.hahsler.net/streamMOA/reference/DSC_MOA.md),
-[`DSC_StreamKM()`](http://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
+[`DSC_BICO_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_BICO_MOA.md),
+[`DSC_ClusTree()`](https://michael.hahsler.net/streamMOA/reference/DSC_ClusTree.md),
+[`DSC_DStream_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_DStream_MOA.md),
+[`DSC_DenStream()`](https://michael.hahsler.net/streamMOA/reference/DSC_DenStream.md),
+[`DSC_MCOD()`](https://michael.hahsler.net/streamMOA/reference/DSC_MCOD.md),
+[`DSC_MOA()`](https://michael.hahsler.net/streamMOA/reference/DSC_MOA.md),
+[`DSC_StreamKM()`](https://michael.hahsler.net/streamMOA/reference/DSC_StreamKM.md)
 
 ## Author
 
