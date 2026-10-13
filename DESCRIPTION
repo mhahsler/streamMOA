@@ -1,6 +1,6 @@
 Package: streamMOA
 Version: 1.4.0
-Date: 2026-xx-xx
+Date: 2026-10-13
 Encoding: UTF-8
 Title: Interface for MOA Stream Clustering Algorithms
 Authors@R: c(person("Michael", "Hahsler", role = c("aut", "cre", "cph"),
