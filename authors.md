@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mhahsler/streamMOA/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/mhahsler/streamMOA/blob/streamMOA_1.4.0/DESCRIPTION)
 
 Hahsler M, Forrest J (2026). *streamMOA: Interface for MOA Stream
 Clustering Algorithms*. R package version 1.4.0,
